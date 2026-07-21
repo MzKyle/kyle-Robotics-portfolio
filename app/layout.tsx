@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     "王凯豪的机器人软件工程作品集，聚焦 C++、ROS 2、工业视觉、机器人系统集成与工程工具。",
   other: {
-    "codex-preview": "development",
+    "site-preview": "development",
   },
   icons: {
     icon: "/favicon.svg",
