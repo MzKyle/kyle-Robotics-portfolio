@@ -19,7 +19,7 @@ export default function ProjectsPage() {
       <section className="project-focus section-shell">
         <div className="archive-heading"><div><h2><T zh="完整的工业视觉系统交付" en="The most complete industrial vision delivery" /></h2></div><p><T zh="从多光源采图、两阶段检测和并发调度，到 PLC 分拣与生产追溯，集中体现端到端系统能力。" en="Multi-light acquisition, two-stage inspection, concurrent orchestration, PLC sorting, and production traceability in one end-to-end system." /></p></div>
 
-        <Link className="archive-lead" href={`/projects/${flagship.slug}`}>
+        <Link className={`archive-lead archive-lead-${flagship.slug}`} href={`/projects/${flagship.slug}`}>
           <div className={`archive-lead-image archive-lead-image-${flagship.imageMode ?? "cover"}`}><img src={flagship.image} alt={`${flagship.title} — ${flagship.subtitle.zh}`} fetchPriority="high" decoding="async" /></div>
           <div className="archive-lead-copy"><div className="case-card-meta"><span><Localized text={flagship.category} /></span><span>{flagship.year}</span></div><h2>{flagship.title}</h2><h3><Localized text={flagship.subtitle} /></h3><p><Localized text={flagship.summary} /></p><dl className="archive-quickfacts"><div><dt><T zh="我的职责" en="MY ROLE" /></dt><dd><Localized text={flagship.role} /></dd></div><div><dt><T zh="系统闭环" en="SYSTEM LOOP" /></dt><dd><Localized text={flagship.outcomes[0].note} /></dd></div><div><dt><T zh="核心成果" en="CORE PROOF" /></dt><dd><b>{flagship.outcomes[2].value}</b><Localized text={flagship.outcomes[2].note} /></dd></div></dl><footer><span>{flagship.tech.slice(0, 5).join(" · ")}</span><b><T zh="打开完整案例" en="Open full case" /> →</b></footer></div>
         </Link>

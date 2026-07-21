@@ -32,11 +32,11 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
         <aside>
           <span><T zh="项目概览" en="CASE BRIEF" /></span>
           <h2><T zh="项目背景与我的职责" en="Project context and my ownership" /></h2>
-          {project.slug === "waterbag-inspection" && (
+          {project.overviewImage && (
             <figure className="case-overview-media">
               <img
-                src="/images/projects/缺陷检测装置2.png"
-                alt="工业水样袋缺陷检测装置实拍"
+                src={project.overviewImage.src}
+                alt={project.overviewImage.alt}
                 loading="lazy"
                 decoding="async"
               />

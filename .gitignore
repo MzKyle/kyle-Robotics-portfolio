@@ -17,6 +17,12 @@
 /.next/
 /out/
 
+# vite / vinext / cloudflare
+/dist/
+/.vinext/
+/.wrangler/
+/.sites-runtime/
+
 # misc
 .DS_Store
 *.pem
@@ -35,8 +41,7 @@ yarn-error.log*
 
 # typescript
 next-env.d.ts
-/dist/
-/.wrangler/
-/.sites-runtime/
+
+# generated artifacts
 /outputs/
 /work/

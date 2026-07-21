@@ -603,7 +603,7 @@ a { color: inherit; text-decoration: none; }
 .experience-main > ul { max-width: 850px; margin: 36px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; line-height: 1.8; }
 .experience-main > ul li + li { margin-top: 12px; }
 .experience-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 42px; background: var(--line); border: 1px solid var(--line); }
-.experience-metrics span { padding: 17px; background: var(--bg); color: #7890a2; font-family: var(--font-geist-mono), monospace; font-size: 9px; }
+.experience-metrics > span { padding: 17px; background: var(--bg); color: #7890a2; font-family: var(--font-geist-mono), monospace; font-size: 9px; }
 .text-link { display: inline-block; margin-top: 28px; color: var(--blue); font-family: var(--font-geist-mono), monospace; font-size: 10px; }
 
 /* Writing */
@@ -1174,7 +1174,7 @@ html[data-theme="minimal"] .outcome-grid span,
 html[data-theme="minimal"] .outcome-grid p,
 html[data-theme="minimal"] .footer-links span,
 html[data-theme="minimal"] .footer-base { color: #718089; }
-html[data-theme="minimal"] .experience-metrics span,
+html[data-theme="minimal"] .experience-metrics > span,
 html[data-theme="minimal"] .honor-list li { background: var(--panel); color: #56666f; }
 html[data-theme="minimal"] .topic-card:hover { background: #f0efe9; }
 html[data-theme="minimal"] .button-primary { box-shadow: none; }
@@ -1848,7 +1848,7 @@ body {
 .experience-side > span,
 .experience-side small,
 .experience-side em,
-.experience-metrics span,
+.experience-metrics > span,
 .text-link,
 .writing-topic-trigger > header span,
 .writing-topic-trigger > header i,
@@ -3053,6 +3053,9 @@ html[data-theme="minimal"] .home-hero-copy {
 .home-selected-work-title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 18px; }
 .home-selected-work-title-row > a { color: var(--blue); font-size: 14px; font-weight: 620; white-space: nowrap; }
 .home-selected-work-head > div > p { max-width: 720px; margin: 10px 0 0; }
+@media (min-width: 760px) {
+  .home-selected-work-head > div > p { max-width: none; white-space: nowrap; }
+}
 .home-featured-project {
   grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
   min-height: 350px;
@@ -3241,7 +3244,7 @@ html[data-theme="minimal"] .home-project-thumb-robot-sim { background: #0c1218; 
   border: 0;
   background: transparent;
 }
-.experience-metrics span {
+.experience-metrics > span {
   padding: 8px 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -3504,14 +3507,27 @@ html[data-theme="minimal"] .home-project-thumb-robot-sim { background: #0c1218; 
 /* Keep the portrait waterbag station image in a portrait frame without a padded gray field. */
 @media (min-width: 1101px) {
   .home-featured-project-waterbag-inspection {
-    grid-template-columns: 236px minmax(0, 1fr);
+    grid-template-columns: 276px minmax(0, 1fr);
   }
   .home-featured-project-waterbag-inspection .home-featured-image {
-    width: min(calc(100% - 24px), 214px);
-    margin: 24px 0 24px 8px;
+    width: min(calc(100% - 46px), 230px);
+    margin: 24px 0 24px 32px;
   }
   .home-featured-project-waterbag-inspection .home-featured-copy {
-    padding-left: 18px;
+    padding-left: 22px;
+  }
+
+  .archive-lead-waterbag-inspection {
+    grid-template-columns: 460px minmax(0, 1fr);
+    align-items: center;
+  }
+  .archive-lead-waterbag-inspection .archive-lead-image {
+    width: 320px;
+    margin: 28px 0;
+    justify-self: center;
+  }
+  .archive-lead-waterbag-inspection .archive-lead-copy {
+    padding-left: 34px;
   }
 }
 .home-featured-project-waterbag-inspection .home-featured-image {
@@ -3519,6 +3535,21 @@ html[data-theme="minimal"] .home-project-thumb-robot-sim { background: #0c1218; 
   height: auto;
   background: transparent;
 }
-.home-featured-project-waterbag-inspection .home-featured-image img {
+.archive-lead-waterbag-inspection .archive-lead-image {
+  aspect-ratio: 4 / 5;
+  min-height: 0;
+  height: auto;
+  background: transparent;
+}
+.home-featured-project-waterbag-inspection .home-featured-image img,
+.archive-lead-waterbag-inspection .archive-lead-image img {
   object-fit: cover;
+}
+
+@media (max-width: 1100px) {
+  .archive-lead-waterbag-inspection .archive-lead-image {
+    width: min(320px, calc(100% - 40px));
+    margin-right: auto;
+    margin-left: auto;
+  }
 }

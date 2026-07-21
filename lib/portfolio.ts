@@ -12,6 +12,7 @@ export type ProjectDetail = {
   image: string;
   imageNote: LocalizedText;
   imageMode?: "cover" | "contain";
+  overviewImage?: { src: string; alt: string };
   repo: string;
   role: LocalizedText;
   status: LocalizedText;
@@ -40,6 +41,7 @@ export const projects: ProjectDetail[] = [
     image: "/images/projects/缺陷检测装置1.png",
     imageMode: "contain",
     imageNote: l("工业水样袋缺陷检测工位", "Industrial waterbag inspection station"),
+    overviewImage: { src: "/images/projects/缺陷检测装置2.png", alt: "工业水样袋缺陷检测装置实拍" },
     repo: "https://github.com/MzKyle/Defect-detection-of-water-sampling-bags",
     role: l("软件开发工程师 / 端到端系统交付", "Software engineer / end-to-end system delivery"),
     status: l("工业项目完整交付", "Complete industrial system delivery"),
@@ -94,9 +96,9 @@ export const projects: ProjectDetail[] = [
     subtitle: l("RoboMaster 视觉闭环目标跟踪与控制系统", "RoboMaster closed-loop visual targeting and control system"),
     category: l("机器人视觉与控制", "ROBOT VISION & CONTROL"),
     year: "2024.06 — 2025.06",
-    image: "/images/projects/auto-aim-hero.png",
+    image: "/images/projects/Robomaster封面.png",
     imageNote: l("RoboMaster 真实视觉检测画面", "Real RoboMaster vision output"),
-    imageMode: "contain",
+    imageMode: "cover",
     repo: "https://github.com/QDU-VRobot/AUTO-Aming-system",
     role: l("算法组组长 / 框架设计 / 核心模块开发", "Vision lead / framework design / core module development"),
     status: l("实车闭环与竞赛验证", "Validated on robots and in competition"),
@@ -265,8 +267,9 @@ export const projects: ProjectDetail[] = [
     subtitle: l("跨平台桌面宠物与互动产品", "Cross-platform interactive desktop companion"),
     category: l("跨平台产品", "SIDE PROJECT · PRODUCT"),
     year: "2025 — 2026",
-    image: "/images/projects/mascotmate-hero.png",
+    image: "/images/projects/3041149f-a6cf-4b66-aefa-e2e29be65b78.png",
     imageNote: l("桌面互动产品角色示意", "Desktop companion product visual"),
+    overviewImage: { src: "/images/projects/蜡笔小新.png", alt: "MascotMate 桌面宠物角色示意图" },
     repo: "https://github.com/MzKyle/MascotMate",
     role: l("产品设计 / 客户端开发", "Product design / desktop client development"),
     status: l("跨平台桌面产品", "Cross-platform desktop product"),
