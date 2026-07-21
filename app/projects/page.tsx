@@ -14,12 +14,12 @@ export default function ProjectsPage() {
   return (
     <main>
       <SiteHeader active="projects" />
-      <PageIntro eyebrow={{ zh: "项目档案", en: "PROJECT ARCHIVE" }} title={{ zh: "从系统问题到工程结果", en: "From system problems to engineering outcomes" }} description={{ zh: "先看旗舰工业视觉案例，再进入机器人闭环、数据工具与仿真系统。每个详情页都围绕职责、架构、关键决策和验证证据展开。", en: "Start with the flagship industrial vision case, then explore closed-loop robotics, data tooling, and simulation systems. Every case is organized around ownership, architecture, decisions, and evidence." }} meta={{ zh: "机器人软件 · 工业视觉 · 系统交付", en: "ROBOTICS SOFTWARE · INDUSTRIAL VISION · SYSTEM DELIVERY" }} />
+      <PageIntro eyebrow={{ zh: "项目档案", en: "PROJECT ARCHIVE" }} title={{ zh: "从系统问题到工程结果", en: "From system problems to engineering outcomes" }} description={{ zh: "工业视觉案例，机器人闭环，数据工具与仿真系统等项目。每个详情页都围绕职责、架构、关键决策和验证证据展开。", en: "Start with the flagship industrial vision case, then explore closed-loop robotics, data tooling, and simulation systems. Every case is organized around ownership, architecture, decisions, and evidence." }} meta={{ zh: "机器人软件 · 工业视觉 · 系统交付", en: "ROBOTICS SOFTWARE · INDUSTRIAL VISION · SYSTEM DELIVERY" }} />
 
       <section className="project-focus section-shell">
-        <div className="archive-heading"><div><h2><T zh="最完整的工业视觉系统交付" en="The most complete industrial vision delivery" /></h2></div><p><T zh="从多光源采图、两阶段检测和并发调度，到 PLC 分拣与生产追溯，集中体现端到端系统能力。" en="Multi-light acquisition, two-stage inspection, concurrent orchestration, PLC sorting, and production traceability in one end-to-end system." /></p></div>
+        <div className="archive-heading"><div><h2><T zh="完整的工业视觉系统交付" en="The most complete industrial vision delivery" /></h2></div><p><T zh="从多光源采图、两阶段检测和并发调度，到 PLC 分拣与生产追溯，集中体现端到端系统能力。" en="Multi-light acquisition, two-stage inspection, concurrent orchestration, PLC sorting, and production traceability in one end-to-end system." /></p></div>
 
-        <Link className="archive-lead" href={`/projects/${flagship.slug}`}>
+        <Link className={`archive-lead archive-lead-${flagship.slug}`} href={`/projects/${flagship.slug}`}>
           <div className={`archive-lead-image archive-lead-image-${flagship.imageMode ?? "cover"}`}><img src={flagship.image} alt={`${flagship.title} — ${flagship.subtitle.zh}`} fetchPriority="high" decoding="async" /></div>
           <div className="archive-lead-copy"><div className="case-card-meta"><span><Localized text={flagship.category} /></span><span>{flagship.year}</span></div><h2>{flagship.title}</h2><h3><Localized text={flagship.subtitle} /></h3><p><Localized text={flagship.summary} /></p><dl className="archive-quickfacts"><div><dt><T zh="我的职责" en="MY ROLE" /></dt><dd><Localized text={flagship.role} /></dd></div><div><dt><T zh="系统闭环" en="SYSTEM LOOP" /></dt><dd><Localized text={flagship.outcomes[0].note} /></dd></div><div><dt><T zh="核心成果" en="CORE PROOF" /></dt><dd><b>{flagship.outcomes[2].value}</b><Localized text={flagship.outcomes[2].note} /></dd></div></dl><footer><span>{flagship.tech.slice(0, 5).join(" · ")}</span><b><T zh="打开完整案例" en="Open full case" /> →</b></footer></div>
         </Link>

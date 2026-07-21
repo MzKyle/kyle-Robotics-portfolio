@@ -12,6 +12,7 @@ export type ProjectDetail = {
   image: string;
   imageNote: LocalizedText;
   imageMode?: "cover" | "contain";
+  overviewImage?: { src: string; alt: string };
   repo: string;
   role: LocalizedText;
   status: LocalizedText;
@@ -37,14 +38,16 @@ export const projects: ProjectDetail[] = [
     subtitle: l("工业水样袋视觉缺陷检测系统", "Industrial water-sampling bag visual inspection system"),
     category: l("工业视觉", "INDUSTRIAL VISION"),
     year: "2025.02 — 2025.12",
-    image: "/images/projects/waterbag-inspection-cover-v2.webp",
+    image: "/images/projects/缺陷检测装置1.png",
+    imageMode: "contain",
     imageNote: l("工业水样袋缺陷检测工位", "Industrial waterbag inspection station"),
+    overviewImage: { src: "/images/projects/缺陷检测装置2.png", alt: "工业水样袋缺陷检测装置实拍" },
     repo: "https://github.com/MzKyle/Defect-detection-of-water-sampling-bags",
     role: l("软件开发工程师 / 端到端系统交付", "Software engineer / end-to-end system delivery"),
     status: l("工业项目完整交付", "Complete industrial system delivery"),
     summary: l("面向白色、半透明、低对比度水样袋，构建采图、检测、分拣和追溯一体化工业视觉系统。", "Built an integrated acquisition, inspection, sorting, and traceability system for white, translucent, low-contrast water-sampling bags."),
-    intro: l("半透明水样袋的褶皱、反光与材料纹理会掩盖微小缺陷，单张图像和单次推理难以稳定满足产线要求。项目同时解决成像、检测、并发调度、物理分拣顺序和结果追溯。", "Folds, glare, and material texture can hide tiny defects on translucent bags, making single-image inspection unreliable. The system addresses imaging, detection, concurrent scheduling, physical sorting order, and result traceability as one production pipeline."),
-    challenge: l("算法结果必须与真实 Bag ID、A/B 面和不同光源图像保持一致；即使推理任务并发完成、返回顺序发生变化，也不能让 PLC 对错误的袋子执行分拣。", "Inference results must stay aligned with the physical Bag ID, both sides, and every lighting condition. Even when concurrent inference finishes out of order, the PLC must never sort the wrong bag."),
+    intro: l("水样袋通常是白色、半透明、低对比度的，缺陷可能是针孔、毛发、黑点、异物、压痕、折痕、污染或封边异常。单张普通正面光图片很容易遇到两个问题：缺陷太浅看不见，或者折痕和反光太像缺陷。", "Folds, glare, and material texture can hide tiny defects on translucent bags, making single-image inspection unreliable. The system addresses imaging, detection, concurrent scheduling, physical sorting order, and result traceability as one production pipeline."),
+    challenge: l("人工做水袋缺陷检测时是在大背光灯下用手调换不同角度来找缺陷，这中多角度观察微小缺陷的能力对受硬件限制只能平放检测的机器来说是个很大的挑战", "Inference results must stay aligned with the physical Bag ID, both sides, and every lighting condition. Even when concurrent inference finishes out of order, the PLC must never sort the wrong bag."),
     contribution: [
       l("主导 C++17 产线后端的模块边界、袋级状态机与多线程调度设计。", "Led the C++17 production backend architecture, bag-level state machine, and multithreaded scheduling."),
       l("完成工业相机、PLC、硬触发时序及分拣执行的端到端接入。", "Integrated industrial cameras, PLC control, hardware-trigger timing, and physical sorting end to end."),
@@ -93,9 +96,9 @@ export const projects: ProjectDetail[] = [
     subtitle: l("RoboMaster 视觉闭环目标跟踪与控制系统", "RoboMaster closed-loop visual targeting and control system"),
     category: l("机器人视觉与控制", "ROBOT VISION & CONTROL"),
     year: "2024.06 — 2025.06",
-    image: "/images/projects/auto-aim-hero.png",
+    image: "/images/projects/Robomaster封面.png",
     imageNote: l("RoboMaster 真实视觉检测画面", "Real RoboMaster vision output"),
-    imageMode: "contain",
+    imageMode: "cover",
     repo: "https://github.com/QDU-VRobot/AUTO-Aming-system",
     role: l("算法组组长 / 框架设计 / 核心模块开发", "Vision lead / framework design / core module development"),
     status: l("实车闭环与竞赛验证", "Validated on robots and in competition"),
@@ -264,8 +267,9 @@ export const projects: ProjectDetail[] = [
     subtitle: l("跨平台桌面宠物与互动产品", "Cross-platform interactive desktop companion"),
     category: l("跨平台产品", "SIDE PROJECT · PRODUCT"),
     year: "2025 — 2026",
-    image: "/images/projects/mascotmate-hero.png",
+    image: "/images/projects/3041149f-a6cf-4b66-aefa-e2e29be65b78.png",
     imageNote: l("桌面互动产品角色示意", "Desktop companion product visual"),
+    overviewImage: { src: "/images/projects/蜡笔小新.png", alt: "MascotMate 桌面宠物角色示意图" },
     repo: "https://github.com/MzKyle/MascotMate",
     role: l("产品设计 / 客户端开发", "Product design / desktop client development"),
     status: l("跨平台桌面产品", "Cross-platform desktop product"),
