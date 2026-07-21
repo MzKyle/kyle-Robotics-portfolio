@@ -19,6 +19,7 @@
 
 # vite / vinext / cloudflare
 /dist/
+/.openai/
 /.vinext/
 /.wrangler/
 /.sites-runtime/
