@@ -14,10 +14,10 @@ export default function ProjectsPage() {
   return (
     <main>
       <SiteHeader active="projects" />
-      <PageIntro eyebrow={{ zh: "项目档案", en: "PROJECT ARCHIVE" }} title={{ zh: "从系统问题到工程结果", en: "From system problems to engineering outcomes" }} description={{ zh: "先看旗舰工业视觉案例，再进入机器人闭环、数据工具与仿真系统。每个详情页都围绕职责、架构、关键决策和验证证据展开。", en: "Start with the flagship industrial vision case, then explore closed-loop robotics, data tooling, and simulation systems. Every case is organized around ownership, architecture, decisions, and evidence." }} meta={{ zh: "机器人软件 · 工业视觉 · 系统交付", en: "ROBOTICS SOFTWARE · INDUSTRIAL VISION · SYSTEM DELIVERY" }} />
+      <PageIntro eyebrow={{ zh: "项目档案", en: "PROJECT ARCHIVE" }} title={{ zh: "从系统问题到工程结果", en: "From system problems to engineering outcomes" }} description={{ zh: "工业视觉案例，机器人闭环，数据工具与仿真系统等项目。每个详情页都围绕职责、架构、关键决策和验证证据展开。", en: "Start with the flagship industrial vision case, then explore closed-loop robotics, data tooling, and simulation systems. Every case is organized around ownership, architecture, decisions, and evidence." }} meta={{ zh: "机器人软件 · 工业视觉 · 系统交付", en: "ROBOTICS SOFTWARE · INDUSTRIAL VISION · SYSTEM DELIVERY" }} />
 
       <section className="project-focus section-shell">
-        <div className="archive-heading"><div><h2><T zh="最完整的工业视觉系统交付" en="The most complete industrial vision delivery" /></h2></div><p><T zh="从多光源采图、两阶段检测和并发调度，到 PLC 分拣与生产追溯，集中体现端到端系统能力。" en="Multi-light acquisition, two-stage inspection, concurrent orchestration, PLC sorting, and production traceability in one end-to-end system." /></p></div>
+        <div className="archive-heading"><div><h2><T zh="完整的工业视觉系统交付" en="The most complete industrial vision delivery" /></h2></div><p><T zh="从多光源采图、两阶段检测和并发调度，到 PLC 分拣与生产追溯，集中体现端到端系统能力。" en="Multi-light acquisition, two-stage inspection, concurrent orchestration, PLC sorting, and production traceability in one end-to-end system." /></p></div>
 
         <Link className="archive-lead" href={`/projects/${flagship.slug}`}>
           <div className={`archive-lead-image archive-lead-image-${flagship.imageMode ?? "cover"}`}><img src={flagship.image} alt={`${flagship.title} — ${flagship.subtitle.zh}`} fetchPriority="high" decoding="async" /></div>

@@ -58,22 +58,22 @@ export default function Home() {
       </section>
 
       <section className="home-selected-work section-shell">
-        <header className="home-section-head">
+        <header className="home-section-head home-selected-work-head">
           <div>
-            <h2><T zh="个人项目" en="Personal Projects" /></h2>
-          </div>
-          <div>
+            <div className="home-selected-work-title-row">
+              <h2><T zh="个人项目" en="Personal Projects" /></h2>
+              <Link href="/projects"><T zh="查看全部项目" en="View all projects" /> →</Link>
+            </div>
             <p><T zh="从工业视觉检测到机器人闭环与工程工具，重点展示感知、控制和系统交付能力。" en="Selected work spanning industrial inspection, closed-loop robotics, and engineering tools." /></p>
-            <Link href="/projects"><T zh="查看全部项目" en="View all projects" /> →</Link>
           </div>
         </header>
 
-        <Link className="home-featured-project" href={`/projects/${leadProject.slug}`}>
+        <Link className={`home-featured-project home-featured-project-${leadProject.slug}`} href={`/projects/${leadProject.slug}`}>
           <div className={`home-featured-image home-featured-image-${leadProject.imageMode ?? "cover"}`}>
             <img src={leadProject.image} alt={`${leadProject.title} — ${leadProject.subtitle.zh}`} fetchPriority="high" decoding="async" />
           </div>
           <div className="home-featured-copy">
-            <div className="home-project-meta"><span><T zh="重点案例" en="FLAGSHIP CASE" /></span><time>{leadProject.year}</time></div>
+            <div className="home-project-meta"><span><T zh="" en="FLAGSHIP CASE" /></span><time>{leadProject.year}</time></div>
             <h3>{leadProject.title}</h3>
             <h4><Localized text={leadProject.subtitle} /></h4>
             <p><Localized text={leadProject.summary} /></p>

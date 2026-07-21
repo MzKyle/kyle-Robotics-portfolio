@@ -495,6 +495,8 @@ a { color: inherit; text-decoration: none; }
 .case-overview { display: grid; grid-template-columns: .76fr 1.24fr; gap: 60px; }
 .case-overview aside > span, .case-tech > span, .case-section-head > span { color: var(--orange); font-family: var(--font-geist-mono), monospace; font-size: 10px; letter-spacing: .1em; }
 .case-overview h2 { max-width: 440px; margin: 16px 0 0; font-size: clamp(34px, 3.5vw, 48px); line-height: 1.12; letter-spacing: -.038em; }
+.case-overview-media { width: 100%; max-width: 520px; aspect-ratio: 4 / 3; margin: 30px 0 0; overflow: hidden; border: 1px solid var(--line); background: #080d12; }
+.case-overview-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .case-lead { margin: 0; color: #b7c0c7; font-size: 19px; line-height: 1.68; }
 .challenge-box { margin-top: 28px; padding: 22px; border-left: 2px solid var(--blue); background: #0c141b; }
 .challenge-box span { color: var(--blue); font-family: var(--font-geist-mono), monospace; font-size: 10px; letter-spacing: .08em; }
@@ -1454,7 +1456,8 @@ html[data-theme="minimal"] .archive-lead,
 html[data-theme="minimal"] .archive-core-card,
 html[data-theme="minimal"] .more-card,
 html[data-theme="minimal"] .challenge-box,
-html[data-theme="minimal"] .case-contribution {
+html[data-theme="minimal"] .case-contribution,
+html[data-theme="minimal"] .case-overview-media {
   border-radius: var(--radius-large);
   box-shadow: 0 12px 38px rgba(29, 29, 31, .05);
 }
@@ -3046,6 +3049,10 @@ html[data-theme="minimal"] .home-hero-copy {
 .home-section-head { margin-bottom: 26px; }
 .home-section-head > div:last-child > p,
 .home-section-head > p { font-size: 16px; line-height: 1.62; }
+.home-selected-work-head { display: block; }
+.home-selected-work-title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 18px; }
+.home-selected-work-title-row > a { color: var(--blue); font-size: 14px; font-weight: 620; white-space: nowrap; }
+.home-selected-work-head > div > p { max-width: 720px; margin: 10px 0 0; }
 .home-featured-project {
   grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
   min-height: 350px;
@@ -3205,6 +3212,14 @@ html[data-theme="minimal"] .home-project-thumb-robot-sim { background: #0c1218; 
 .case-disclosure > .validation-grid { margin-top: 0; padding: 0 0 28px; }
 .case-validation-disclosure { margin-top: 28px; }
 .case-evidence .outcome-grid { margin-top: 28px; }
+
+/* The waterbag inspection cover is portrait-oriented, so its frame follows the photo rather than cropping it into a landscape card. */
+.case-hero-media-waterbag-inspection.case-hero-media-contain {
+  width: min(100%, 400px);
+  aspect-ratio: 4 / 5;
+  height: auto;
+  justify-self: center;
+}
 
 /* Experience stays scannable; detailed responsibilities remain one click away. */
 .experience-page { max-width: 1320px; }
@@ -3484,4 +3499,26 @@ html[data-theme="minimal"] .home-project-thumb-robot-sim { background: #0c1218; 
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+}
+
+/* Keep the portrait waterbag station image in a portrait frame without a padded gray field. */
+@media (min-width: 1101px) {
+  .home-featured-project-waterbag-inspection {
+    grid-template-columns: 236px minmax(0, 1fr);
+  }
+  .home-featured-project-waterbag-inspection .home-featured-image {
+    width: min(calc(100% - 24px), 214px);
+    margin: 24px 0 24px 8px;
+  }
+  .home-featured-project-waterbag-inspection .home-featured-copy {
+    padding-left: 18px;
+  }
+}
+.home-featured-project-waterbag-inspection .home-featured-image {
+  aspect-ratio: 4 / 5;
+  height: auto;
+  background: transparent;
+}
+.home-featured-project-waterbag-inspection .home-featured-image img {
+  object-fit: cover;
 }

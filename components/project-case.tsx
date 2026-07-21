@@ -29,7 +29,20 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
       </nav>
 
       <section className="case-overview case-shell" id="brief">
-        <aside><span><T zh="项目概览" en="CASE BRIEF" /></span><h2><T zh="项目背景与我的职责" en="Project context and my ownership" /></h2></aside>
+        <aside>
+          <span><T zh="项目概览" en="CASE BRIEF" /></span>
+          <h2><T zh="项目背景与我的职责" en="Project context and my ownership" /></h2>
+          {project.slug === "waterbag-inspection" && (
+            <figure className="case-overview-media">
+              <img
+                src="/images/projects/缺陷检测装置2.png"
+                alt="工业水样袋缺陷检测装置实拍"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          )}
+        </aside>
         <div>
           <p className="case-lead"><Localized text={project.intro} /></p>
           <div className="challenge-box"><span><T zh="核心挑战" en="CORE CHALLENGE" /></span><p><Localized text={project.challenge} /></p></div>
@@ -43,7 +56,7 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
       <section className="case-tech case-shell"><span><T zh="技术栈" en="TECH STACK" /></span><ul>{project.tech.map((item) => <li key={item}>{item}</li>)}</ul></section>
 
       <section className="case-architecture case-flow case-shell" id="architecture">
-        <div className="case-section-head"><span><T zh="01 · 系统架构" en="01 · SYSTEM ARCHITECTURE" /></span><h2><T zh="从数据流到模块边界" en="From data flow to module boundaries" /></h2><p><T zh="先看系统如何运行，再看关键模块如何分工，让架构与工程价值在同一处完成说明。" en="See how the system runs, then how its key modules divide responsibility—keeping architecture and engineering value in one place." /></p></div>
+        <div className="case-section-head"><span><T zh="01 · 系统架构" en="01 · SYSTEM ARCHITECTURE" /></span><h2><T zh="从数据流到模块边界" en="From data flow to module boundaries" /></h2><p><T zh="" en="" /></p></div>
         <ol>{project.flow.map((item, index) => <li key={item.zh}><span>0{index + 1}</span><strong><Localized text={item} /></strong>{index < project.flow.length - 1 && <i>→</i>}</li>)}</ol>
         <details className="case-disclosure">
           <summary><div><span><T zh="核心模块" en="CORE MODULES" /></span><h3><T zh="系统由哪些模块组成" en="The modules behind the system" /></h3></div><b aria-hidden="true">+</b></summary>
