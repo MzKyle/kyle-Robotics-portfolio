@@ -18,7 +18,9 @@
   --max: 1320px;
   --gutter: 32px;
   --header-height: 72px;
-  --section-space: 120px;
+  --section-space-large: 104px;
+  --section-space: 84px;
+  --section-space-compact: 64px;
   --radius-image: 8px;
   --radius-button: 8px;
   --radius-small: 8px;
@@ -45,7 +47,12 @@
 }
 
 @media (max-width: 760px) {
-  :root { --gutter: 20px; --section-space: 80px; }
+  :root {
+    --gutter: 20px;
+    --section-space-large: 72px;
+    --section-space: 60px;
+    --section-space-compact: 48px;
+  }
 }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }

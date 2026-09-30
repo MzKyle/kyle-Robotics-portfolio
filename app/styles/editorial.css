@@ -1,7 +1,15 @@
 /* Shared editorial rhythm. Detail-page structures and content remain intact. */
 .section-shell, .case-shell { max-width: var(--max); padding: var(--section-space) var(--gutter); }
+.case-shell { padding-block: 72px var(--section-space); }
+.case-architecture { padding-block: 88px 96px; }
+.case-tech { padding-block: 48px; }
+.home-writing-brief, .about-target, .pdf-preview { padding-block: var(--section-space-compact); }
+.writing-page { padding-block: var(--section-space-compact); }
+.resume-layout { padding-block: 72px; }
+.pdf-preview { padding-block: 48px; }
+.about-disclosures { padding-top: var(--section-space-compact); }
 .page-intro, .resume-hero, .engineering-hero { max-width: var(--max); margin-inline: auto; }
-.page-intro { gap: 64px; min-height: 360px; padding: 80px var(--gutter); }
+.page-intro { gap: 64px; min-height: 264px; padding: 48px var(--gutter); }
 .page-intro h1, .resume-hero h1 { font-size: var(--type-display); }
 .page-intro-copy p { max-width: 720px; color: var(--text-secondary); }
 .hero-grid { display: none; }
@@ -10,28 +18,28 @@
 .button-primary:hover, .contact-band a:first-child:hover { background: var(--text-secondary); border-color: var(--text-secondary); }
 .button-secondary:hover { background: var(--surface-subtle); }
 .contact-band, .site-footer { max-width: var(--max); padding-inline: var(--gutter); background: transparent; }
-.contact-band { padding-block: var(--section-space); text-align: left; }
+.contact-band { padding-block: var(--section-space-compact); text-align: left; }
 .contact-band h2 { margin-left: 0; font-size: var(--type-section); }
 .contact-band > div { justify-content: flex-start; }
 .contact-band-subtitle { color: var(--text-secondary); }
-.site-footer { padding-top: 64px; }
+.site-footer { padding-block: 48px 40px; }
 .footer-links a { color: var(--text-secondary); }
 .footer-intro .brand-mark { margin-right: 8px; }
 .footer-base, .footer-links span { color: var(--text-secondary); }
-.engineering-hero { min-height: 620px; grid-template-columns: minmax(0, 1.5fr) minmax(0, .75fr); }
-.engineering-hero-main { padding: 100px var(--gutter); border-right: 0; }
+.engineering-hero { min-height: 0; grid-template-columns: minmax(0, 1.5fr) minmax(0, .75fr); }
+.engineering-hero-main { padding: 64px var(--gutter); border-right: 0; }
 .engineering-hero h1 { font-size: clamp(3.5rem, 5.5vw, 4.5rem); }
-.engineering-hero-route { padding: 64px var(--gutter); background: transparent; }
+.engineering-hero-route { padding: 48px var(--gutter); background: transparent; }
 .engineering-hero-route li { border-bottom: 0; }
 .engineering-hero-route ol { border-top: 0; }
 .engineering-section-head h2 { font-size: var(--type-section); }
-.selected-engineering-work { gap: 64px; }
+.selected-engineering-work { gap: 44px; }
 .engineering-featured-card, .engineering-secondary-card { border: 0; border-radius: 0; background: transparent; }
-.engineering-featured-copy { padding: 24px 40px 24px 0; }
+.engineering-featured-copy { padding: 18px 40px 18px 0; }
 .engineering-featured-visual { border: 0; border-radius: var(--radius-image); }
 .engineering-secondary-grid { gap: 32px; }
 .engineering-secondary-visual { border: 0; border-radius: var(--radius-image); }
-.engineering-secondary-copy { padding: 28px 0 0; }
+.engineering-secondary-copy { padding: 20px 0 0; }
 .engineering-featured-card:hover, .engineering-secondary-card:hover { border-color: transparent; }
 .engineering-featured-card:focus-visible, .engineering-secondary-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
 .home-core-grid { gap: 40px; }
@@ -52,18 +60,22 @@
 
 @media (max-width: 1100px) {
   .engineering-hero { grid-template-columns: 1fr; }
-  .engineering-hero-main { padding-block: 80px 48px; border-bottom: 0; }
-  .engineering-hero-route { padding-block: 0 64px; }
+  .engineering-hero-main { padding-block: 64px 36px; border-bottom: 0; }
+  .engineering-hero-route { padding-block: 0 48px; }
   .page-intro { gap: 32px; }
 }
 
 @media (max-width: 760px) {
-  .page-intro { grid-template-columns: 1fr; min-height: 0; padding-block: 64px; }
-  .engineering-hero-main { padding-block: 72px 36px; }
+  .page-intro { grid-template-columns: 1fr; min-height: 0; padding-block: 56px; }
+  .case-shell { padding-block: var(--section-space); }
+  .case-architecture { padding-block: var(--section-space-large); }
+  .case-tech { padding-block: 36px; }
+  .resume-layout { padding-block: var(--section-space); }
+  .engineering-hero-main { padding-block: 56px 32px; }
   .engineering-hero h1 { font-size: 3rem; }
   .engineering-featured-copy, .engineering-secondary-copy { padding: 24px 0; }
   .engineering-featured-visual { border: 0; aspect-ratio: 16 / 9; }
-  .engineering-secondary-grid { gap: 48px; }
+  .engineering-secondary-grid { gap: 36px; }
   .engineering-secondary-card:last-child .engineering-secondary-visual { border: 0; }
   .contact-band > div { flex-wrap: wrap; }
   .footer-base { flex-wrap: wrap; gap: 16px; }

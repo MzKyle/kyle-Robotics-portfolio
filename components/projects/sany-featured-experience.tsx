@@ -11,7 +11,7 @@ const cases = [
 
 export function SanyFeaturedExperience({ project }: { project: ProjectDetail }) {
   return (
-    <section className={styles.section} id="sany" aria-labelledby="sany-title">
+    <section className={`${styles.section} ${styles.featuredSection}`} id="sany" aria-labelledby="sany-title">
       <SectionLabel number="01" year={project.year}>FEATURED INDUSTRIAL EXPERIENCE</SectionLabel>
       <div className={styles.featuredHeading}>
         <div><h2 id="sany-title">SANY<span>Industrial Welding Robotics</span></h2><p className={styles.subtitle}><T zh="工业焊接机器人视觉与系统工程" en="Vision and systems engineering for industrial welding robots" /></p></div>
