@@ -2,40 +2,41 @@ import Link from "next/link";
 import type { LocalizedText } from "../lib/portfolio";
 import { Localized, T } from "./localized";
 import { PreferenceControl } from "./preferences";
+import { MobileNavigation } from "./site-navigation";
 
 const nav = [
-  { href: "/", label: { zh: "首页", en: "Home" }, key: "home" },
   { href: "/projects", label: { zh: "项目", en: "Projects" }, key: "projects" },
-  { href: "/interview", label: { zh: "面试模式", en: "Interview" }, key: "interview" },
   { href: "/experience", label: { zh: "工作经历", en: "Experience" }, key: "experience" },
   { href: "/writing", label: { zh: "技术文章", en: "Writing" }, key: "writing" },
   { href: "/about", label: { zh: "关于我", en: "About" }, key: "about" },
-  { href: "/resume", label: { zh: "简历", en: "Resume" }, key: "resume" },
 ];
 
 export function SiteHeader({ active }: { active: string }) {
   return (
     <header className="site-header">
-      <Link className="brand" href="/" aria-label="返回首页 / Back home">
-        <span className="brand-mark" aria-hidden="true">KW</span>
-        <span><T zh="王凯豪" en="Kyle Wang" /><small><T zh="机器人软件" en="ROBOTICS SOFTWARE" /></small></span>
-      </Link>
-      <nav className="primary-nav" aria-label="主导航 / Main navigation">
-        {nav.map((item) => (
-          <Link className={active === item.key ? "active" : ""} href={item.href} key={item.key}><Localized text={item.label} /></Link>
-        ))}
-      </nav>
-      <div className="header-actions">
-        <a className="header-link" href="mailto:2972689924@qq.com"><T zh="联系我" en="CONTACT" /> <span aria-hidden="true">↗</span></a>
-        <details className="mobile-navigation">
-          <summary aria-label="打开页面导航 / Open site navigation"><span aria-hidden="true">☰</span><b><T zh="菜单" en="Menu" /></b></summary>
+      <div className="site-header-inner">
+        <Link className="brand" href="/" aria-label="返回首页 / Back home">
+          <span className="brand-mark" aria-hidden="true">KW</span>
+          <span><T zh="王凯豪" en="Kyle Wang" /></span>
+        </Link>
+        <nav className="primary-nav" aria-label="主导航 / Main navigation">
+          {nav.map((item) => (
+            <Link aria-current={active === item.key ? "page" : undefined} href={item.href} key={item.key}><Localized text={item.label} /></Link>
+          ))}
+        </nav>
+        <div className="header-actions">
+          <Link aria-current={active === "interview" ? "page" : undefined} href="/interview"><T zh="面试模式" en="Interview" /></Link>
+          <Link className="header-resume" aria-current={active === "resume" ? "page" : undefined} href="/resume"><T zh="简历" en="Resume" /> <span aria-hidden="true">↗</span></Link>
+          <PreferenceControl />
+        </div>
+        <MobileNavigation>
           <nav aria-label="移动端导航 / Mobile navigation">
-            {nav.map((item) => (
-              <Link className={active === item.key ? "active" : ""} href={item.href} key={item.key}><Localized text={item.label} /><span aria-hidden="true">→</span></Link>
-            ))}
+            {nav.map((item) => <Link aria-current={active === item.key ? "page" : undefined} href={item.href} key={item.key}><Localized text={item.label} /><span aria-hidden="true">→</span></Link>)}
+            <Link aria-current={active === "interview" ? "page" : undefined} href="/interview"><T zh="面试模式" en="Interview" /><span aria-hidden="true">→</span></Link>
+            <Link aria-current={active === "resume" ? "page" : undefined} href="/resume"><T zh="简历" en="Resume" /><span aria-hidden="true">↗</span></Link>
           </nav>
-        </details>
-        <PreferenceControl />
+          <PreferenceControl />
+        </MobileNavigation>
       </div>
     </header>
   );

@@ -1,0 +1,148 @@
+.container { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.label, .heroLabel, .sectionLabel, .heroIndex, .figure figcaption, .stepNumber, .geometryHeader { font-family: var(--font-geist-mono), monospace; font-size: .75rem; letter-spacing: .1em; }
+.hero { min-height: calc(100svh - var(--header-height)); display: flex; flex-direction: column; justify-content: center; padding-block: 88px 36px; }
+.heroLabel { display: flex; align-items: center; gap: 32px; color: var(--text-secondary); }
+.heroLabel > span:first-child { color: var(--text-primary); }
+.hero h1 { max-width: 1120px; margin: 44px 0 0; font-size: clamp(3rem, 5.1vw, 4.5rem); line-height: 1.13; font-weight: 550; letter-spacing: -.045em; text-wrap: balance; }
+.hero h1 :global(.lang-zh) { letter-spacing: -.035em; line-height: 1.3; }
+.heroLine { display: block; }
+.heroBottom { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 64px; align-items: end; margin-top: 52px; }
+.heroBottom > p { max-width: 560px; margin: 0; color: var(--text-secondary); font-size: 1.125rem; line-height: 1.85; }
+.heroBottom ul { list-style: none; margin: 0; padding: 0 0 0 24px; border-left: 1px solid var(--border); color: var(--text-secondary); font-size: .8125rem; line-height: 1.9; }
+.heroIndex { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 72px; color: var(--text-secondary); }
+.heroIndex:hover { color: var(--accent); }
+.heroIndex > span:last-child { color: var(--accent); font-size: 20px; }
+
+/* Numbered editorial sections, each with its own composition. */
+.section { padding-block: 120px 136px; border-top: 1px solid var(--border); scroll-margin-top: var(--header-height); }
+.sectionLabel { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; margin-bottom: 40px; color: var(--text-secondary); }
+.sectionLabel p { margin: 0; }
+.sectionLabel p > span { color: var(--accent); }
+.sectionLabel > span { letter-spacing: .025em; white-space: nowrap; }
+.projectTitle { margin: 0; font-size: clamp(2.25rem, 3.6vw, 3rem); line-height: 1.15; font-weight: 550; letter-spacing: -.045em; }
+.subtitle { margin: 16px 0 0; color: var(--text-secondary); font-size: 1.125rem; line-height: 1.6; }
+.description { max-width: 720px; color: var(--text-secondary); font-size: 1rem; line-height: 1.85; }
+.projectLink { display: inline-flex; align-items: center; gap: 24px; width: fit-content; min-height: 44px; color: var(--accent); font-size: .9375rem; }
+.projectLink > span:last-child { transition: transform 180ms ease; }
+.projectLink:hover > span:last-child { transform: translateX(4px); }
+.projectLink:hover { text-decoration: underline; text-underline-offset: 5px; }
+.techList { display: flex; flex-wrap: wrap; gap: 8px 0; list-style: none; padding: 0; margin: 0; color: var(--text-secondary); font-family: var(--font-geist-mono), monospace; font-size: .75rem; line-height: 1.6; }
+.techList li:not(:last-child)::after { content: "/"; margin-inline: 12px; color: var(--border-strong); }
+.figure { min-width: 0; margin: 0; }
+.imageFrame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius-image); background: var(--surface-subtle); }
+.imageFrame img { object-fit: cover; }
+.figure figcaption { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 20px; margin-top: 16px; color: var(--text-secondary); font-size: .75rem; line-height: 1.6; letter-spacing: .025em; }
+.figure figcaption > span:first-child { color: var(--text-muted); letter-spacing: .08em; }
+
+/* SANY: one experience, full-width visual, two equally sized work areas. */
+.featuredHeading { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, .65fr); align-items: end; gap: 60px; margin-bottom: 48px; }
+.featuredHeading h2 { margin: 0; font-size: clamp(4rem, 6.5vw, 5.5rem); font-weight: 560; line-height: 1; letter-spacing: -.06em; }
+.featuredHeading h2 > span { display: block; max-width: 680px; margin-top: 20px; font-size: clamp(2rem, 3.4vw, 3rem); font-weight: 500; line-height: 1.15; letter-spacing: -.045em; }
+.featuredIntro .label { color: var(--text-secondary); }
+.featuredIntro p { margin: 16px 0 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.8; }
+.workLabel { display: flex; justify-content: space-between; gap: 20px; margin: 64px 0 32px; color: var(--text-secondary); }
+.cases { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.case { display: flex; flex-direction: column; align-items: flex-start; padding-right: 60px; }
+.case + .case { padding-left: 60px; padding-right: 0; border-left: 1px solid var(--border); }
+.caseNumber { color: var(--text-muted); font-family: var(--font-geist-mono), monospace; font-size: 2.5rem; line-height: 1; letter-spacing: -.05em; }
+.case h3 { max-width: 440px; min-height: 2.3em; margin: 24px 0 0; font-size: clamp(1.75rem, 2.6vw, 2.25rem); line-height: 1.15; font-weight: 500; letter-spacing: -.035em; }
+.case .techList { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 22px; margin-block: 28px; }
+.case .techList li::after { content: none; }
+.case .projectLink { margin-top: auto; }
+
+/* Waterbag: device photography and a vertical production sequence. */
+.waterbagLayout { display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr); gap: clamp(36px, 7vw, 96px); margin-top: 48px; }
+.deviceFrame { aspect-ratio: 4 / 5; }
+.deviceFrame img { object-position: center 44%; }
+.waterbagCopy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding-block: 20px 36px; }
+.waterbagCopy .techList { margin-top: 40px; }
+.waterbagCopy .description { margin-block: 20px; }
+.pipeline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; list-style: none; padding: 0; margin: 40px 0 0; }
+.pipeline li { position: relative; display: flex; flex-direction: column; gap: 12px; padding-right: 20px; font-size: 1.125rem; line-height: 1.5; }
+.stepNumber { color: var(--accent); letter-spacing: .04em; }
+.pipelineArrow { position: absolute; right: 0; top: 25px; color: var(--text-muted); }
+.pipelineVertical { grid-template-columns: 1fr; gap: 30px; margin: 0; }
+.pipelineVertical li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 18px; align-items: baseline; padding: 0; font-size: 1.375rem; letter-spacing: -.02em; }
+.pipelineVertical .pipelineArrow { top: auto; right: auto; bottom: -27px; left: 46px; font-size: 16px; }
+
+/* RoboMaster: full-width photography before the compact control pipeline. */
+.robotFigure { margin-top: 48px; }
+.sectionFoot { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 36px; }
+
+/* 3D: computation on the left, an explicitly illustrative geometry on the right. */
+.volumeLayout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: center; gap: 64px; margin-top: 56px; }
+.volumeCopy .techList { max-width: 360px; margin-top: 40px; }
+.volumeCopy .projectLink { margin-top: 24px; }
+.geometryVisual { overflow: hidden; border-radius: var(--radius-image); background: var(--surface-subtle); padding: 28px; }
+.geometryHeader { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--text-secondary); font-size: .6875rem; letter-spacing: .06em; }
+.geometryVisual svg { display: block; width: 100%; height: auto; margin-block: 30px; }
+.referencePlane { color: var(--border-strong); }
+.objectGeometry, .pointCloud { color: var(--accent); }
+.dimensionLines { color: var(--text-muted); }
+.geometryText { color: var(--text-secondary); font-family: var(--font-geist-mono), monospace; }
+.geometryVisual > p { margin: 0; color: var(--text-secondary); font-family: var(--font-geist-mono), monospace; font-size: .75rem; line-height: 1.6; }
+
+/* Supporting work deliberately stays a small, text-only index. */
+.personal h2 { max-width: 720px; margin: 0; font-size: clamp(1.625rem, 2.6vw, 2.25rem); line-height: 1.3; font-weight: 450; letter-spacing: -.03em; }
+.personalList { list-style: none; margin: 48px 0 0; padding: 0; }
+.personalList li { border-bottom: 1px solid var(--border); }
+.personalList a { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 24px; align-items: center; gap: 28px; min-height: 104px; padding-block: 24px; }
+.personalList h3 { margin: 0; font-size: 1.375rem; font-weight: 500; letter-spacing: -.02em; }
+.personalList p { margin: 0; color: var(--text-secondary); font-size: .9375rem; }
+.personalList a > span { color: var(--accent); transition: transform 180ms ease; }
+.personalList a:hover h3 { color: var(--accent); }
+.personalList a:hover > span { transform: translateX(4px); }
+
+@media (max-width: 1000px) {
+  .featuredHeading { grid-template-columns: 1fr; gap: 28px; }
+  .featuredIntro { max-width: 640px; }
+  .case { padding-right: 32px; }
+  .case + .case { padding-left: 32px; }
+  .case .techList { grid-template-columns: 1fr; }
+  .volumeLayout { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 28px; }
+}
+
+@media (max-width: 760px) {
+  .hero { padding-block: 64px 28px; }
+  .hero h1 { margin-top: 36px; font-size: clamp(2.25rem, 7.5vw, 3.5rem); line-height: 1.16; }
+  .heroLabel { justify-content: space-between; gap: 16px; }
+  .heroBottom { grid-template-columns: 1fr; gap: 32px; margin-top: 32px; }
+  .heroBottom > p { font-size: 1rem; }
+  .heroBottom ul { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; border: 0; padding: 0; font-size: .75rem; }
+  .heroIndex { padding-top: 56px; font-size: .6875rem; letter-spacing: .04em; }
+  .section { padding-block: 80px 88px; }
+  .sectionLabel { flex-direction: column; gap: 12px; margin-bottom: 32px; font-size: .6875rem; letter-spacing: .06em; }
+  .featuredHeading { margin-bottom: 32px; }
+  .featuredHeading h2 { font-size: 4rem; }
+  .featuredHeading h2 > span { font-size: 2rem; }
+  .projectTitle { font-size: clamp(2rem, 8vw, 2.5rem); }
+  .subtitle { font-size: 1rem; }
+  .cases, .waterbagLayout, .volumeLayout { grid-template-columns: 1fr; }
+  .workLabel { margin-top: 40px; }
+  .workLabel .label { font-size: .6875rem; letter-spacing: .04em; }
+  .case { padding: 0 0 36px; }
+  .case + .case { padding: 36px 0 0; border-left: 0; border-top: 1px solid var(--border); }
+  .case h3 { min-height: 0; font-size: 1.875rem; }
+  .case .techList { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; }
+  .waterbagLayout { gap: 32px; margin-top: 32px; }
+  .waterbagCopy { padding: 0; }
+  .robotFigure { margin-top: 32px; }
+  .pipeline:not(.pipelineVertical) { grid-template-columns: 1fr; gap: 18px; margin-top: 32px; }
+  .pipeline:not(.pipelineVertical) li { display: grid; grid-template-columns: 28px 1fr; gap: 18px; align-items: baseline; padding-bottom: 20px; }
+  .pipeline:not(.pipelineVertical) .pipelineArrow { inset: auto auto -4px 46px; transform: rotate(90deg); }
+  .pipelineVertical li { font-size: 1.25rem; }
+  .sectionFoot { align-items: flex-start; flex-direction: column; margin-top: 16px; }
+  .volumeLayout { gap: 40px; margin-top: 36px; }
+  .geometryVisual { padding: 20px 12px; }
+  .geometryHeader, .geometryVisual > p { padding-inline: 8px; }
+  .personalList { margin-top: 32px; }
+  .personalList a { grid-template-columns: minmax(0, 1fr) 24px; gap: 8px 20px; min-height: 100px; }
+  .personalList h3 { font-size: 1.25rem; }
+  .personalList p { grid-row: 2; }
+  .personalList a > span { grid-column: 2; grid-row: 1 / 3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectLink > span:last-child, .personalList a > span { transition: none; }
+  .projectLink:hover > span:last-child, .personalList a:hover > span { transform: none; }
+}
