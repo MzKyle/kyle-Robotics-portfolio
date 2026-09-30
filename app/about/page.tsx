@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { capabilities } from "../../lib/portfolio";
+import { capabilities, honors } from "../../lib/portfolio";
 import { Localized, T } from "../../components/localized";
 import { PageIntro, SiteFooter, SiteHeader } from "../../components/site-shell";
 
@@ -36,12 +36,12 @@ export default function AboutPage() {
       <section className="about-overview section-shell">
         <div className="about-overview-copy">
           <div className="section-primary-heading"><h2><T zh="快速了解" en="At a Glance" /></h2><p><T zh="机器人软件开发工程师" en="Robotics Software Engineer" /></p></div>
-          <p><T zh="我擅长把相机、点云、视觉算法、ROS 2 与机械臂控制连接成可运行、可观测、可维护的软件系统。目前主要参与工业焊接机器人与机器视觉开发。" en="I connect cameras, point clouds, perception algorithms, ROS 2, and robot control into operational, observable, and maintainable systems. I currently work on industrial welding robotics and machine vision." /></p>
+          <p><T zh="我擅长把相机、点云、视觉算法、ROS 2 与机械臂控制连接成可运行、可观测、可维护的软件系统，工程经历覆盖机器人视觉闭环、工业视觉交付与工业焊接机器人。" en="I connect cameras, point clouds, perception algorithms, ROS 2, and robot control into operational, observable, and maintainable systems across robot vision, industrial inspection, and welding robotics." /></p>
           <div className="about-overview-actions"><Link href="/projects"><T zh="查看代表项目" en="View selected work" /> →</Link><Link href="/resume"><T zh="查看完整简历" en="View full resume" /> →</Link></div>
         </div>
 
         <dl className="about-facts">
-          <div><dt><T zh="当前经历" en="CURRENT ROLE" /></dt><dd><T zh="三一集团 · 耘创新实验室 / 工业焊接机器人" en="SANY · Yun Innovation Lab / Industrial welding robotics" /></dd></div>
+          <div><dt><T zh="最近经历" en="LATEST ROLE" /></dt><dd><T zh="三一集团 · 工业焊接机器人 / 2026.03—2026.08" en="SANY · Industrial welding robotics / 2026.03—2026.08" /></dd></div>
           <div><dt><T zh="核心技术" en="CORE STACK" /></dt><dd>C++ · ROS 2 · Linux · OpenCV · PCL</dd></div>
           <div><dt><T zh="完整链路" en="SYSTEM SCOPE" /></dt><dd><T zh="设备接入 → 感知部署 → 机器人控制 → 仿真诊断" en="Device integration → perception → robot control → simulation and diagnostics" /></dd></div>
           <div><dt><T zh="求职方向" en="ROLE TARGET" /></dt><dd><T zh="机器人软件开发 · ROS 2 系统集成 · 工业视觉工程" en="Robotics software · ROS 2 systems · Industrial vision" /></dd></div>
@@ -56,14 +56,14 @@ export default function AboutPage() {
             <summary><span className="disclosure-index">01</span><div><small><T zh="经历与路径" en="EXPERIENCE &amp; PATH" /></small><h2><T zh="工程经历与成长路径" en="Experience and engineering journey" /></h2><p><T zh="嵌入式基础 → RoboMaster → 工业视觉 → 焊接机器人系统" en="Embedded foundations → RoboMaster → industrial vision → welding robotics" /></p></div><DisclosureToggle /></summary>
             <div className="disclosure-content">
               <div className="about-expanded-story">
-                <p className="about-lead"><T zh="目前，我主要参与工业焊接机器人与机器视觉系统开发，工作内容覆盖 2D/3D 相机采集、点云与图像处理、算法服务接入、坐标转换、FANUC 机械臂运动流程以及系统记录与排障。" en="I currently work on industrial welding robots and machine-vision systems, covering 2D/3D cameras, point-cloud and image processing, algorithm services, coordinate transforms, FANUC motion workflows, and diagnostics." /></p>
-                <div><p><T zh="此前，我参与物流 3D 体积测量，并以项目制方式交付工业水样袋缺陷检测系统，打通相机、推理、PLC 分拣与结果追溯。" en="Previously, I worked on 3D logistics measurement and delivered an industrial waterbag inspection system spanning cameras, inference, PLC sorting, and traceability." /></p><p><T zh="RoboMaster 算法组组长经历让我较早接触实时视觉闭环、PnP、状态估计、串口协议与团队协作。" en="Leading a RoboMaster vision team gave me early experience with real-time visual loops, PnP, state estimation, serial protocols, and team collaboration." /></p></div>
+                <p className="about-lead"><T zh="2026 年参与工业焊接机器人域控系统开发，负责焊前定位与摆弧焊纠偏相关模块，工作覆盖多设备时序、高吞吐数据路径、2D / 3D 感知与空间纠偏。" en="In 2026 I contributed to an industrial welding robot domain-control system, owning pre-weld positioning and weave-correction modules across multi-device timing, high-throughput data paths, 2D/3D perception, and spatial correction." /></p>
+                <div><p><T zh="此前，我参与物流 3D 体积测量，并以项目制方式独立开发工业水样袋 C++ 视觉后端主控，打通相机、推理、Modbus RTU 分拣与结果追溯。" en="Previously, I worked on 3D logistics measurement and independently developed the C++ vision backend controller for an industrial waterbag system spanning cameras, inference, Modbus RTU sorting, and traceability." /></p><p><T zh="RoboMaster 算法组组长经历让我主导自瞄架构迭代，推进 ROS 2 Component / intra-process、EKF 融合、SensorCalibration 工具与 VRobot 团队规范。" en="As RoboMaster vision lead, I drove auto-aim architecture iterations across ROS 2 components/intra-process communication, EKF fusion, SensorCalibration tooling, and VRobot team practices." /></p></div>
               </div>
               <ol className="journey-list">
                 <li><time>2023</time><div><small><T zh="基础阶段" en="FOUNDATION" /></small><h3><T zh="电子信息与嵌入式基础" en="Electronics and embedded foundations" /></h3><p><T zh="从 C/C++、51 单片机与 STM32 开始理解内存、外设、串口通信、采样与控制。" en="Built hardware foundations through C/C++, 8051 and STM32 development, peripherals, serial communication, sampling, and control." /></p></div><span>C/C++ · STM32 · UART · CRC</span></li>
-                <li><time>2024</time><div><small><T zh="机器人闭环" en="ROBOTICS LOOP" /></small><h3><T zh="RoboMaster 视觉闭环与团队负责" en="RoboMaster visual loop and team leadership" /></h3><p><T zh="担任算法组组长，参与相机接入、装甲板识别、PnP、Tracker / Kalman 预测、坐标变换和 NUC 与 STM32 控制通信。" en="Led camera integration, armor detection, PnP, Tracker / Kalman prediction, transforms, and NUC-to-STM32 control communication." /></p></div><span>ROS 2 · OpenCV · PnP · TRACKER</span></li>
+                <li><time>2024</time><div><small><T zh="机器人闭环" en="ROBOTICS LOOP" /></small><h3><T zh="RoboMaster 自瞄架构与团队负责" en="RoboMaster auto-aim architecture and leadership" /></h3><p><T zh="担任算法组组长，主导 ROS 2 通信重构，以 Component / intra-process 降低链路开销，并推进 EKF 融合、成像调优和标定工具。" en="Led the ROS 2 communications refactor, using components and intra-process communication to reduce path overhead while advancing EKF fusion, imaging, and calibration tooling." /></p></div><span>ROS 2 · COMPONENT · EKF · CALIBRATION</span></li>
                 <li><time>2025</time><div><small><T zh="工业视觉" en="INDUSTRIAL VISION" /></small><h3><T zh="进入工业视觉与项目交付" en="Industrial vision and project delivery" /></h3><p><T zh="参与物流 3D 体积测量并推进水样袋缺陷检测，开始负责相机、模型、PLC、数据库和桌面工具组成的生产链路。" en="Worked on 3D logistics measurement and waterbag inspection across cameras, models, PLCs, databases, and desktop tools." /></p></div><span>3D VISION · ONNX · PLC · QT</span></li>
-                <li><time>2026</time><div><small><T zh="机器人系统" en="ROBOTICS SYSTEMS" /></small><h3><T zh="工业焊接机器人与工程工具" en="Welding robotics and engineering tools" /></h3><p><T zh="围绕 FANUC 完善相机、算法与运动控制链路，并开发 DataScope Studio、Robot-Sim 等数据诊断和仿真工具。" en="Integrated cameras, algorithms, and FANUC motion control while building DataScope Studio and Robot-Sim." /></p></div><span>FANUC · MOVEIT 2 · RERUN · GAZEBO</span></li>
+                <li><time>2026</time><div><small><T zh="工业机器人系统" en="INDUSTRIAL ROBOTICS SYSTEMS" /></small><h3><T zh="焊接机器人、多设备时序与空间纠偏" en="Welding robotics, timing, and spatial correction" /></h3><p><T zh="在真实工业机器人系统中处理相机数据通路、设备时序、3D 几何与机器人 TCP 关系，并把定位方案迭代为一步完成。" en="Worked on camera data paths, device timing, 3D geometry, and robot TCP relationships in a real industrial system, iterating positioning into a single-step process." /></p></div><span>C++ · ROS 2 · IPC · 3D VISION</span></li>
               </ol>
             </div>
           </details>
@@ -92,11 +92,11 @@ export default function AboutPage() {
           </details>
 
           <details className="about-disclosure">
-            <summary><span className="disclosure-index">04</span><div><small><T zh="教育与团队" en="EDUCATION &amp; LEADERSHIP" /></small><h2><T zh="教育、团队角色与荣誉" en="Education, leadership, and honors" /></h2><p><T zh="青岛大学 · RoboMaster 算法组组长 · 电子设计竞赛 · 5 项代表荣誉" en="Qingdao University · RoboMaster team lead · electronics competition · five selected honors" /></p></div><DisclosureToggle /></summary>
+            <summary><span className="disclosure-index">04</span><div><small><T zh="教育与团队" en="EDUCATION &amp; LEADERSHIP" /></small><h2><T zh="教育、团队角色与荣誉" en="Education, leadership, and honors" /></h2><p><T zh="青岛大学 · RoboMaster 算法组组长 · VRobot 发起人 · 8 项代表荣誉" en="Qingdao University · RoboMaster vision lead · VRobot founder · eight selected honors" /></p></div><DisclosureToggle /></summary>
             <div className="disclosure-content">
               <div className="education-honors">
                 <div className="education-profile"><p className="section-kicker"><T zh="教育与团队" en="EDUCATION &amp; LEADERSHIP" /></p><h2><T zh="青岛大学" en="Qingdao University" /></h2><p><T zh="电子信息工程 · 卓越工程师计划" en="Electronic Information Engineering · Excellence Engineer Program" /></p><span>2023.09 — 2027.06</span><dl><div><dt><T zh="团队角色" en="TEAM ROLE" /></dt><dd><T zh="RoboMaster 算法组组长" en="RoboMaster Vision Team Lead" /></dd></div><div><dt><T zh="竞赛角色" en="COMPETITION ROLE" /></dt><dd><T zh="全国大学生电子设计大赛项目负责人" en="Project Lead, National Electronics Design Contest" /></dd></div><div><dt><T zh="基础方向" en="FOUNDATIONS" /></dt><dd><T zh="电子系统 · 嵌入式开发 · 信号与数据处理" en="Electronics · embedded development · signal and data processing" /></dd></div></dl></div>
-                <div className="honors-profile"><p className="section-kicker"><T zh="代表荣誉" en="SELECTED HONORS" /></p><ul><li><span>01</span><T zh="全国大学生机器人竞赛全国三等奖" en="National College Student Robotics Competition — Third Prize" /></li><li><span>02</span><T zh="全国大学生机器人竞赛区域赛二等奖" en="Regional Robotics Competition — Second Prize" /></li><li><span>03</span><T zh="RoboMaster 高校联盟赛二等奖、机器人竞技一等奖" en="RoboMaster University League — Second Prize; Robot Competition — First Prize" /></li><li><span>04</span><T zh="全国大学生电子设计大赛省级二等奖" en="National Electronics Design Contest Provincial — Second Prize" /></li><li><span>05</span><T zh="谐振杯电子设计大赛一等奖" en="Resonance Cup Electronics Design Contest — First Prize" /></li></ul></div>
+                <div className="honors-profile"><p className="section-kicker"><T zh="代表荣誉" en="SELECTED HONORS" /></p><ul>{honors.map((honor, index) => <li key={honor.zh}><span>{String(index + 1).padStart(2, "0")}</span><Localized text={honor} /></li>)}</ul></div>
               </div>
             </div>
           </details>

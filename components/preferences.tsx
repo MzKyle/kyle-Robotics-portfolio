@@ -15,11 +15,11 @@ function applyPreferences(language: Language, theme: Theme) {
 export function PreferenceControl() {
   const [open, setOpen] = useState(false);
   const [language, setLanguage] = useState<Language>("zh");
-  const [theme, setTheme] = useState<Theme>("minimal");
+  const [theme, setTheme] = useState<Theme>("industrial");
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem("portfolio-language") === "en" ? "en" : "zh";
-    const savedTheme = localStorage.getItem("portfolio-theme") === "industrial" ? "industrial" : "minimal";
+    const savedTheme = localStorage.getItem("portfolio-theme") === "minimal" ? "minimal" : "industrial";
     applyPreferences(savedLanguage, savedTheme);
   }, []);
 
@@ -69,11 +69,11 @@ export function PreferenceControl() {
           <div className="setting-group">
             <div><strong>{language === "zh" ? "渲染风格" : "Visual style"}</strong><p>{language === "zh" ? "默认使用轻量、聚焦内容的简约界面，也可以切换为深色科技界面。" : "The focused minimal interface is the default, with an optional dark technology style."}</p></div>
             <div className="theme-options" role="group" aria-label={language === "zh" ? "渲染风格" : "Visual style"}>
-              <button className={theme === "minimal" ? "selected" : ""} type="button" onClick={() => chooseTheme("minimal")} aria-pressed={theme === "minimal"}>
-                <i className="theme-swatch minimal-swatch"><span /><span /><span /></i><strong>{language === "zh" ? "简约风格" : "Minimal"}</strong><small>{language === "zh" ? "默认 · 浅色 · 聚焦内容" : "Default · light · focused"}</small>
-              </button>
               <button className={theme === "industrial" ? "selected" : ""} type="button" onClick={() => chooseTheme("industrial")} aria-pressed={theme === "industrial"}>
-                <i className="theme-swatch industrial-swatch"><span /><span /><span /></i><strong>{language === "zh" ? "科技风格" : "Technology"}</strong><small>{language === "zh" ? "深色 · 数据面板 · 网格" : "Dark · data panels · grid"}</small>
+                <i className="theme-swatch industrial-swatch"><span /><span /><span /></i><strong>{language === "zh" ? "工业风格" : "Industrial"}</strong><small>{language === "zh" ? "默认 · 深色 · 工程网格" : "Default · dark · engineering grid"}</small>
+              </button>
+              <button className={theme === "minimal" ? "selected" : ""} type="button" onClick={() => chooseTheme("minimal")} aria-pressed={theme === "minimal"}>
+                <i className="theme-swatch minimal-swatch"><span /><span /><span /></i><strong>{language === "zh" ? "简约风格" : "Minimal"}</strong><small>{language === "zh" ? "浅色 · 聚焦内容" : "Light · focused"}</small>
               </button>
             </div>
           </div>

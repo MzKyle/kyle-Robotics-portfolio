@@ -9,11 +9,19 @@ export type ProjectDetail = {
   subtitle: LocalizedText;
   category: LocalizedText;
   year: string;
-  image: string;
+  image?: string;
   imageNote: LocalizedText;
   imageMode?: "cover" | "contain";
+  cardLayout?: "top" | "side";
+  homeImage?: string;
+  homeImageMode?: "cover" | "contain";
+  homeImagePosition?: string;
+  homeDescription?: LocalizedText;
+  homeTech?: string[];
+  homeEvidence?: { value: string; label: LocalizedText }[];
+  homeVisualSteps?: LocalizedText[];
   overviewImage?: { src: string; alt: string };
-  repo: string;
+  repo?: string;
   role: LocalizedText;
   status: LocalizedText;
   summary: LocalizedText;
@@ -28,9 +36,15 @@ export type ProjectDetail = {
   validation: { tag: string; title: LocalizedText; text: LocalizedText }[];
   outcomes: { label: LocalizedText; value: string; note: LocalizedText }[];
   value: LocalizedText[];
+  kind?: "flagship" | "personal";
+  accent?: "timing" | "pipeline" | "control" | "geometry" | "tooling";
+  ownership?: { label: LocalizedText; type: "mine" | "collaboration" | "existing" }[];
+  problems?: { title: LocalizedText; constraint: LocalizedText; decision: LocalizedText }[];
+  deepDive?: { title: LocalizedText; text: LocalizedText }[];
+  confidentialityNote?: LocalizedText;
 };
 
-export const projects: ProjectDetail[] = [
+const existingProjects: ProjectDetail[] = [
   {
     slug: "waterbag-inspection",
     index: "01",
@@ -40,21 +54,31 @@ export const projects: ProjectDetail[] = [
     year: "2025.02 — 2025.12",
     image: "/images/projects/缺陷检测装置1.png",
     imageMode: "contain",
+    cardLayout: "side",
+    homeImage: "/images/projects/缺陷检测装置1.png",
+    homeImageMode: "cover",
+    homeImagePosition: "center 44%",
+    homeDescription: l("构建采图、检测、分拣与数据追溯一体化工业视觉系统。", "Built an integrated industrial vision system for capture, inspection, sorting, and traceability."),
+    homeTech: ["C++17", "Industrial Camera", "ONNX", "Modbus RTU"],
+    homeEvidence: [
+      { value: "END-TO-END", label: l("完整工业视觉链路", "Complete industrial vision path") },
+      { value: "BAG ID", label: l("有序分拣状态管理", "Ordered sorting state") },
+    ],
     imageNote: l("工业水样袋缺陷检测工位", "Industrial waterbag inspection station"),
     overviewImage: { src: "/images/projects/缺陷检测装置2.png", alt: "工业水样袋缺陷检测装置实拍" },
     repo: "https://github.com/MzKyle/Defect-detection-of-water-sampling-bags",
-    role: l("软件开发工程师 / 端到端系统交付", "Software engineer / end-to-end system delivery"),
+    role: l("软件开发工程师 / C++ 视觉后端主控", "Software engineer / C++ vision backend lead"),
     status: l("工业项目完整交付", "Complete industrial system delivery"),
     summary: l("面向白色、半透明、低对比度水样袋，构建采图、检测、分拣和追溯一体化工业视觉系统。", "Built an integrated acquisition, inspection, sorting, and traceability system for white, translucent, low-contrast water-sampling bags."),
     intro: l("水样袋通常是白色、半透明、低对比度的，缺陷可能是针孔、毛发、黑点、异物、压痕、折痕、污染或封边异常。单张普通正面光图片很容易遇到两个问题：缺陷太浅看不见，或者折痕和反光太像缺陷。", "Folds, glare, and material texture can hide tiny defects on translucent bags, making single-image inspection unreliable. The system addresses imaging, detection, concurrent scheduling, physical sorting order, and result traceability as one production pipeline."),
     challenge: l("人工做水袋缺陷检测时是在大背光灯下用手调换不同角度来找缺陷，这中多角度观察微小缺陷的能力对受硬件限制只能平放检测的机器来说是个很大的挑战", "Inference results must stay aligned with the physical Bag ID, both sides, and every lighting condition. Even when concurrent inference finishes out of order, the PLC must never sort the wrong bag."),
     contribution: [
-      l("主导 C++17 产线后端的模块边界、袋级状态机与多线程调度设计。", "Led the C++17 production backend architecture, bag-level state machine, and multithreaded scheduling."),
-      l("完成工业相机、PLC、硬触发时序及分拣执行的端到端接入。", "Integrated industrial cameras, PLC control, hardware-trigger timing, and physical sorting end to end."),
-      l("组织两阶段模型训练、ONNX 导出与 C++ Runtime 部署，使算法进入稳定生产链路。", "Connected two-stage model training and ONNX export to a stable C++ runtime deployment."),
-      l("建立 Mock 测试、JSONL 审计、SQLite 同步与 Dashboard 追溯体系。", "Built mock testing, JSONL audit records, SQLite synchronization, and dashboard traceability."),
+      l("独立开发 C++ 视觉后端主控模块，接入工业相机采集、Modbus RTU、缺陷推理调度与末端分拣控制。", "Independently developed the C++ vision backend controller across industrial-camera capture, Modbus RTU, inference scheduling, and end-of-line sorting."),
+      l("参与多光源频闪 Burst 成像与‘整图快速粗检 + ROI 微缺陷精检’链路，面向亚像素级缺陷提升可见性与检出稳定性。", "Contributed to multi-light burst imaging and a full-image coarse pass plus ROI micro-defect refinement for sub-pixel-scale defects."),
+      l("完成 YOLO 训练调优、ONNX 导出与 CUDA 部署，并使用 EfficientNet 完成细分类。", "Trained and tuned YOLO, exported ONNX for CUDA deployment, and used EfficientNet for fine-grained classification."),
+      l("建立 Bag ID 状态机、乱序结果重排及 JSONL、SQLite、Flask Dashboard 追溯链路。", "Built the Bag-ID state machine, out-of-order result reordering, and a JSONL/SQLite/Flask dashboard traceability path."),
     ],
-    tech: ["C++17", "YOLO", "ONNX Runtime", "PLC", "SQLite", "JSONL", "Flask", "Mock Hardware"],
+    tech: ["C++17", "Industrial Camera", "Modbus RTU", "YOLO / ONNX", "CUDA", "EfficientNet", "SQLite / JSONL", "Flask"],
     flow: [l("多光源 Burst 采图", "Multi-light burst capture"), l("Bag ID 组包", "Bag ID aggregation"), l("整图粗检", "Full-image inspection"), l("微缺陷补检", "Micro-defect refinement"), l("结果融合与重排序", "Fusion and reordering"), l("PLC 分拣与追溯", "PLC sorting and traceability")],
     modules: [
       { code: "CAMERA DRIVER", title: l("工业相机与硬触发采集", "Industrial camera and hardware trigger"), text: l("对接海康 MVS SDK，完成连续取流、Burst 会话、Chunk 硬件时间戳和光源/曝光元数据封装；回调只负责收帧，保存与推理移出采集线程。", "Integrates Hikrobot MVS for continuous acquisition, burst sessions, chunk timestamps, and lighting/exposure metadata. Camera callbacks only receive frames; storage and inference stay off the capture thread.") },
@@ -99,17 +123,23 @@ export const projects: ProjectDetail[] = [
     image: "/images/projects/Robomaster封面.png",
     imageNote: l("RoboMaster 真实视觉检测画面", "Real RoboMaster vision output"),
     imageMode: "cover",
+    homeDescription: l("将工业相机、PnP、EKF、运动预测与控制通信组成 ROS 2 实时视觉闭环。", "Combined industrial cameras, PnP, EKF, motion prediction, and control communication into a ROS 2 real-time vision loop."),
+    homeTech: ["ROS 2", "C++17 / C++20", "OpenCV", "PnP / EKF"],
+    homeEvidence: [
+      { value: "ROS 2 LOOP", label: l("实时视觉闭环", "Real-time vision loop") },
+      { value: "EKF / PNP", label: l("状态估计与空间解算", "State and spatial estimation") },
+    ],
     repo: "https://github.com/QDU-VRobot/AUTO-Aming-system",
     role: l("算法组组长 / 框架设计 / 核心模块开发", "Vision lead / framework design / core module development"),
     status: l("实车闭环与竞赛验证", "Validated on robots and in competition"),
     summary: l("将工业相机、装甲板识别、PnP、EKF 跟踪、弹道解算和串口控制组织为 ROS 2 实时视觉闭环。", "Integrated industrial cameras, armor detection, PnP, EKF tracking, trajectory solving, and serial control into a ROS 2 real-time vision loop."),
-    intro: l("项目面向 RoboMaster 高动态对抗场景，需要在有限算力和强运动干扰下完成稳定识别、状态估计、提前量计算与云台控制。作为算法组组长，我主导 2025 赛季框架设计与 ROS 2 通信链路重构，并负责手眼标定、模块解耦和团队协作规范。", "The system targets RoboMaster's high-dynamic combat environment, where detection, state estimation, lead prediction, and gimbal control must remain stable under motion and compute constraints. As vision lead, I drove the 2025 framework and ROS 2 communication refactor, built the hand-eye calibration workflow, separated core modules, and established team development practices."),
+    intro: l("项目面向 RoboMaster 高动态对抗场景，需要在有限算力和强运动干扰下完成稳定识别、状态估计、提前量计算与云台控制。作为算法组组长，我主导 2025 赛季总体自瞄架构与性能迭代，推进 ROS 2 通信重构、成像链路调优、标定工具和团队工程规范。", "The system targets RoboMaster's high-dynamic combat environment, where detection, estimation, lead prediction, and gimbal control must remain stable under motion and compute constraints. As vision lead, I drove the 2025 auto-aim architecture and performance iteration across ROS 2 communications, imaging, calibration tooling, and team practices."),
     challenge: l("从相机观测到云台控制的每一步都依赖统一时间、坐标系和目标状态；任何延迟、TF 偏差或串口异常都会直接表现为瞄准抖动和预测误差。", "Every stage from camera observation to gimbal command depends on consistent time, frames, and target state. Latency, TF errors, or serial faults immediately appear as aiming jitter and prediction error."),
     contribution: [
-      l("担任算法组组长，主导 2025 赛季框架设计、ROS 2 通信链路重构与模块职责划分。", "Served as vision lead, driving the 2025 architecture, ROS 2 communication refactor, and package boundaries."),
-      l("负责装甲板检测、PnP、跟踪与控制链路的集成调试，并推动不同机器人配置复用。", "Integrated and tuned armor detection, PnP, tracking, and control while enabling reuse across robot configurations."),
-      l("独立开发手眼标定模块与采样质量检查，将相机安装外参写入 URDF/Xacro 链路。", "Developed the hand-eye calibration module and sample-quality checks, feeding camera extrinsics into the URDF/Xacro chain."),
-      l("建立仿真、视频回放、实车调试和可视化工作流，降低完整硬件依赖。", "Established simulation, video replay, robot tuning, and visualization workflows to reduce full-hardware dependency."),
+      l("担任算法组组长，主导 2025 赛季总体自瞄架构与性能迭代；重构 ROS 2 通信并解耦图像处理与目标解算。", "Served as vision lead, driving the 2025 auto-aim architecture and performance iteration while decoupling image processing from target solving through a ROS 2 communications refactor."),
+      l("采用 ROS 2 Component 与 intra-process 通信，减少 DDS 序列化、数据复制与链路延迟，并改善部署和调参体验。", "Used ROS 2 components and intra-process communication to reduce DDS serialization, copies, and path latency while improving deployment and tuning."),
+      l("调优工业相机成像参数与形态学处理，并开发 SensorCalibration 可视化交互软件完成相机内外参标定。", "Tuned industrial-camera imaging and morphology, and developed the SensorCalibration visual tool for intrinsic and extrinsic calibration."),
+      l("集成社区开源方案，以 EKF 融合目标位姿观测与本机运动状态；创建 VRobot 技术组织并建立开发、版本与新人培训规范。", "Integrated community open-source solutions, used an EKF to fuse target-pose observations with host motion, and founded VRobot with development, versioning, and onboarding practices."),
     ],
     tech: ["ROS 2 Humble", "C++17 / C++20", "OpenCV", "PnP", "Eigen / EKF", "TF2", "LibXR / UART", "OpenVINO / TensorRT"],
     flow: [l("工业相机采图", "Industrial camera input"), l("装甲板检测与分类", "Armor detection and classification"), l("PnP 位姿解算", "PnP pose estimation"), l("多模型 EKF 跟踪", "Multi-model EKF tracking"), l("弹道与提前量解算", "Ballistics and lead solving"), l("串口下发云台控制", "UART gimbal command")],
@@ -319,6 +349,249 @@ export const projects: ProjectDetail[] = [
   },
 ];
 
+const sanyCase: ProjectDetail = {
+  slug: "sany-welding-robotics",
+  index: "01",
+  title: "SANY Industrial Welding Robotics",
+  subtitle: l("工业焊接机器人域控与视觉纠偏系统", "Industrial welding robot domain control and visual correction"),
+  category: l("工业机器人系统工程", "INDUSTRIAL WELDING ROBOTICS"),
+  year: "2026.03 — 2026.08",
+  imageNote: l("企业项目未公开实拍图，页面使用系统架构示意", "No internal imagery is published; the page uses a system schematic"),
+  homeImage: "/images/robot-workstation-hero.png",
+  homeImageMode: "cover",
+  homeImagePosition: "center",
+  homeDescription: l("围绕多设备协同、实时数据链路、3D 感知与机器人纠偏开展系统开发。", "Engineering across multi-device coordination, real-time data paths, 3D perception, and robot correction."),
+  homeTech: ["C++", "ROS 2", "Shared Memory", "3D Vision"],
+  homeEvidence: [
+    { value: "±0.5 mm", label: l("定位结果", "POSITIONING") },
+    { value: "ZERO-COPY", label: l("数据通路", "DATA PATH") },
+    { value: "ms-level", label: l("时序对齐", "TIMING ALIGNMENT") },
+  ],
+  role: l("算法工程师 / 焊前定位与摆弧焊纠偏模块", "Algorithm engineer / pre-weld positioning and weave correction modules"),
+  status: l("公开版工程案例 / 已脱敏", "Public engineering case / sanitized"),
+  summary: l("围绕毫秒级多设备时序、高吞吐数据链路、点云空间配准与高帧率感知，参与工业焊接机器人域控系统开发。", "Worked on an industrial welding robot domain-control system across millisecond-level device timing, high-throughput data paths, point-cloud registration, and high-frame-rate perception."),
+  intro: l("系统协调 3D Camera、Weld-pool Camera 与 Industrial Robot，在焊前定位和摆弧运动过程中把多源数据转换为可用于机器人纠偏的空间信息。公开页面只说明模块边界、工程决策与本人职责。", "The system coordinates a 3D Camera, Weld-pool Camera, and Industrial Robot, turning multi-source observations into spatial correction data for pre-weld positioning and weave motion. This public case only describes module boundaries, engineering decisions, and personal ownership."),
+  challenge: l("传感器与机器人各自拥有独立时序和数据格式；高帧率 RAW 数据、3D 几何信息与 TCP 位姿必须在有限复制和明确坐标关系下完成对齐。", "Sensors and the robot maintain independent clocks and data formats. High-frame-rate RAW data, 3D geometry, and TCP poses must align with bounded copying and explicit coordinate relationships."),
+  contribution: [
+    l("参与工业焊接机器人域控系统开发，负责焊前定位与摆弧焊纠偏相关模块。", "Contributed to the robot domain-control system and owned modules for pre-weld positioning and weave correction."),
+    l("以软触发协调两类视觉传感器与工业机器人，初始化对齐时间零点并以 count 记录运行期时间偏移，在受限条件下实现毫秒级多设备同步。", "Coordinated two visual sensors and the robot with software triggering, aligned time zero at initialization, and recorded runtime offsets with count values for millisecond-level synchronization under constrained conditions."),
+    l("优化设备 SDK Buffer 到算法模块的数据路径，引入 Shared Memory / Zero-copy 思路减少不必要复制。", "Optimized the path from device SDK buffers to compute modules using shared-memory and zero-copy principles."),
+    l("结合预存工件 3D 点云、机器人 TCP 位姿与实时观测完成点云配准，一步输出精确高度纠偏量。", "Registered a stored workpiece point cloud against live observations using robot TCP poses, producing precise height correction in one step."),
+    l("以多 chunk Buffer 缓存高帧率 RAW 图像，在摆弧峰值按平台法选帧并执行后 ISP、2D 极线求交与 3D 解算。", "Buffered high-rate RAW images across multiple chunks, selected weave-peak frames with a plateau method, then applied post-ISP, 2D polar-ray intersection, and 3D solving."),
+  ],
+  tech: ["C++", "ROS 2", "Shared Memory", "Zero-copy", "3D Vision", "Point Cloud", "TCP Transform", "RAW Buffer"],
+  flow: [l("3D / Weld-pool Cameras", "3D / Weld-pool Cameras"), l("采集与时序对齐", "Acquisition & timing"), l("Shared Memory 数据路径", "Shared-memory data path"), l("2D / 3D 感知", "2D / 3D perception"), l("空间匹配与纠偏", "Spatial matching & correction"), l("Robot Controller", "Robot Controller")],
+  modules: [
+    { code: "TIMING", title: l("毫秒级多设备时序", "Millisecond-level device timing"), text: l("软触发协调设备，初始化对齐时间零点，运行阶段以 count 记录时间偏移；在受限条件下实现毫秒级同步。", "Coordinates devices with software triggers, aligns time zero at initialization, and records runtime offsets with count values for millisecond-level synchronization under constrained conditions.") },
+    { code: "DATA PATH", title: l("高吞吐数据通路", "High-throughput data path"), text: l("衔接设备 SDK Buffer、共享内存与算法计算模块，减少高频数据链路中的重复拷贝。", "Connects device SDK buffers, shared memory, and compute modules while reducing repeated copies in the high-frequency path.") },
+    { code: "3D MATCH", title: l("点云配准与一步定位", "Point-cloud registration and one-step positioning"), text: l("将预存工件 3D 点云、机器人 TCP 位姿与实时观测置于统一坐标关系，通过点云配准一步得到高度纠偏量。", "Places the stored workpiece point cloud, TCP poses, and live observations in one frame relationship, then derives height correction through one-step point-cloud registration.") },
+    { code: "RAW BUFFER", title: l("摆弧峰值 RAW 选帧", "Weave-peak RAW selection"), text: l("多 chunk Buffer 保留高帧率 RAW 图像，在摆弧峰值按平台法计算目标时机，选帧后执行后 ISP 与几何解算。", "A multi-chunk buffer retains high-rate RAW frames; a plateau method determines the weave-peak timing before post-ISP and geometric solving.") },
+  ],
+  decisions: [
+    { title: l("把时序关系显式化", "Make timing relationships explicit"), text: l("不假设设备天然同步，而是记录时间零点、计数与偏移关系，为后续匹配保留可追溯依据。", "The design does not assume natural synchronization; it records time zero, counters, and offsets as traceable matching evidence.") },
+    { title: l("让数据靠近计算", "Keep data close to compute"), text: l("以共享内存和 Buffer 生命周期管理缩短相机数据到算法模块的路径。", "Shared memory and explicit buffer lifetime management shorten the path from camera data to compute.") },
+    { title: l("点云配准一步输出纠偏", "One-step correction through registration"), text: l("预存工件点云、TCP 位姿与实时观测进入同一配准链路，通过一次空间求解直接输出高度纠偏。", "The stored workpiece cloud, TCP pose, and live observation enter one registration path that directly outputs height correction through a single spatial solve.") },
+    { title: l("按摆弧峰值选择图像", "Select images at the weave peak"), text: l("先缓冲高帧率 RAW 数据，再以平台法计算摆弧峰值时机，选帧执行后 ISP、2D 极线求交和 3D 解算。", "High-rate RAW data is buffered first; a plateau method finds the weave peak before post-ISP, 2D polar-ray intersection, and 3D solving.") },
+  ],
+  engineering: [
+    { title: l("时序证据", "Timing evidence"), text: l("以计数和时间偏移描述设备时序差异，使异常可以沿采集链路定位。", "Counters and time offsets expose device timing differences for capture-path diagnosis.") },
+    { title: l("Buffer 生命周期", "Buffer lifetime"), text: l("在 SDK Buffer、共享内存和计算模块之间明确数据所有权，避免高频场景下的隐式复制与悬空引用。", "Ownership is explicit across SDK buffers, shared memory, and compute modules to avoid hidden copies and dangling references.") },
+    { title: l("坐标关系", "Coordinate relationships"), text: l("空间计算围绕相机、预存几何和机器人 TCP 的关系组织，公开版不披露内部标定与工艺参数。", "Spatial computation is organized around camera, stored geometry, and robot TCP relationships without exposing internal calibration or process parameters.") },
+    { title: l("相位后处理", "Phase-aware post-processing"), text: l("采集层持续保留 RAW 数据，后处理只消费摆弧峰值目标帧；3D 结果再经过 clipping 与 EMA 稳定。", "Capture retains RAW data continuously while post-processing consumes only the weave-peak frame; clipping and EMA then stabilize the 3D result.") },
+  ],
+  validation: [
+    { tag: "TIMING", title: l("毫秒级时序核对", "Millisecond-level timing checks"), text: l("通过软触发、时间零点、count 与偏移记录核对传感器和机器人事件，在受限条件下达到毫秒级同步。", "Software triggers, time-zero, count, and offset records verify sensor/robot correspondence and reach millisecond-level synchronization under constrained conditions.") },
+    { tag: "DATA PATH", title: l("高频链路验证", "High-frequency path validation"), text: l("围绕 Buffer 生命周期与复制次数检查高帧率感知数据能否稳定进入计算模块。", "Buffer lifetimes and copy boundaries are checked to keep high-rate perception stable into compute.") },
+    { tag: "ROBOT", title: l("空间纠偏结果", "Spatial correction result"), text: l("公开结果为最终定位达到 ±0.5 mm；不公开工艺参数、内部算法细节或设备配置。", "The public result is ±0.5 mm positioning; process parameters, internal algorithm details, and device configuration remain undisclosed.") },
+  ],
+  outcomes: [
+    { label: l("定位结果", "Positioning"), value: "±0.5 mm", note: l("公开简历结果", "Public resume result") },
+    { label: l("设备协同", "Device coordination"), value: "ms-level", note: l("受限条件下的多设备同步", "Constrained multi-device synchronization") },
+    { label: l("数据链路", "Data path"), value: "ZERO-COPY", note: l("Shared Memory / Buffer 优化", "Shared memory / buffer optimization") },
+    { label: l("感知模式", "Perception"), value: "HIGH-RATE", note: l("RAW Buffer 与相位选择", "RAW buffering and phase selection") },
+  ],
+  value: [l("真实工业机器人域控系统经验", "Real industrial robot domain-control experience"), l("高吞吐相机数据链路与时序对齐", "High-throughput camera paths and timing alignment"), l("3D 几何、TCP 与实时数据的空间匹配", "Spatial matching across 3D geometry, TCP, and live data")],
+  kind: "flagship",
+  accent: "timing",
+  ownership: [
+    { label: l("3D Camera / Weld-pool Camera", "3D Camera / Weld-pool Camera"), type: "existing" },
+    { label: l("采集与时序对齐", "Acquisition & timing alignment"), type: "mine" },
+    { label: l("Shared Memory 数据链路", "Shared-memory data path"), type: "mine" },
+    { label: l("2D / 3D 感知处理", "2D / 3D perception"), type: "collaboration" },
+    { label: l("空间匹配与纠偏逻辑", "Spatial matching & correction"), type: "mine" },
+    { label: l("Industrial Robot / Controller", "Industrial Robot / Controller"), type: "existing" },
+  ],
+  problems: [
+    { title: l("多设备时序", "Multi-device timing"), constraint: l("独立设备时钟与不同触发节奏", "Independent clocks and trigger cadence"), decision: l("时间零点 + 计数 / 偏移关系", "Time zero plus counter / offset relationships") },
+    { title: l("高吞吐数据路径", "High-throughput data path"), constraint: l("高帧率 RAW 数据不适合反复复制", "High-rate RAW data cannot tolerate repeated copies"), decision: l("Shared Memory / Zero-copy Buffer 链路", "Shared-memory / zero-copy buffer path") },
+    { title: l("空间纠偏", "Spatial correction"), constraint: l("需要关联预存工件点云、TCP 位姿与实时观测", "The stored workpiece cloud, TCP poses, and live observations must align"), decision: l("点云配准后一步输出高度纠偏", "One-step height correction after point-cloud registration") },
+    { title: l("摆动相位感知", "Weave-phase perception"), constraint: l("有效图像集中在摆弧峰值时机", "Useful imagery is concentrated around the weave peak"), decision: l("多 chunk RAW Buffer + 平台法选帧", "Multi-chunk RAW buffer plus plateau-based selection") },
+  ],
+  deepDive: [
+    { title: l("如何定义跨设备的时间零点？", "How is cross-device time zero defined?"), text: l("公开层面只展示初始化对齐和运行期偏移记录思路；内部触发协议与网络配置不公开。", "The public case covers initialization alignment and runtime offset records; internal trigger protocols and network configuration are omitted.") },
+    { title: l("Zero-copy 的边界在哪里？", "Where does zero-copy stop?"), text: l("重点是明确 SDK Buffer、共享内存与算法输入之间的所有权和生命周期，而不是声称整条链路绝对零复制。", "The focus is explicit ownership and lifetime across SDK buffers, shared memory, and algorithm inputs—not a claim of absolute zero copying everywhere.") },
+    { title: l("如何把摆弧状态转为选帧条件？", "How does weave state become a frame-selection condition?"), text: l("高帧率数据先进入多 chunk Buffer，再用平台法计算摆弧峰值的目标时机；目标 RAW 帧经过后 ISP、2D 极线求交和 3D 解算，最后以 clipping 与 EMA 稳定。", "High-rate data first enters a multi-chunk buffer. A plateau method identifies the weave peak; the selected RAW frame then passes through post-ISP, 2D polar-ray intersection, 3D solving, clipping, and EMA.") },
+  ],
+  confidentialityNote: l("保密说明：设备统一使用抽象名称；不公开客户、内部代号、IP / 网络拓扑、焊接工艺参数、源码、模型细节及未公开设备参数。", "Confidentiality: devices use abstract names. Client identity, internal codenames, IP/network topology, welding parameters, source code, model details, and unpublished device specifications are omitted."),
+};
+
+const volumeCase: ProjectDetail = {
+  slug: "3d-volume-measurement",
+  index: "04",
+  title: "3D Volume Measurement",
+  subtitle: l("基于深度相机的物流体积测量系统", "Depth-camera-based logistics volume measurement"),
+  category: l("三维视觉与几何", "3D VISION & GEOMETRY"),
+  year: "2025.07 — 2025.11",
+  imageNote: l("项目实拍图待补充，当前使用算法管线示意", "Project imagery pending; the current page uses an algorithm schematic"),
+  homeDescription: l("从深度图滤波、点云与平面估计到几何补偿，解决倾斜物体与超薄物体测量问题。", "From depth filtering and point-cloud geometry to compensation for tilted and ultra-thin objects."),
+  homeTech: ["Orbbec", "Depth Image", "OpenCV", "Point Cloud"],
+  homeEvidence: [
+    { value: "97%+", label: l("体积测量准确率", "VOLUME ACCURACY") },
+    { value: "+20%", label: l("后处理效率提升", "POST-PROCESSING") },
+  ],
+  homeVisualSteps: [l("深度图", "DEPTH"), l("点云", "POINT CLOUD"), l("几何建模", "GEOMETRY")],
+  role: l("算法工程师 / 深度处理、几何建模与测量优化", "Algorithm engineer / depth processing, geometry, and measurement optimization"),
+  status: l("实习项目 / 公开简历范围", "Internship project / public resume scope"),
+  summary: l("从深度图滤波、点云与平面估计到几何补偿，面向倾斜物体和超薄物体构建体积测量链路。", "Built a volume-measurement pipeline from depth filtering and point clouds to plane estimation and geometric compensation for tilted and ultra-thin objects."),
+  intro: l("深度相机数据存在空洞、边缘伪影和随距离变化的噪声分布；当物体倾斜或厚度接近深度噪声量级时，直接使用包围盒会放大测量误差。", "Depth-camera data contains holes, edge artifacts, and distance-dependent noise. For tilted or ultra-thin objects, direct bounding-box measurement amplifies error."),
+  challenge: l("需要在不依赖单一阈值的情况下稳定处理不同距离和材质，同时用几何模型解释倾斜与超薄物体的测量偏差。", "The pipeline must handle varying distance and materials without one fixed threshold, while using geometry to explain bias for tilted and ultra-thin objects."),
+  contribution: [
+    l("对比多类深度滤波方法，采用时域滤波，并对上表面使用高权重双边滤波以修复空洞与边缘。", "Evaluated depth filters, selecting temporal filtering and a high-weight bilateral filter on top surfaces to repair holes and edges."),
+    l("按深度区间设计分级空间滤波，以不同卷积核改善背景、托盘和物体分割。", "Designed graded spatial filtering with depth-dependent kernels to improve separation of background, pallet, and object."),
+    l("使用 RANSAC 拟合空托盘点云基准与物体，并以数学建模完成倾斜缓冲补偿。", "Used RANSAC to fit the empty-pallet point-cloud baseline and object, then modeled tilt-buffer compensation mathematically."),
+    l("结合 YOLO / SAM 与 OpenCV 后处理，重构核心算子和数据流，并参与上位机软件与多视角点云融合。", "Combined YOLO/SAM with OpenCV post-processing, refactored core operators and data flow, and contributed to host software and multi-view point-cloud fusion."),
+  ],
+  tech: ["Orbbec", "Depth Image", "OpenCV", "Point Cloud", "RANSAC", "YOLO / SAM", "C++", "Multi-view Fusion"],
+  flow: [l("Depth Camera", "Depth Camera"), l("深度滤波", "Depth filtering"), l("Point Cloud", "Point Cloud"), l("平面估计", "Plane estimation"), l("几何建模与补偿", "Geometry & compensation"), l("Volume", "Volume")],
+  modules: [
+    { code: "DEPTH FILTER", title: l("时域与分级空间滤波", "Temporal and graded spatial filtering"), text: l("结合时域、双边与距离分级策略处理空洞、随机噪声和边缘伪影。", "Combines temporal, bilateral, and distance-aware filtering for holes, random noise, and edge artifacts.") },
+    { code: "POINT CLOUD", title: l("深度到空间几何", "Depth to spatial geometry"), text: l("通过相机模型将有效深度转换为点云，为平面估计和物体几何计算提供统一输入。", "Projects valid depth into a point cloud for plane estimation and object geometry.") },
+    { code: "RANSAC", title: l("基准平面估计", "Reference-plane estimation"), text: l("使用 RANSAC 抑制物体与异常深度干扰，得到稳定的测量基准。", "RANSAC suppresses object and depth outliers to recover a stable measurement reference.") },
+    { code: "COMPENSATION", title: l("倾斜与超薄补偿", "Tilt and ultra-thin compensation"), text: l("以几何模型处理姿态和厚度带来的系统偏差，而不是单纯扩大经验阈值。", "A geometry model handles pose- and thickness-related bias instead of simply widening empirical thresholds.") },
+  ],
+  decisions: [
+    { title: l("先治理深度质量", "Stabilize depth before geometry"), text: l("先处理空洞、边缘伪影和距离相关噪声，再进入点云与尺寸计算。", "Holes, edge artifacts, and distance-dependent noise are treated before point-cloud measurement.") },
+    { title: l("用平面建立测量基准", "Use a plane as the measurement reference"), text: l("RANSAC 平面让高度和体积相对于稳定基准计算，降低相机姿态与背景点干扰。", "A RANSAC plane provides a stable reference for height and volume, reducing pose and background interference.") },
+    { title: l("对特殊物体显式补偿", "Model special objects explicitly"), text: l("倾斜和超薄物体采用几何补偿，不把它们隐藏在统一经验系数里。", "Tilted and ultra-thin cases use explicit geometric compensation rather than one hidden empirical factor.") },
+  ],
+  engineering: [
+    { title: l("距离相关滤波", "Distance-aware filtering"), text: l("根据不同工作距离下的噪声分布调整空间处理强度，避免近处过度平滑或远处抑噪不足。", "Spatial filtering strength follows noise at different working distances to avoid over-smoothing nearby data or under-filtering distant data.") },
+    { title: l("边缘伪影处理", "Edge-artifact handling"), text: l("对物体边缘的混合深度与空洞单独处理，减少轮廓扩张对长宽高的影响。", "Mixed depth and holes near boundaries are handled separately to reduce contour expansion in dimensions.") },
+    { title: l("后处理优化", "Post-processing optimization"), text: l("梳理 OpenCV 后处理步骤与数据访问，使公开简历记录的处理效率提升 20%。", "The OpenCV post-processing path and data access were streamlined for the 20% improvement recorded on the public resume.") },
+  ],
+  validation: [
+    { tag: "TILTED OBJECT", title: l("倾斜物体体积测量", "Tilted-object volume measurement"), text: l("公开简历记录倾斜物体的体积测量准确率达到 97%+。", "The public resume records 97%+ volume-measurement accuracy for tilted objects.") },
+    { tag: "THIN OBJECT", title: l("超薄物体", "Ultra-thin objects"), text: l("针对厚度接近深度噪声量级的物体，公开结果为 95%+ 准确率。", "For objects near the depth-noise scale, the public result is 95%+ accuracy.") },
+    { tag: "PERFORMANCE", title: l("后处理效率", "Post-processing efficiency"), text: l("OpenCV 后处理效率提升 20%，未增加其他未验证 benchmark。", "OpenCV post-processing improved by 20%; no additional unverified benchmark is claimed.") },
+  ],
+  outcomes: [
+    { label: l("倾斜物体体积准确率", "Tilted-object volume accuracy"), value: "97%+", note: l("公开简历结果", "Public resume result") },
+    { label: l("超薄物体准确率", "Ultra-thin accuracy"), value: "95%+", note: l("公开简历结果", "Public resume result") },
+    { label: l("后处理效率", "Post-processing"), value: "+20%", note: l("OpenCV 路径优化", "OpenCV path optimization") },
+    { label: l("算法路径", "Algorithm path"), value: "3D", note: l("深度图、点云与几何建模", "Depth, point cloud, geometry") },
+  ],
+  value: [l("真正的三维视觉算法与数学建模经验", "Hands-on 3D vision and mathematical modeling"), l("将深度噪声问题转化为可解释的滤波与几何决策", "Translates depth noise into explainable filtering and geometry decisions")],
+  kind: "flagship",
+  accent: "geometry",
+  ownership: [
+    { label: l("Orbbec Depth Camera", "Orbbec Depth Camera"), type: "existing" },
+    { label: l("深度图滤波与空洞处理", "Depth filtering & hole handling"), type: "mine" },
+    { label: l("点云与 RANSAC 平面", "Point cloud & RANSAC plane"), type: "mine" },
+    { label: l("几何模型与特殊物体补偿", "Geometry & special-object compensation"), type: "mine" },
+    { label: l("结果展示与数据工具", "Result and data tooling"), type: "collaboration" },
+  ],
+  problems: [
+    { title: l("深度图空洞", "Depth holes"), constraint: l("材质与视角导致无效深度", "Material and view produce invalid depth"), decision: l("时域 + 空间填充并保留有效性边界", "Temporal/spatial filling with validity boundaries") },
+    { title: l("边缘伪影", "Edge artifacts"), constraint: l("混合深度会扩大物体轮廓", "Mixed depth expands object contours"), decision: l("边缘感知滤波与轮廓后处理", "Edge-aware filtering and contour post-processing") },
+    { title: l("倾斜物体", "Tilted objects"), constraint: l("轴对齐包围盒放大尺寸", "Axis-aligned boxes overestimate dimensions"), decision: l("平面关系与几何补偿", "Plane relationships and geometric compensation") },
+    { title: l("超薄物体", "Ultra-thin objects"), constraint: l("厚度接近深度噪声量级", "Thickness approaches depth-noise scale"), decision: l("特殊阈值区间与整体几何判断", "Dedicated range handling and holistic geometry") },
+  ],
+  deepDive: [
+    { title: l("为什么先滤波再点云？", "Why filter before point-cloud conversion?"), text: l("深度域更适合利用像素邻域和时间连续性处理空洞；完成质量控制后再投影，可避免无效深度扩散到三维计算。", "Depth space preserves pixel neighborhoods and temporal continuity for hole handling; projecting after quality control prevents invalid depth from spreading into 3D geometry.") },
+    { title: l("RANSAC 平面如何参与体积计算？", "How does the RANSAC plane support volume?"), text: l("平面提供背景与高度基准，物体点相对该基准形成高度分布，再进入尺寸、补偿与体积模型。", "The plane provides background and height reference; object points form a relative height distribution for dimensions, compensation, and volume.") },
+    { title: l("为什么超薄物体需要单独策略？", "Why do ultra-thin objects need a separate strategy?"), text: l("当厚度与传感器噪声处于同一量级，单点高度不可靠，需要联合平面、区域连续性和整体几何判断。", "When thickness and sensor noise share a scale, single-point height is unreliable; the decision combines the plane, regional continuity, and holistic geometry.") },
+  ],
+};
+
+const waterbagBase = existingProjects.find((project) => project.slug === "waterbag-inspection")!;
+const autoAimBase = existingProjects.find((project) => project.slug === "auto-aim")!;
+
+const waterbagCase: ProjectDetail = {
+  ...waterbagBase,
+  index: "02",
+  kind: "flagship",
+  accent: "pipeline",
+  flow: [l("Industrial Camera", "Industrial Camera"), l("Image Acquisition", "Image Acquisition"), l("ROI / Detection", "ROI / Detection"), l("Fine Classification", "Fine Classification"), l("Bag State Machine", "Bag State Machine"), l("Result Reordering", "Result Reordering"), l("Modbus RTU", "Modbus RTU"), l("Sorting", "Sorting"), l("Persistence / Traceability", "Persistence / Traceability")],
+  ownership: [
+    { label: l("Industrial Camera / Lighting", "Industrial Camera / Lighting"), type: "existing" },
+    { label: l("C++ 采集、状态机与任务调度", "C++ acquisition, state, and scheduling"), type: "mine" },
+    { label: l("粗检、ROI 精检与模型部署", "Detection, ROI refinement, and deployment"), type: "collaboration" },
+    { label: l("Bag ID / Reorder Buffer", "Bag ID / Reorder Buffer"), type: "mine" },
+    { label: l("Modbus RTU / 分拣控制", "Modbus RTU / sorting control"), type: "mine" },
+    { label: l("SQLite / JSONL / Dashboard", "SQLite / JSONL / dashboard"), type: "mine" },
+  ],
+  problems: [
+    { title: l("低对比缺陷", "Low-contrast defects"), constraint: l("半透明材料、折痕与反光干扰", "Translucent material, folds, and glare"), decision: l("多光源 Burst + 粗检 / ROI 精检", "Multi-light burst plus full/ROI inspection") },
+    { title: l("并发结果乱序", "Out-of-order inference"), constraint: l("模型完成顺序不等于物理袋序", "Completion order differs from physical bag order"), decision: l("Bag ID 状态机 + Reorder Buffer", "Bag-ID state machine plus reorder buffer") },
+    { title: l("设备故障边界", "Device failure boundaries"), constraint: l("相机、光源和分拣动作可能超时", "Camera, lighting, and sorting actions may time out"), decision: l("Adapter、ACK、超时、重试与 fail-safe NG", "Adapters, ACKs, timeout, retry, and fail-safe NG") },
+    { title: l("生产追溯", "Production traceability"), constraint: l("现场问题需要还原袋级全链路", "Field issues need bag-level reconstruction"), decision: l("JSONL 审计源 + SQLite + Dashboard", "JSONL audit source plus SQLite and dashboard") },
+  ],
+  deepDive: [
+    { title: l("为什么不能只做 YOLO 推理？", "Why is YOLO inference not enough?"), text: l("产线还需要确定的采图、袋级状态、动作确认、物理顺序、失败策略和可追溯记录，模型只是其中一个模块。", "Production also needs deterministic capture, bag state, action acknowledgements, physical ordering, failure policy, and traceability; the model is one module.") },
+    { title: l("Reorder Buffer 如何避免误分拣？", "How does the reorder buffer prevent wrong sorting?"), text: l("worker 可以并发完成，但 sorter 只释放下一物理 Bag ID 的结果；缺失或超时进入明确的安全策略。", "Workers may finish concurrently, but the sorter releases only the next physical Bag ID; missing or timed-out results follow an explicit safe policy.") },
+    { title: l("如何在无硬件时验证？", "How is the system tested without hardware?"), text: l("Camera / PLC Adapter 保持相同契约，Mock 设备运行完整生产循环并生成与真实路径一致的状态轨迹。", "Camera and PLC adapters preserve the same contract; mocks run the full production loop and emit the same state traces as real paths.") },
+  ],
+};
+
+const autoAimCase: ProjectDetail = {
+  ...autoAimBase,
+  index: "03",
+  title: "RoboMaster Auto-Aiming",
+  kind: "flagship",
+  accent: "control",
+  flow: [l("Camera", "Camera"), l("Detection", "Detection"), l("PnP", "PnP"), l("State Estimation / EKF", "State Estimation / EKF"), l("Prediction", "Prediction"), l("Coordinate Transform", "Coordinate Transform"), l("Ballistics / Control", "Ballistics / Control"), l("UART / STM32", "UART / STM32"), l("Gimbal", "Gimbal")],
+  ownership: [
+    { label: l("Industrial Camera / STM32 / Gimbal", "Industrial Camera / STM32 / Gimbal"), type: "existing" },
+    { label: l("ROS 2 架构与 Component 边界", "ROS 2 architecture and component boundaries"), type: "mine" },
+    { label: l("Detection / PnP", "Detection / PnP"), type: "collaboration" },
+    { label: l("EKF、预测与状态机集成", "EKF, prediction, and state integration"), type: "mine" },
+    { label: l("坐标变换、弹道与 UART 链路", "Transforms, ballistics, and UART path"), type: "collaboration" },
+    { label: l("团队架构与调试流程", "Team architecture and tuning workflow"), type: "mine" },
+  ],
+  problems: [
+    { title: l("实时视觉闭环", "Real-time visual loop"), constraint: l("感知延迟直接进入控制误差", "Perception latency becomes control error"), decision: l("ROS 2 Component 与 intra-process 通信", "ROS 2 components and intra-process communication") },
+    { title: l("目标状态估计", "Target state estimation"), constraint: l("旋转、遮挡与短时丢失", "Rotation, occlusion, and temporary loss"), decision: l("多模型 EKF + 带迟滞状态机", "Multi-model EKF plus hysteretic state machine") },
+    { title: l("坐标一致性", "Frame consistency"), constraint: l("相机、云台与世界坐标持续变化", "Camera, gimbal, and world frames keep moving"), decision: l("标定、TF 与时间戳统一约束", "Calibration, TF, and timestamp constraints") },
+    { title: l("上下位机协同", "Host-controller coordination"), constraint: l("控制命令和姿态反馈必须闭环", "Commands and attitude feedback must close the loop"), decision: l("NUC ↔ STM32 UART 协议边界", "NUC-to-STM32 UART protocol boundary") },
+  ],
+  deepDive: [
+    { title: l("PnP 误差如何传到控制端？", "How does PnP error reach control?"), text: l("位姿误差会经坐标变换、状态估计和弹道预测继续传播，因此标定、时序与观测质量需要在上游验证。", "Pose error propagates through transforms, estimation, and ballistic prediction, so calibration, timing, and observation quality are verified upstream.") },
+    { title: l("为什么使用多模型 EKF？", "Why use multiple EKF models?"), text: l("整车中心、单装甲板与特殊目标的运动结构不同，分模型可让状态定义和切换条件更清晰。", "Vehicle center, single armor, and special targets have different motion structures; separate models keep state definitions and switching explicit.") },
+    { title: l("如何降低实车调试成本？", "How is robot tuning cost reduced?"), text: l("视频回放、纯仿真和真云台混合模式复用同一接口，先隔离感知与状态估计，再进入完整实车闭环。", "Video replay, simulation, and real-gimbal hybrid modes share interfaces, isolating perception and estimation before the complete robot loop.") },
+  ],
+};
+
+const personalCases = existingProjects
+  .filter((project) => !["waterbag-inspection", "auto-aim"].includes(project.slug))
+  .map((project, index): ProjectDetail => ({
+    ...project,
+    index: String(index + 5).padStart(2, "0"),
+    kind: "personal",
+    accent: "tooling",
+  }));
+
+export const flagshipProjects: ProjectDetail[] = [sanyCase, waterbagCase, autoAimCase, volumeCase];
+export const personalProjects: ProjectDetail[] = personalCases;
+export const projects: ProjectDetail[] = [...flagshipProjects, ...personalProjects];
+
+export type InterviewTrackKey = "robotics" | "industrial-vision" | "computer-vision" | "general";
+export const interviewTracks: Record<InterviewTrackKey, { title: LocalizedText; subtitle: LocalizedText; slugs: string[] }> = {
+  robotics: { title: l("机器人软件", "ROBOTICS SOFTWARE"), subtitle: l("C++ / ROS 2 / 机器人系统", "C++ / ROS 2 / ROBOTICS SYSTEMS"), slugs: ["sany-welding-robotics", "auto-aim", "waterbag-inspection", "3d-volume-measurement"] },
+  "industrial-vision": { title: l("工业视觉", "INDUSTRIAL VISION"), subtitle: l("工业视觉 / AI 部署 / 工业软件", "INDUSTRIAL VISION / AI DEPLOYMENT / SOFTWARE"), slugs: ["waterbag-inspection", "sany-welding-robotics", "3d-volume-measurement", "auto-aim"] },
+  "computer-vision": { title: l("计算机视觉", "COMPUTER VISION"), subtitle: l("视觉算法 / 3D Vision", "VISION ALGORITHMS / 3D VISION"), slugs: ["3d-volume-measurement", "sany-welding-robotics", "auto-aim", "waterbag-inspection"] },
+  general: { title: l("综合技术面", "GENERAL"), subtitle: l("系统、视觉与工程交付", "SYSTEMS / VISION / DELIVERY"), slugs: ["sany-welding-robotics", "waterbag-inspection", "auto-aim", "3d-volume-measurement"] },
+};
+
 export type Experience = {
   period: string;
   company: LocalizedText;
@@ -327,35 +600,39 @@ export type Experience = {
   details: LocalizedText[];
   metrics: LocalizedText[];
   kind: "employment" | "project";
+  caseSlug?: string;
 };
 
 export const experiences: Experience[] = [
   {
-    period: "2026.03 — PRESENT",
-    company: l("三一集团 · 耘创新实验室", "SANY Group · Innovation Lab"),
+    period: "2026.03 — 2026.08",
+    company: l("三一集团 · 三一耘 AI 总院", "SANY Group · SANY Yun AI Institute"),
     role: l("算法工程师 / 工业焊接机器人", "Algorithm Engineer / Industrial Welding Robotics"),
-    summary: l("参与工业级焊接机器人域控系统，负责焊缝粗定位、快速纠偏停止、多源数据记录与模型部署优化。", "Contributing to an industrial welding robot domain-control system across seam pre-positioning, fast correction and stopping, multimodal recording, and model deployment optimization."),
-    details: [l("设计“轮询下探 + 3D 激光线扫”两级定位策略，结合 RANSAC 平面拟合与 OBB 估计工件初始位置。", "Designed a two-stage probe-and-3D-laser-scan positioning strategy using RANSAC plane fitting and OBB estimation."), l("完成 2D/3D 多模态数据时空对齐与坐标转换，接入 SAM2 分割和 X/Z 双维度纠偏流程。", "Implemented spatiotemporal alignment and frame transforms for 2D/3D data, integrating SAM2 segmentation and X/Z correction."), l("开发点云、熔池图像和机械臂姿态的记录、回放、可视化与云端归档链路。", "Built recording, replay, visualization, and cloud archiving for point clouds, weld-pool imagery, and robot poses."), l("参与引弧板定位模型推理优化，在保证精度的情况下实现 40% 以上提速。", "Optimized arc-strike plate inference by over 40% while preserving accuracy.")],
-    metrics: [l("±0.5 mm 定位精度", "±0.5 mm positioning"), l("40%+ 推理提速", "40%+ faster inference"), l("2D/3D 多模态数据", "2D/3D multimodal data"), l("全链路记录与回放", "Full-chain record and replay")],
+    summary: l("参与工业焊接机器人域控系统开发，负责焊前定位与摆弧焊纠偏相关模块。", "Contributed to an industrial welding robot domain-control system, owning modules for pre-weld positioning and weave correction."),
+    details: [l("以软触发协调 3D Camera、Weld-pool Camera 与 Industrial Robot，初始化对齐时间零点并用 count 记录时间偏移，在受限条件下实现毫秒级多设备同步。", "Coordinated a 3D Camera, Weld-pool Camera, and Industrial Robot with software triggers, aligned time zero, and recorded count-based offsets for millisecond-level synchronization under constrained conditions."), l("以 Shared Memory / Zero-copy 路径将设备 SDK Buffer 直接衔接算法计算模块，提高感知模块频率。", "Connected device SDK buffers to compute modules through a shared-memory/zero-copy path to increase perception frequency."), l("结合预存工件 3D 点云、机器人 TCP 位姿与实时观测完成点云配准，一步输出高度纠偏量。", "Registered a stored workpiece point cloud against live observations using robot TCP poses to output height correction in one step."), l("用多 chunk Buffer 缓存高帧率 RAW 图像，在摆弧峰值按平台法选帧；经后 ISP、2D 极线求交和 3D 解算后，以 clipping 与 EMA 稳定结果。", "Buffered high-rate RAW images across multiple chunks, selected weave-peak frames with a plateau method, then applied post-ISP, 2D polar-ray intersection, 3D solving, clipping, and EMA.")],
+    metrics: [l("±0.5 mm 焊前定位", "±0.5 mm pre-weld positioning"), l("毫秒级多设备同步", "Millisecond-level device sync"), l("Shared Memory / Zero-copy", "Shared memory / zero-copy"), l("高帧率 RAW 感知链路", "High-rate RAW perception path")],
     kind: "employment",
+    caseSlug: "sany-welding-robotics",
   },
   {
     period: "2025.07 — 2025.11",
     company: l("青岛点之云智能科技有限公司", "Qingdao Dianzhiyun Intelligent Technology"),
     role: l("算法工程师 / 物流体积测量", "Algorithm Engineer / Logistics Volume Measurement"),
-    summary: l("基于 Orbbec Gemini 2L 与 Intel RealSense 研发物流体积测量系统，覆盖托盘、超薄件和不规则异形件。", "Developed logistics volume-measurement systems with Orbbec Gemini 2L and Intel RealSense for pallets, ultra-thin items, and irregular objects."),
-    details: [l("优化深度图填充、边缘滤波与连通图分割，解决边缘分割模糊问题。", "Improved depth filling, edge filtering, and connected-component segmentation to sharpen object boundaries."), l("设计倾斜缓冲补偿与整体计算方法，提升托盘内倾斜物体和超薄物体测量效果。", "Designed tilt-buffer compensation and holistic measurement methods for tilted and ultra-thin pallet items."), l("开发不规则中大型异形件多视角测量，并将测量精度提升至毫米级。", "Developed multi-view measurement for medium and large irregular objects with millimeter-level accuracy."), l("同步开发 Qt 前端交互、结果展示与数据传输存储功能。", "Built Qt interactions, result visualization, and data transfer and storage features.")],
-    metrics: [l("97%+ 托盘测量精度", "97%+ pallet accuracy"), l("95%+ 超薄物体准确率", "95%+ thin-object accuracy"), l("毫米级异形件测量", "Millimeter-level irregular objects"), l("Qt 数据工具", "Qt data tooling")],
+    summary: l("基于 Orbbec 深度相机研发物流体积测量系统，工作覆盖深度滤波、点云、几何补偿与后处理优化。", "Developed a logistics volume-measurement system with an Orbbec depth camera across depth filtering, point clouds, geometric compensation, and post-processing optimization."),
+    details: [l("对比深度滤波方案，采用时域滤波与上表面高权重双边滤波修复空洞和边缘。", "Evaluated depth filters, selecting temporal filtering and high-weight bilateral filtering on top surfaces to repair holes and edges."), l("按深度范围选择卷积核进行分级空间滤波，改善背景、托盘和物体分割。", "Applied graded spatial filtering with depth-dependent kernels to improve background, pallet, and object segmentation."), l("使用 RANSAC 拟合空托盘点云基准与物体，并以数学建模完成倾斜缓冲补偿。", "Used RANSAC to fit the empty-pallet baseline and object, then modeled tilt-buffer compensation mathematically."), l("结合 YOLO / SAM 与 OpenCV 后处理，重构核心算子和数据流，并参与上位机软件与多视角点云融合。", "Combined YOLO/SAM with OpenCV post-processing, refactored core operators and data flow, and contributed to host software and multi-view point-cloud fusion.")],
+    metrics: [l("97%+ 倾斜物体体积准确率", "97%+ tilted-object volume accuracy"), l("95%+ 超薄物体准确率", "95%+ ultra-thin accuracy"), l("端到端效率 +20%", "+20% end-to-end efficiency"), l("深度图 / 点云 / 几何建模", "Depth / point cloud / geometry")],
     kind: "employment",
+    caseSlug: "3d-volume-measurement",
   },
   {
     period: "2025.02 — 2025.12",
     company: l("工业水样袋检测项目", "Industrial Waterbag Inspection Project"),
-    role: l("项目制软件开发 / 工业视觉系统交付", "Project-based Software Development / Industrial Vision Delivery"),
+    role: l("软件开发工程师 / C++ 视觉后端主控", "Software Engineer / C++ Vision Backend Lead"),
     summary: l("以项目制方式完成低对比度水样袋缺陷检测系统，从相机与 PLC 接入、C++ 实时后端到模型部署、分拣和追溯形成完整闭环。", "Delivered a project-based low-contrast waterbag inspection system spanning camera and PLC integration, a C++ runtime, model deployment, sorting, and traceability."),
-    details: [l("搭建多光源 burst 采图与两阶段检测流程，提升半透明材料微缺陷的可见性与检出稳定性。", "Built multi-light burst capture and two-stage detection to improve micro-defect visibility and stability."), l("设计袋级状态机与 Bag ID 重排序机制，确保并发推理结果按物理顺序驱动 PLC 分拣。", "Designed a bag-level state machine and Bag ID reorder mechanism so concurrent inference drives PLC sorting in physical order."), l("通过相机 / PLC Adapter 与 Mock 硬件建立可替换设备层和无硬件测试链路。", "Created replaceable camera/PLC adapters and mock-hardware test paths."), l("使用 SQLite、JSONL 与 Dashboard 记录完整检测结果，实现生产问题回放与追溯。", "Recorded complete inspection results with SQLite, JSONL, and a dashboard for production replay and traceability.")],
-    metrics: [l("采图到分拣闭环", "Capture-to-sort loop"), l("Bag ID 顺序一致性", "Bag ID order integrity"), l("C++17 + ONNX", "C++17 + ONNX"), l("可追溯生产记录", "Traceable production records")],
+    details: [l("独立开发 C++ 视觉后端主控，完成工业相机采集、Modbus RTU、缺陷推理调度与末端分拣控制闭环。", "Independently developed the C++ vision backend controller across camera capture, Modbus RTU, inference scheduling, and sorting."), l("参与多光源频闪 Burst 成像与整图粗检、ROI 亚像素级微缺陷精检链路。", "Contributed to multi-light burst imaging and a full-image coarse pass followed by ROI-level sub-pixel micro-defect refinement."), l("完成 YOLO 训练调优、ONNX 导出、CUDA 部署及 EfficientNet 细分类。", "Trained and tuned YOLO, exported ONNX for CUDA deployment, and implemented EfficientNet fine classification."), l("以 Bag ID 状态机和重排缓冲保证物理袋序，并以 JSONL、SQLite、Flask Dashboard 实现记录查询、原图回放、质量统计与反向追溯。", "Preserved physical bag order with a Bag-ID state machine and reorder buffer, with JSONL, SQLite, and a Flask dashboard for queries, source-image replay, quality statistics, and reverse traceability.")],
+    metrics: [l("独立开发 C++ 主控", "Independently built C++ controller"), l("Bag ID 顺序一致性", "Bag ID order integrity"), l("YOLO / ONNX / CUDA", "YOLO / ONNX / CUDA"), l("可反向追溯生产记录", "Reverse-traceable production records")],
     kind: "project",
+    caseSlug: "waterbag-inspection",
   },
 ];
 
@@ -433,11 +710,32 @@ export const writingTopics: WritingTopic[] = [
 ];
 
 export const capabilities = [
-  { code: "SYS.01", title: l("机器人系统集成", "Robotics Systems Integration"), text: l("把相机、算法服务和机械臂控制组织为可运行、可恢复的 ROS 2 链路。", "Connect cameras, algorithm services, and robot control into operational and recoverable ROS 2 systems."), items: [l("ROS 2 / TF / Service", "ROS 2 / TF / Services"), l("多传感器接入", "Multi-sensor integration"), l("机械臂运动流程", "Robot motion workflows"), l("现场异常处理", "On-site fault handling")] },
-  { code: "VIS.02", title: l("工业视觉与点云", "Industrial Vision and Point Clouds"), text: l("面向真实工业场景处理低对比度图像、深度数据、点云定位与模型推理。", "Solve low-contrast imaging, depth processing, point-cloud localization, and inference in real industrial scenes."), items: [l("OpenCV / PCL", "OpenCV / PCL"), l("RANSAC / OBB", "RANSAC / OBB"), l("SAM2 / YOLO / ONNX", "SAM2 / YOLO / ONNX"), l("2D / 3D 坐标对齐", "2D / 3D alignment")] },
-  { code: "ENG.03", title: l("C++ 工程化", "C++ Production Engineering"), text: l("关注实时链路、状态一致性、模块边界以及系统的部署、记录与诊断。", "Engineer real-time paths, state integrity, module boundaries, deployment, recording, and diagnostics."), items: [l("Modern C++ / STL", "Modern C++ / STL"), l("CMake", "CMake"), l("并发与状态机", "Concurrency and state machines"), l("Qt / SQLite / 工具", "Qt / SQLite / tooling")] },
+  { code: "SYS.01", title: l("机器人系统集成", "Robotics Systems Integration"), text: l("把相机、原始多传感器数据、算法服务和机器人控制组织为可运行、可诊断的 ROS 2 链路。", "Connect cameras, raw multi-sensor data, algorithm services, and robot control into operational and diagnosable ROS 2 systems."), items: [l("ROS 2 / TF / Component", "ROS 2 / TF / Components"), l("PTP / 多设备时序", "PTP / multi-device timing"), l("Shared Memory / IPC", "Shared memory / IPC"), l("机器人感知与控制", "Robot perception and control")] },
+  { code: "VIS.02", title: l("工业视觉与点云", "Industrial Vision and Point Clouds"), text: l("面向真实工业场景处理低对比度图像、深度数据、点云定位与模型推理。", "Solve low-contrast imaging, depth processing, point-cloud localization, and inference in real industrial scenes."), items: [l("OpenCV / PCL", "OpenCV / PCL"), l("RANSAC / 几何建模", "RANSAC / geometry"), l("YOLO / ONNX / CUDA", "YOLO / ONNX / CUDA"), l("2D / 3D 坐标对齐", "2D / 3D alignment")] },
+  { code: "ENG.03", title: l("C++ 工程化与 AI 工作流", "C++ Engineering and AI Workflow"), text: l("以 Modern C++ / CMake 构建生产链路，并用 Python 与 AI 开发工作流完成视觉模型、调试和辅助工具。", "Build production paths with Modern C++/CMake and use Python plus AI-assisted workflows for vision models, debugging, and tooling."), items: [l("Modern C++ / STL", "Modern C++ / STL"), l("CMake / Linux", "CMake / Linux"), l("Python / AI 开发工作流", "Python / AI workflow"), l("并发、状态机与工具", "Concurrency, state, and tooling")] },
+];
+
+export const honors: LocalizedText[] = [
+  l("2024、2025 RoboMaster 全国三等奖", "2024 & 2025 RoboMaster National Third Prize"),
+  l("2024、2025 全国大学生机器人竞赛区域赛二等奖", "2024 & 2025 National College Student Robotics Competition Regional Second Prize"),
+  l("2024、2025 RoboMaster 高校联盟赛一等奖", "2024 & 2025 RoboMaster University League First Prize"),
+  l("2025 RoboMaster 机器人竞技一等奖", "2025 RoboMaster Robot Competition First Prize"),
+  l("2025 全国大学生电子设计大赛省级二等奖", "2025 National Electronics Design Contest Provincial Second Prize"),
+  l("2024 谐振杯电子设计大赛一等奖", "2024 Resonance Cup Electronics Design Contest First Prize"),
+  l("2024 蓝桥杯山东省二等奖", "2024 Lanqiao Cup Shandong Second Prize"),
+  l("青岛大学一等奖学金", "Qingdao University First-Class Scholarship"),
 ];
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
+}
+
+export function getProjectWithNeighbors(slug: string) {
+  const index = projects.findIndex((project) => project.slug === slug);
+  if (index < 0) return undefined;
+  return {
+    project: projects[index],
+    previous: projects[(index - 1 + projects.length) % projects.length],
+    next: projects[(index + 1) % projects.length],
+  };
 }

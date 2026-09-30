@@ -1,16 +1,16 @@
 # Kyle Wang Robotics Portfolio
 
-Personal robotics software engineering portfolio built with Next.js, Vinext,
-React, Tailwind CSS, and the Cloudflare Workers runtime.
+Interview-oriented robotics engineering portfolio and casebook built with
+Next.js, Vinext, React, Tailwind CSS, and the Cloudflare Workers runtime.
 
-The site presents project case studies, experience, resume material, and
-technical writing for job applications.
+The site presents four flagship engineering cases, personal/open-source work,
+an interview route selector, a concise experience timeline, resume material,
+and technical writing.
 
 ## Prerequisites
 
 - Node.js `>=22.13.0`
 - npm
-- Linux/macOS shell environment for the helper scripts
 
 Use the pinned local version when a Node version manager is available:
 
@@ -36,6 +36,16 @@ npm test
 `npm run build` runs `vinext build` and validates the generated Cloudflare
 Worker artifact. `npm test` builds the site and verifies the rendered homepage
 metadata from the Worker entry.
+
+## Interview Routes
+
+- `/interview?track=robotics`
+- `/interview?track=industrial-vision`
+- `/interview?track=computer-vision`
+- `/interview?track=general`
+
+Each route reorders the same four case records from `lib/portfolio.ts`; project
+content is not duplicated between normal and interview views.
 
 ## Cloudflare Deployment
 

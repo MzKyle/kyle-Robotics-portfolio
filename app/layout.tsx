@@ -31,9 +31,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" data-language="zh" data-theme="minimal" suppressHydrationWarning>
+    <html lang="zh-CN" data-language="zh" data-theme="industrial" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var l=localStorage.getItem('portfolio-language')==='en'?'en':'zh';var t=localStorage.getItem('portfolio-theme')==='industrial'?'industrial':'minimal';document.documentElement.dataset.language=l;document.documentElement.dataset.theme=t;document.documentElement.lang=l==='zh'?'zh-CN':'en';}catch(e){}})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var l=localStorage.getItem('portfolio-language')==='en'?'en':'zh';var t=localStorage.getItem('portfolio-theme')==='minimal'?'minimal':'industrial';document.documentElement.dataset.language=l;document.documentElement.dataset.theme=t;document.documentElement.lang=l==='zh'?'zh-CN':'en';}catch(e){}})();` }} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

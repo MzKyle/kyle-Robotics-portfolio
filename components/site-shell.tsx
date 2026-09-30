@@ -6,6 +6,7 @@ import { PreferenceControl } from "./preferences";
 const nav = [
   { href: "/", label: { zh: "首页", en: "Home" }, key: "home" },
   { href: "/projects", label: { zh: "项目", en: "Projects" }, key: "projects" },
+  { href: "/interview", label: { zh: "面试模式", en: "Interview" }, key: "interview" },
   { href: "/experience", label: { zh: "工作经历", en: "Experience" }, key: "experience" },
   { href: "/writing", label: { zh: "技术文章", en: "Writing" }, key: "writing" },
   { href: "/about", label: { zh: "关于我", en: "About" }, key: "about" },
@@ -48,7 +49,7 @@ export function SiteFooter() {
         <div><strong><T zh="王凯豪" en="Kyle Wang" /></strong><p><T zh="机器人软件开发工程师" en="Robotics Software Engineer" /></p></div>
       </div>
       <div className="footer-links">
-        <div><span><T zh="页面导航" en="NAVIGATION" /></span><Link href="/projects"><T zh="项目案例" en="Projects" /></Link><Link href="/experience"><T zh="工作经历" en="Experience" /></Link><Link href="/writing"><T zh="技术文章" en="Writing" /></Link></div>
+        <div><span><T zh="页面导航" en="NAVIGATION" /></span><Link href="/projects"><T zh="项目案例" en="Projects" /></Link><Link href="/interview"><T zh="面试模式" en="Interview mode" /></Link><Link href="/experience"><T zh="工作经历" en="Experience" /></Link><Link href="/writing"><T zh="技术文章" en="Writing" /></Link></div>
         <div><span><T zh="联系方式" en="CONNECT" /></span><a href="https://github.com/MzKyle" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://mzkyle.blog.csdn.net" target="_blank" rel="noreferrer">CSDN ↗</a><a href="mailto:2972689924@qq.com"><T zh="邮箱" en="Email" /> ↗</a></div>
         <div><span><T zh="简历" en="DOCUMENT" /></span><Link href="/resume"><T zh="在线简历" en="Online resume" /></Link><a href="/resume.pdf" target="_blank" rel="noreferrer"><T zh="PDF 简历" en="PDF resume" /> ↗</a></div>
       </div>
