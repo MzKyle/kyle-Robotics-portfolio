@@ -22,7 +22,6 @@ export default function Home() {
           <p className="hero-description"><T zh="将工业相机、视觉算法、ROS 2 与机械臂控制整合为可运行、可诊断、可交付的机器人软件系统。" en="I integrate industrial cameras, perception algorithms, ROS 2, and robot control into deployable, diagnosable robotics systems." /></p>
           <div className="hero-actions">
             <a className="button button-primary" href="#selected-work"><T zh="精选工程案例" en="Selected work" /> <span>↓</span></a>
-            <Link className="button button-secondary" href="/interview"><T zh="面试模式" en="Interview mode" /> <span>→</span></Link>
             <Link className="hero-text-link" href="/resume"><T zh="查看简历" en="Resume" /> ↗</Link>
           </div>
         </div>

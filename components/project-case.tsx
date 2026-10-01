@@ -50,7 +50,6 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
           <div className="case-actions">
             <a className="button button-primary" href="#context"><T zh="开始阅读" en="Start case" /> <span>↓</span></a>
             {project.repo && <a className="button button-secondary" href={project.repo} target="_blank" rel="noreferrer"><T zh="查看 GitHub" en="View GitHub" /> <span>↗</span></a>}
-            <Link className="case-inline-link" href="/interview"><T zh="面试模式" en="Interview mode" /> →</Link>
           </div>
           <dl className="case-meta">
             <div><dt><T zh="我的职责" en="MY ROLE" /></dt><dd><Localized text={project.role} /></dd></div>

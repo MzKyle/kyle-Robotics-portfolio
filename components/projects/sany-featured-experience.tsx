@@ -1,12 +1,12 @@
+import Link from "next/link";
 import type { ProjectDetail } from "../../lib/portfolio";
 import { Localized, T } from "../localized";
-import { ProjectFigure, ProjectLink, SectionLabel, TechList } from "./project-elements";
+import { ProjectFigure, SectionLabel, TechList } from "./project-elements";
 import styles from "./projects.module.css";
 
-// Presentation only: both cases retain the existing, shared SANY detail route.
 const cases = [
-  { number: "01", title: "Weave Welding Vision", subtitle: { zh: "主案例 · 相位感知与高频 RAW 系统设计", en: "Main case · phase-aware high-rate RAW system design" }, tech: ["≈60 Hz Robot", "200 Hz RAW Target", "Ring Buffer", "Time Alignment"] },
-  { number: "02", title: "Pre-Weld Positioning", subtitle: { zh: "相关模块 · 点云定位与高度纠偏", en: "Related module · point-cloud positioning and height correction" }, tech: ["3D Camera", "Point Cloud", "TCP Transform", "Robot Integration"] },
+  { number: "01", title: "Weave Welding Vision", href: "/projects/sany-welding-robotics/technical", subtitle: { zh: "主案例 · 相位感知与高频 RAW 系统设计", en: "Main case · phase-aware high-rate RAW system design" }, tech: ["≈60 Hz Robot", "200 Hz RAW Target", "Ring Buffer", "Time Alignment"] },
+  { number: "02", title: "Pre-Weld Positioning", href: "/projects/sany-welding-robotics/pre-weld-localization", subtitle: { zh: "相关模块 · 点云定位与高度纠偏", en: "Related module · point-cloud positioning and height correction" }, tech: ["3D Camera", "Point Cloud", "TCP Transform", "Robot Integration"] },
 ];
 
 export function SanyFeaturedExperience({ project }: { project: ProjectDetail }) {
@@ -20,7 +20,7 @@ export function SanyFeaturedExperience({ project }: { project: ProjectDetail }) 
       <ProjectFigure src={project.homeImage!} alt="SANY industrial robotics system illustration, not an on-site photograph" number="01" caption={{ zh: "工业机器人系统示意 · 非现场实拍", en: "Industrial robotics system illustration · not an on-site photograph" }} />
       <div className={styles.workLabel}><span className={styles.label}>MY WORK</span><span className={styles.label}>02 ENGINEERING CASES</span></div>
       <div className={styles.cases}>
-        {cases.map((item) => <article key={item.number} className={styles.case}><span className={styles.caseNumber}>{item.number}</span><h3>{item.title}</h3><p className={styles.subtitle}><Localized text={item.subtitle} /></p><TechList items={item.tech} /><ProjectLink slug={project.slug} caseLink /></article>)}
+        {cases.map((item) => <article key={item.number} className={styles.case}><span className={styles.caseNumber}>{item.number}</span><h3>{item.title}</h3><p className={styles.subtitle}><Localized text={item.subtitle} /></p><TechList items={item.tech} /><Link className={styles.projectLink} href={item.href}><T zh="查看案例" en="View case" /><span aria-hidden="true">→</span></Link></article>)}
       </div>
     </section>
   );

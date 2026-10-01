@@ -90,9 +90,7 @@ export const sanyEssayChapters: EssayChapter[] = [
       { kind: "p", text: l("可选事件包括左右极值、中心过零点或固定目标相位。对于摆弧极值，局部运动的一阶导数为零；周期模型或极值附近的局部拟合可以用于估计该事件时刻。", "A target event may be a left or right extremum, a center crossing, or another fixed phase. At an extremum the local weave derivative is zero; a periodic model or local fit near that extremum can estimate its time.") },
       { kind: "formula", expression: "x_weave(t) = A sin(ωt + φ)      dx_weave(t) / dt = 0 at a peak", caption: l("模型与极值条件；公式为说明性局部模型", "Illustrative local model and extremum condition") },
       { kind: "figure", id: "reduction" },
-      { kind: "subhead", text: l("为什么这是估计，而不是伪造高频状态", "Why this remains an estimate, not fabricated high-rate state") },
-      { kind: "list", items: [l("轨迹形式、周期与振幅范围提供模型约束。", "Path form, period, and amplitude range constrain the model."), l("多个连续 TCP 观测点共同约束局部相位，而非依赖一个插值点。", "Multiple consecutive TCP observations constrain local phase rather than relying on one interpolated point."), l("运动连续性和焊缝跟随的慢变假设缩小估计范围。", "Motion continuity and the slow seam-following assumption narrow the estimate.")], ordered: true },
-      { kind: "p", text: l("t_phase 仍带有不确定性，受到 TCP 采样间隔、通信抖动、时间戳及模型误差影响。它适合用于事件时间选帧，不能推导出“已获得完整 200 Hz / 1 kHz TCP 真值”。", "t_phase still carries uncertainty from TCP sampling, communication jitter, timestamps, and model mismatch. It supports event-time frame selection, not a claim of complete 200 Hz or 1 kHz TCP truth.") },
+      { kind: "p", text: l("t_phase 适合用于事件时间选帧，不能推导出“已获得完整 200 Hz / 1 kHz TCP 真值”。局部慢变假设与运动连续性缩小估计范围，但不消除真实伺服误差。", "t_phase supports event-time frame selection, not a claim of complete 200 Hz or 1 kHz TCP truth. Slow local trends and motion continuity narrow the estimate without removing real servo error.") },
     ],
   },
   {
@@ -121,7 +119,6 @@ export const sanyEssayChapters: EssayChapter[] = [
     blocks: [
       { kind: "p", text: l("传统串行链路默认每采一帧 RAW 就立即完成 ISP，再交给上位机与算法。完整 ISP 涉及黑电平、坏点、去马赛克、颜色与降噪等处理；若每帧都执行，处理能力可能先于 Sensor 读出成为时间采样瓶颈。", "A conventional serial path assumes every RAW frame immediately passes through full ISP before host processing. Full ISP includes black-level correction, bad-pixel handling, demosaicing, color work, and denoising. Processing throughput can become the temporal-sampling limit before sensor readout does.") },
       { kind: "figure", id: "isp" },
-      { kind: "subhead", text: l("先采集、再选择、后处理", "Capture, select, then process") },
       { kind: "list", items: [l("Sensor 连续采集带时间戳的 RAW，并保留在滚动历史窗口。", "The sensor continuously records timestamped RAW into rolling history."), l("根据机器人侧估计的 t_phase，查询最近的真实 RAW 帧。", "The robot-side t_phase selects the nearest real RAW frame."), l("仅对被选中的 Key RAW 执行完整 ISP，然后进入视觉处理。", "Only selected Key RAW receives full ISP before vision processing.")], ordered: true },
       { kind: "p", text: l("此架构把 RAW 采样能力与完整成像负载解耦。它追求更密的时间观测点与更少的无效 ISP 计算，并不声称所有设备都能持续达到精确 200 Hz，也不把未测吞吐量写成结果。", "This architecture separates RAW sampling capability from full imaging load. It seeks denser time observations and less unnecessary ISP work; it does not claim every device sustained exactly 200 Hz or present unmeasured throughput as a result.") },
       { kind: "media", name: "weld-pool-raw.webp", caption: l("熔池 RAW 帧 · 真实素材预留", "Weld-pool RAW frame · real media slot") },

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { SanyCase } from "../../../components/case-study/sany-case";
-import "../../../components/case-study/sany-case.css";
-import { getProjectWithNeighbors } from "../../../lib/portfolio";
+import { SanyExperienceHub } from "../../../components/compact-cases/SanyExperienceHub";
+import "../../../components/compact-cases/compact-cases.css";
 
 export const metadata: Metadata = {
-  title: "工业焊接机器人实时感知与摆弧焊视觉系统 | 王凯豪工程案例",
-  description: "60 Hz 机器人状态与 200 Hz RAW 相机约束下的相位感知、Buffer 架构、ISP 解耦与跨设备时间轴设计。",
+  title: "SANY 工业焊接机器人 | 焊前定位与摆弧焊视觉工程案例",
+  description: "三一工业焊接机器人项目中的焊前 3D 定位与基于运动相位的摆弧焊视觉感知系统。",
 };
 
 export default function Page() {
-  return <SanyCase {...getProjectWithNeighbors("sany-welding-robotics")!} />;
+  return <SanyExperienceHub />;
 }

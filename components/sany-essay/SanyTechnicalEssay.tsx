@@ -42,7 +42,7 @@ function EssayContentBlock({ block }: { block: EssayBlock }) {
     }
     case "formula": return <div className="essay-formula"><code>{block.expression}</code>{block.caption && <span><Localized text={block.caption} /></span>}</div>;
     case "note": return <aside className="essay-note"><Localized text={block.text} /></aside>;
-    case "figure": return <div className="essay-breakout"><EssayFigure id={block.id} /></div>;
+    case "figure": return <div className={`essay-breakout essay-breakout-${block.id}`}><EssayFigure id={block.id} /></div>;
     case "media": return <div className="essay-media-breakout"><SanyMedia name={block.name} caption={block.caption} /></div>;
   }
 }
@@ -50,7 +50,7 @@ function EssayContentBlock({ block }: { block: EssayBlock }) {
 export function SanyTechnicalEssay() {
   return <main className="sany-technical-essay">
     <SiteHeader active="projects" />
-    <ReadingProgress chapters={sanyEssayChapters.map(({ id, number, title }) => ({ id, number, title }))} />
+    <ReadingProgress />
     <article>
       <header className="essay-hero">
         <div className="essay-hero-copy"><Link className="essay-back" href="/projects/sany-welding-robotics">← <T zh="SANY 项目概览" en="SANY project overview" /></Link><p className="essay-overline">SANY INTERNSHIP · ROBOTICS SOFTWARE</p><h1><T zh="基于运动相位的时间域稳像设计" en="Phase-aware Temporal Stabilization" /></h1><p className="essay-hero-english">Phase-aware Temporal Stabilization for Robotic Welding Vision</p><p className="essay-hero-summary"><T zh="面对约 60 Hz FANUC TCP 状态与最高约 200 Hz RAW 相机之间的采样失配，通过运动先验将全轨迹重建降维为关键相位时间估计，再从高频 RAW 历史中选取同相位真实帧，并通过 ISP 后处理完成稳定熔池观测。" en="Faced with roughly 60 Hz FANUC TCP state and RAW camera capability up to about 200 Hz, this design uses motion priors to reduce full-trajectory reconstruction to key-phase timing, selects real same-phase frames from high-rate RAW history, and processes only those frames through ISP for stable weld-pool observation." /></p><div className="essay-hero-meta"><span><T zh="8 章技术推导" en="8 technical chapters" /></span><span><T zh="4 个核心交互" en="4 core interactions" /></span><span><T zh="公开版 · 设备细节脱敏" en="Public edition · device details sanitized" /></span></div></div>

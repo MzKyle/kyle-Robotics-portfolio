@@ -59,7 +59,7 @@ const existingProjects: ProjectDetail[] = [
     homeImageMode: "cover",
     homeImagePosition: "center 44%",
     homeDescription: l("构建采图、检测、分拣与数据追溯一体化工业视觉系统。", "Built an integrated industrial vision system for capture, inspection, sorting, and traceability."),
-    homeTech: ["C++17", "Industrial Camera", "ONNX", "Modbus RTU"],
+    homeTech: ["C++17", "Industrial Camera", "ONNX", "Modbus TCP"],
     homeEvidence: [
       { value: "END-TO-END", label: l("完整工业视觉链路", "Complete industrial vision path") },
       { value: "BAG ID", label: l("有序分拣状态管理", "Ordered sorting state") },
@@ -73,12 +73,12 @@ const existingProjects: ProjectDetail[] = [
     intro: l("水样袋通常是白色、半透明、低对比度的，缺陷可能是针孔、毛发、黑点、异物、压痕、折痕、污染或封边异常。单张普通正面光图片很容易遇到两个问题：缺陷太浅看不见，或者折痕和反光太像缺陷。", "Folds, glare, and material texture can hide tiny defects on translucent bags, making single-image inspection unreliable. The system addresses imaging, detection, concurrent scheduling, physical sorting order, and result traceability as one production pipeline."),
     challenge: l("人工做水袋缺陷检测时是在大背光灯下用手调换不同角度来找缺陷，这中多角度观察微小缺陷的能力对受硬件限制只能平放检测的机器来说是个很大的挑战", "Inference results must stay aligned with the physical Bag ID, both sides, and every lighting condition. Even when concurrent inference finishes out of order, the PLC must never sort the wrong bag."),
     contribution: [
-      l("独立开发 C++ 视觉后端主控模块，接入工业相机采集、Modbus RTU、缺陷推理调度与末端分拣控制。", "Independently developed the C++ vision backend controller across industrial-camera capture, Modbus RTU, inference scheduling, and end-of-line sorting."),
+      l("独立开发 C++ 视觉后端主控模块，接入工业相机采集、Modbus TCP、缺陷推理调度与末端分拣控制。", "Independently developed the C++ vision backend controller across industrial-camera capture, Modbus TCP, inference scheduling, and end-of-line sorting."),
       l("参与多光源频闪 Burst 成像与‘整图快速粗检 + ROI 微缺陷精检’链路，面向亚像素级缺陷提升可见性与检出稳定性。", "Contributed to multi-light burst imaging and a full-image coarse pass plus ROI micro-defect refinement for sub-pixel-scale defects."),
       l("完成 YOLO 训练调优、ONNX 导出与 CUDA 部署，并使用 EfficientNet 完成细分类。", "Trained and tuned YOLO, exported ONNX for CUDA deployment, and used EfficientNet for fine-grained classification."),
       l("建立 Bag ID 状态机、乱序结果重排及 JSONL、SQLite、Flask Dashboard 追溯链路。", "Built the Bag-ID state machine, out-of-order result reordering, and a JSONL/SQLite/Flask dashboard traceability path."),
     ],
-    tech: ["C++17", "Industrial Camera", "Modbus RTU", "YOLO / ONNX", "CUDA", "EfficientNet", "SQLite / JSONL", "Flask"],
+    tech: ["C++17", "Industrial Camera", "Modbus TCP", "YOLO / ONNX", "CUDA", "EfficientNet", "SQLite / JSONL", "Flask"],
     flow: [l("多光源 Burst 采图", "Multi-light burst capture"), l("Bag ID 组包", "Bag ID aggregation"), l("整图粗检", "Full-image inspection"), l("微缺陷补检", "Micro-defect refinement"), l("结果融合与重排序", "Fusion and reordering"), l("PLC 分拣与追溯", "PLC sorting and traceability")],
     modules: [
       { code: "CAMERA DRIVER", title: l("工业相机与硬触发采集", "Industrial camera and hardware trigger"), text: l("对接海康 MVS SDK，完成连续取流、Burst 会话、Chunk 硬件时间戳和光源/曝光元数据封装；回调只负责收帧，保存与推理移出采集线程。", "Integrates Hikrobot MVS for continuous acquisition, burst sessions, chunk timestamps, and lighting/exposure metadata. Camera callbacks only receive frames; storage and inference stay off the capture thread.") },
@@ -523,13 +523,13 @@ const waterbagCase: ProjectDetail = {
   index: "02",
   kind: "flagship",
   accent: "pipeline",
-  flow: [l("Industrial Camera", "Industrial Camera"), l("Image Acquisition", "Image Acquisition"), l("ROI / Detection", "ROI / Detection"), l("Fine Classification", "Fine Classification"), l("Bag State Machine", "Bag State Machine"), l("Result Reordering", "Result Reordering"), l("Modbus RTU", "Modbus RTU"), l("Sorting", "Sorting"), l("Persistence / Traceability", "Persistence / Traceability")],
+  flow: [l("Industrial Camera", "Industrial Camera"), l("Image Acquisition", "Image Acquisition"), l("ROI / Detection", "ROI / Detection"), l("Fine Classification", "Fine Classification"), l("Bag State Machine", "Bag State Machine"), l("Result Reordering", "Result Reordering"), l("Modbus TCP", "Modbus TCP"), l("Sorting", "Sorting"), l("Persistence / Traceability", "Persistence / Traceability")],
   ownership: [
     { label: l("Industrial Camera / Lighting", "Industrial Camera / Lighting"), type: "existing" },
     { label: l("C++ 采集、状态机与任务调度", "C++ acquisition, state, and scheduling"), type: "mine" },
     { label: l("粗检、ROI 精检与模型部署", "Detection, ROI refinement, and deployment"), type: "collaboration" },
     { label: l("Bag ID / Reorder Buffer", "Bag ID / Reorder Buffer"), type: "mine" },
-    { label: l("Modbus RTU / 分拣控制", "Modbus RTU / sorting control"), type: "mine" },
+    { label: l("Modbus TCP / 分拣控制", "Modbus TCP / sorting control"), type: "mine" },
     { label: l("SQLite / JSONL / Dashboard", "SQLite / JSONL / dashboard"), type: "mine" },
   ],
   problems: [
@@ -631,7 +631,7 @@ export const experiences: Experience[] = [
     company: l("工业水样袋检测项目", "Industrial Waterbag Inspection Project"),
     role: l("软件开发工程师 / C++ 视觉后端主控", "Software Engineer / C++ Vision Backend Lead"),
     summary: l("以项目制方式完成低对比度水样袋缺陷检测系统，从相机与 PLC 接入、C++ 实时后端到模型部署、分拣和追溯形成完整闭环。", "Delivered a project-based low-contrast waterbag inspection system spanning camera and PLC integration, a C++ runtime, model deployment, sorting, and traceability."),
-    details: [l("独立开发 C++ 视觉后端主控，完成工业相机采集、Modbus RTU、缺陷推理调度与末端分拣控制闭环。", "Independently developed the C++ vision backend controller across camera capture, Modbus RTU, inference scheduling, and sorting."), l("参与多光源频闪 Burst 成像与整图粗检、ROI 亚像素级微缺陷精检链路。", "Contributed to multi-light burst imaging and a full-image coarse pass followed by ROI-level sub-pixel micro-defect refinement."), l("完成 YOLO 训练调优、ONNX 导出、CUDA 部署及 EfficientNet 细分类。", "Trained and tuned YOLO, exported ONNX for CUDA deployment, and implemented EfficientNet fine classification."), l("以 Bag ID 状态机和重排缓冲保证物理袋序，并以 JSONL、SQLite、Flask Dashboard 实现记录查询、原图回放、质量统计与反向追溯。", "Preserved physical bag order with a Bag-ID state machine and reorder buffer, with JSONL, SQLite, and a Flask dashboard for queries, source-image replay, quality statistics, and reverse traceability.")],
+    details: [l("独立开发 C++ 视觉后端主控，完成工业相机采集、Modbus TCP、缺陷推理调度与末端分拣控制闭环。", "Independently developed the C++ vision backend controller across camera capture, Modbus TCP, inference scheduling, and sorting."), l("参与多光源频闪 Burst 成像与整图粗检、ROI 亚像素级微缺陷精检链路。", "Contributed to multi-light burst imaging and a full-image coarse pass followed by ROI-level sub-pixel micro-defect refinement."), l("完成 YOLO 训练调优、ONNX 导出、CUDA 部署及 EfficientNet 细分类。", "Trained and tuned YOLO, exported ONNX for CUDA deployment, and implemented EfficientNet fine classification."), l("以 Bag ID 状态机和重排缓冲保证物理袋序，并以 JSONL、SQLite、Flask Dashboard 实现记录查询、原图回放、质量统计与反向追溯。", "Preserved physical bag order with a Bag-ID state machine and reorder buffer, with JSONL, SQLite, and a Flask dashboard for queries, source-image replay, quality statistics, and reverse traceability.")],
     metrics: [l("独立开发 C++ 主控", "Independently built C++ controller"), l("Bag ID 顺序一致性", "Bag ID order integrity"), l("YOLO / ONNX / CUDA", "YOLO / ONNX / CUDA"), l("可反向追溯生产记录", "Reverse-traceable production records")],
     kind: "project",
     caseSlug: "waterbag-inspection",

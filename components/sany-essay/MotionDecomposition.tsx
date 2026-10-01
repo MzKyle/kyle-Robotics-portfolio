@@ -28,12 +28,11 @@ export function MotionDecomposition() {
   return <figure className="essay-figure essay-motion" aria-labelledby="motion-title">
     <div className="essay-figure-top"><div><span className="essay-figure-number">INTERACTIVE FIGURE 02</span><h3 id="motion-title"><T zh="运动分解观察器" en="Motion decomposition explorer" /></h3></div><span className="essay-concept-label"><T zh="局部平移模型 · 概念曲线" en="Local translation model · conceptual curves" /></span></div>
     <div className="essay-motion-toggle" role="group" aria-label="Visible motion components">{controls.map((control) => <button type="button" key={control.id} className={`essay-signal-${control.id}`} aria-pressed={visible[control.id]} onClick={() => setVisible((current) => ({ ...current, [control.id]: !current[control.id] }))}><i aria-hidden="true" /><span>{control.label}</span><small><T zh={control.zh} en={control.en} /></small></button>)}</div>
-    <svg viewBox="0 0 900 290" className="essay-motion-svg" role="img" aria-label="Toggable local motion curves showing slow seam motion, periodic weave, and their combined TCP path">
+    <svg viewBox="0 105 900 150" className="essay-motion-svg" role="img" aria-label="Toggable local motion curves showing slow seam motion, periodic weave, and their combined TCP path">
       <path className="essay-graph-axis" d="M42 35V250H867M42 105H867M42 175H867M42 245H867" />
       {visible.seam && <path className="essay-motion-seam" d={paths.seam} />}
       {visible.weave && <path className="essay-motion-weave" d={paths.weave} />}
       {visible.tcp && <path className="essay-motion-tcp" d={paths.tcp} />}
-      <text x="48" y="277">t →</text>
     </svg>
     <div className="essay-motion-equation">p<sub>TCP</sub>(t) = p<sub>seam</sub>(t) + p<sub>weave</sub>(t)</div>
     <figcaption><T zh="关闭某条曲线可单独观察慢变趋势和周期摆弧如何组成 TCP 局部运动。曲线用于解释结构，不代表项目实测轨迹或完整六自由度运动。" en="Hide a curve to see how slow trend and periodic weave form local TCP motion. The curves explain structure; they are not measured project traces or full six-degree-of-freedom motion." /></figcaption>

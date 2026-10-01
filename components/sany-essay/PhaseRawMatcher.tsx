@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
 import { T } from "../localized";
 import { cameraFpsChoices, idealQuantizationBoundMs, nearestCameraFrame, sampleTimes, type CameraFps } from "../../lib/sany-essay-model";
@@ -55,7 +56,7 @@ export function PhaseRawMatcher() {
     <div className="essay-matcher-controls"><div className="essay-control-group" role="group" aria-label="Camera RAW sampling rate"><span><T zh="相机 RAW 采样" en="Camera RAW sampling" /></span><div>{cameraFpsChoices.map((choice) => <button type="button" key={choice} aria-pressed={fps === choice} onClick={() => setFps(choice)}>{choice} Hz</button>)}</div></div><div className="essay-control-group" role="group" aria-label="Target weaving phase"><span><T zh="目标摆弧相位" en="Target weave phase" /></span><div>{phases.map((item) => <button type="button" key={item.id} aria-pressed={phaseId === item.id} onClick={() => setPhaseId(item.id)}><T zh={item.zh} en={item.en} /></button>)}</div></div><button className="essay-play-button" type="button" aria-pressed={running} onClick={() => reducedMotion ? setCursor((current) => (current + 10) % 100) : setRunning((current) => !current)}><T zh={reducedMotion ? "步进观察" : running ? "暂停运动" : "播放运动"} en={reducedMotion ? "Step marker" : running ? "Pause motion" : "Play motion"} /></button></div>
     <div className="essay-matcher-stage">
       <div className="essay-matcher-curve-label"><strong><T zh="机器人摆弧曲线" en="Robot weaving curve" /></strong><span><T zh="离散黑点 = ≈60 Hz 状态观测" en="Black dots = ≈60 Hz state observations" /></span></div>
-      <svg className="essay-matcher-curve" viewBox="0 0 1000 190" role="img" aria-label="Conceptual periodic weave curve with 60 Hz robot samples, target phase, and moving position marker">
+      <svg className="essay-matcher-curve" viewBox="0 12 1000 165" preserveAspectRatio="none" role="img" aria-label="Conceptual periodic weave curve with 60 Hz robot samples, target phase, and moving position marker">
         <path className="essay-graph-axis" d="M40 100H960" />
         <path className="essay-matcher-wave" d={weavePath} />
         {robotSamples.map((time) => <circle className="essay-robot-observation" key={time} cx={plotX(time)} cy={plotY(time)} r="4" />)}
@@ -63,7 +64,7 @@ export function PhaseRawMatcher() {
         <circle className="essay-target-dot" cx={plotX(phase.eventMs)} cy={plotY(phase.eventMs)} r="8" />
         <circle className="essay-motion-marker" cx={plotX(cursor)} cy={plotY(cursor)} r="6" />
       </svg>
-      <div className="essay-matcher-link"><span>t<sub>phase</sub></span><i aria-hidden="true">↓</i></div>
+      <div className="essay-matcher-link" style={{ "--phase-position": `${phase.eventMs}%` } as CSSProperties}><span>t<sub>phase</sub></span><i aria-hidden="true">↓</i></div>
       <div className="essay-matcher-raw-label"><strong><T zh="真实 RAW 采样时间轴" en="Real RAW sampling timeline" /></strong><span>{fps} Hz · {frames.length} <T zh="个示意采样点" en="illustrative sample points" /></span></div>
       <div className="essay-matcher-raw-track" aria-hidden="true">{frames.map((time, index) => <i className={index === selected.index ? "selected" : ""} key={index} style={{ left: `${time}%` }} />)}<span className="essay-raw-target" style={{ left: `${phase.eventMs}%` }} /><b className="essay-key-raw" style={{ left: `${selected.timeMs}%` }}>KEY RAW</b></div>
       <div className="essay-axis-scale"><span>0 ms</span><span>50 ms</span><span>100 ms</span></div>
