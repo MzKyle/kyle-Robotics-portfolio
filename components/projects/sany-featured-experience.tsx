@@ -5,8 +5,8 @@ import styles from "./projects.module.css";
 
 // Presentation only: both cases retain the existing, shared SANY detail route.
 const cases = [
-  { number: "01", title: "Pre-Weld Localization", subtitle: { zh: "焊前定位", en: "3D localization before welding" }, tech: ["3D Camera", "Point Cloud", "Coordinate Transform", "Robot Integration"] },
-  { number: "02", title: "Weave Welding Visual Correction", subtitle: { zh: "摆弧焊视觉纠偏", en: "Visual correction during weave welding" }, tech: ["High-rate RAW", "Timing Alignment", "Post ISP", "Vision Correction"] },
+  { number: "01", title: "Weave Welding Vision", subtitle: { zh: "主案例 · 相位感知与高频 RAW 系统设计", en: "Main case · phase-aware high-rate RAW system design" }, tech: ["≈60 Hz Robot", "200 Hz RAW Target", "Ring Buffer", "Time Alignment"] },
+  { number: "02", title: "Pre-Weld Positioning", subtitle: { zh: "相关模块 · 点云定位与高度纠偏", en: "Related module · point-cloud positioning and height correction" }, tech: ["3D Camera", "Point Cloud", "TCP Transform", "Robot Integration"] },
 ];
 
 export function SanyFeaturedExperience({ project }: { project: ProjectDetail }) {
