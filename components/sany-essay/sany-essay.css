@@ -77,6 +77,27 @@ html[data-language="en"] .essay-hero-english { display: none; }
 .essay-note { margin-block: var(--case-paragraph-gap); padding: 4px 0 4px 20px; border-left: 2px solid var(--essay-rule); color: var(--essay-muted); font-size: 15px; line-height: 1.85; }
 .case-reading > :last-child { margin-bottom: 0; }
 
+/* The source article is complete; formatting adds structure without shortening it. */
+.essay-source-abstract { padding-block: 0 32px; }
+.source-equation { min-width: 0; padding-block: 8px; }
+.source-math-block { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-block: 6px; }
+.source-math-block .katex-display { margin: 0; text-align: left; }
+.source-math-block .katex-display > .katex { text-align: left; }
+.source-equation .katex { font-size: 1.1em; }
+.source-math-inline .katex { font-size: 1.04em; }
+.essay-paragraph strong, .essay-body-list strong { color: var(--essay-ink); font-weight: 600; }
+.essay-paragraph code { padding: 1px 4px; background: #eceeec; font-family: var(--font-geist-mono), monospace; font-size: .88em; }
+.source-quotation .essay-paragraph { color: inherit; font-size: inherit; }
+.source-quotation .essay-paragraph + .essay-paragraph { margin-top: 12px; }
+.essay-source-image { margin: 0; }
+.essay-source-image img { display: block; width: 100%; height: auto; }
+.essay-source-image figcaption { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 20px; margin-top: 12px; color: var(--essay-muted); font-size: 12px; line-height: 1.7; }
+.essay-source-image figcaption > a { color: var(--essay-blue); white-space: nowrap; }
+.source-original-mermaid { margin-top: 14px; }
+.source-original-mermaid pre { max-width: 100%; max-height: 460px; overflow: auto; margin: 14px 0 0; padding: 18px; background: #eff1ef; font-size: 12px; line-height: 1.7; }
+.essay-source-conclusion { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding-block: 52px 64px; border-top: 1px solid var(--essay-rule); }
+.essay-source-conclusion h2 { margin: 0; font-size: 30px; font-weight: 600; letter-spacing: -.035em; }
+
 /* Engineering figures: one header, one body, one caption. No card shell. */
 .essay-figure { margin: 0; padding-block: 24px; border-block: 1px solid var(--essay-rule); }
 .essay-figure-top { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 9px 24px; margin-bottom: 24px; }

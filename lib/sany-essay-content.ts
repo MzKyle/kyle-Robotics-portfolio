@@ -42,9 +42,9 @@ export type EssayChapter = {
   blocks: EssayBlock[];
 };
 
-// Public, bilingual adaptation of add_res/系统设计_---_基于运动相位的时间域稳像设计.md.
-// Keep the source article's eight-chapter argument and equations. Internal protocol details
-// and third-party hotlinked illustrations are intentionally omitted from the public page.
+// Chapter metadata and earlier explanatory material. The technical page's primary
+// prose now comes directly from the complete source Markdown via sany-source-article.ts.
+// These explanations do not replace or filter any part of the source article.
 export const sanyEssayChapters: EssayChapter[] = [
   {
     id: "sampling-mismatch",

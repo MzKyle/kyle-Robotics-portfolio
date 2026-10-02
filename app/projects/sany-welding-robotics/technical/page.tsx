@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SanyTechnicalEssay } from "../../../../components/sany-essay/SanyTechnicalEssay";
 import "../../../../components/sany-essay/sany-essay.css";
+import "katex/dist/katex.min.css";
 
 export const metadata: Metadata = {
   title: "基于运动相位的时间域稳像设计 | SANY 技术深读",

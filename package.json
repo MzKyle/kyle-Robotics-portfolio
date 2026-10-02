@@ -11,11 +11,13 @@
     "review:sany": "node scripts/review-sany-layout.mjs",
     "build": "vinext build && node scripts/validate-artifact.mjs",
     "start": "vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "npm run build && node --test tests/rendered-html.test.mjs tests/sany-source-article.test.mjs",
     "validate:artifact": "node scripts/validate-artifact.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {
+    "katex": "0.16.47",
+    "marked": "16.4.2",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6"

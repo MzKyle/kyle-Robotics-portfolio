@@ -59,7 +59,7 @@ try {
     assert.equal(geometry.pageWidth, geometry.viewport, `${viewport.name}: horizontal overflow`);
     assert.equal(geometry.chapters, 8);
     assert.equal(geometry.placeholders, false);
-    assert.equal(geometry.figures.length, 11);
+    assert.equal(geometry.figures.length, 13);
     assert.equal(geometry.headerBackground, "rgb(247, 247, 245)");
     const axis = geometry.readings[0].x;
     for (const rect of [...geometry.readings, ...geometry.figures]) assert.ok(Math.abs(rect.x - axis) < 1, `${viewport.name}: left axis drift`);
