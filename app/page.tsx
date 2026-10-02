@@ -3,6 +3,7 @@ import { capabilities, flagshipProjects, personalProjects, writingTopics } from 
 import { Localized, T } from "../components/localized";
 import { ContactBand, SiteFooter, SiteHeader } from "../components/site-shell";
 import { FeaturedCaseCard, SecondaryCaseCard } from "../components/engineering-work";
+import { EngineeringSystemMap } from "../components/engineering-visuals/EngineeringSystemMap";
 
 export default function Home() {
   const writingHighlights = [writingTopics[0], writingTopics[1], writingTopics[3]];
@@ -13,7 +14,6 @@ export default function Home() {
       <SiteHeader active="home" />
 
       <section className="engineering-hero" id="home">
-        <div className="hero-grid" aria-hidden="true" />
         <div className="engineering-hero-main">
           <p className="section-kicker">ENGINEERING PORTFOLIO / CASEBOOK</p>
           <h1><T zh="王凯豪" en="Kyle Wang" /></h1>
@@ -26,13 +26,7 @@ export default function Home() {
           </div>
         </div>
         <aside className="engineering-hero-route" aria-label="工程能力链路 / Engineering capability route">
-          <span><T zh="系统范围" en="SYSTEM SCOPE" /></span>
-          <ol>
-            <li><b>01</b><T zh="设备与采集" en="Devices & acquisition" /></li>
-            <li><b>02</b><T zh="视觉与三维感知" en="Vision & 3D perception" /></li>
-            <li><b>03</b><T zh="状态、坐标与通信" en="State, frames & communication" /></li>
-            <li><b>04</b><T zh="机器人执行与交付" en="Robot execution & delivery" /></li>
-          </ol>
+          <EngineeringSystemMap />
         </aside>
       </section>
 

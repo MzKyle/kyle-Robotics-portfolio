@@ -1,0 +1,108 @@
+.systemMap, .evidenceCanvas, .workstreamFigure { --ev-rule: var(--border); --ev-ink: var(--text-primary); --ev-muted: var(--text-secondary); --ev-blue: var(--accent); min-width: 0; }
+.mapHeading, .mapFootnote, .stageLabel, .stageIndex, .stageAnnotations, .stageFlow, .figureHeading, .canvasHeading, .regionHeading, .figurePipeline, .canvasPipeline { font-family: var(--font-geist-mono), monospace; }
+.mapHeading { display: flex; justify-content: space-between; gap: 14px; padding-bottom: 15px; border-bottom: 1px solid var(--ev-rule); color: var(--ev-muted); font-size: 10px; letter-spacing: .055em; }
+.mapHeading > span:last-child { color: var(--ev-blue); }
+.mapStages { position: relative; list-style: none; margin: 14px 0 0; padding: 0; }
+.mapStages::before { content: ""; position: absolute; top: 29px; bottom: 55px; left: 40px; border-left: 1px solid var(--border-strong); }
+.mapStage { position: relative; display: grid; grid-template-columns: 28px minmax(0, 1fr) 66px; gap: 26px; align-items: center; padding-block: 13px 12px; outline-offset: 2px; }
+.mapStage::before { content: ""; position: absolute; left: 37px; top: 26px; width: 7px; height: 7px; border: 1px solid var(--ev-blue); border-radius: 50%; background: var(--bg); transition: background 180ms ease-out; }
+.mapStage::after { content: ""; position: absolute; top: 29px; left: 44px; width: 10px; border-top: 1px solid var(--ev-rule); transition: border-color 180ms ease-out; }
+.stageIndex { align-self: start; padding-top: 1px; color: var(--ev-blue); font-size: 11px; }
+.stageCopy { min-width: 0; }
+.stageLabel { display: block; color: var(--ev-ink); font-size: 11px; letter-spacing: .05em; }
+.stageCopy strong { display: block; margin-top: 3px; font-size: 14px; font-weight: 500; line-height: 1.5; }
+.stageAnnotations { display: grid; margin-top: 4px; color: var(--ev-muted); font-size: 9px; line-height: 1.5; }
+.stageAnnotations > span { grid-area: 1 / 1; transition: opacity 180ms ease-out; }
+.stageTools { opacity: 0; color: var(--ev-blue); }
+.stageFlow { position: absolute; left: 54px; bottom: -1px; color: var(--text-muted); font-size: 8px; letter-spacing: .03em; }
+.stageSketch { width: 66px; height: auto; fill: none; stroke: var(--border-strong); stroke-width: 1; transition: stroke 180ms ease-out; }
+.sketchDot { fill: var(--text-secondary); stroke: none; }
+.mapStage:hover::before, .mapStage:focus-visible::before { background: var(--ev-blue); }
+.mapStage:hover::after, .mapStage:focus-visible::after { border-color: var(--ev-blue); }
+.mapStage:hover .stageDefault, .mapStage:focus-visible .stageDefault { opacity: 0; }
+.mapStage:hover .stageTools, .mapStage:focus-visible .stageTools { opacity: 1; }
+.mapStage:hover .stageSketch, .mapStage:focus-visible .stageSketch { stroke: var(--ev-muted); }
+.mapFootnote { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; margin: 12px 0 0; padding-top: 13px; border-top: 1px solid var(--ev-rule); color: var(--ev-muted); font-size: 9px; }
+.mapFootnote > span:last-child { font-size: 8px; color: var(--text-muted); }
+
+.diagram { display: block; width: 100%; height: auto; overflow: visible; font-family: var(--font-geist-mono), monospace; }
+.diagram text { fill: var(--ev-muted); font-size: 14px; }
+.diagram .diagramLabel { fill: var(--ev-ink); font-size: 14px; letter-spacing: .07em; }
+.diagram .diagramNote { fill: var(--ev-muted); font-size: 12px; }
+.rule, .faintRule, .trend, .axis, .tcpAxis, .transformLine, .eventLine, .eventRing { fill: none; vector-effect: non-scaling-stroke; }
+.rule { stroke: var(--ev-rule); stroke-width: 1; }
+.faintRule { stroke: var(--ev-rule); stroke-width: .75; stroke-dasharray: 3 5; }
+.trend { stroke: var(--text-muted); stroke-width: 1.25; stroke-dasharray: 4 4; }
+.primaryFill { fill: var(--ev-ink); stroke: none; }
+.referenceFill { fill: var(--border-strong); stroke: none; }
+.cloudFill { fill: var(--ev-ink); opacity: .65; }
+.eventFill { fill: var(--accent); stroke: none; transition: opacity 180ms ease-out; }
+.eventStroke { stroke: var(--accent); }
+.diagram .eventText { fill: var(--ev-blue); font-size: 14px; }
+.eventLine { stroke: var(--ev-blue); stroke-width: 1; stroke-dasharray: 3 4; }
+.eventRing { stroke: var(--ev-blue); stroke-width: 1; }
+.axis { stroke: var(--border-strong); stroke-width: 1; }
+.tcpAxis { stroke: var(--ev-ink); stroke-width: 1; }
+.transformLine { stroke: var(--text-muted); stroke-width: 1; stroke-dasharray: 4 4; }
+.phaseEvent, .correspondences { opacity: var(--ev-event-opacity, .72); transition: opacity 180ms ease-out; }
+.workstreamFigure:hover .phaseEvent, .workstreamFigure:hover .correspondences, .evidenceCanvas:hover .phaseEvent, .evidenceCanvas:hover .correspondences { opacity: 1; }
+
+.evidenceCanvas { margin: 0; padding: 18px 22px 0; border-top: 1px solid var(--border-strong); background: var(--surface); }
+.canvasHeading { display: flex; justify-content: space-between; gap: 14px; color: var(--ev-muted); font-size: 9px; letter-spacing: .045em; }
+.canvasHeading > span:last-child { color: var(--text-muted); }
+.evidenceRegion { padding-block: 17px 10px; }
+.evidenceRegion + .evidenceRegion { border-top: 1px solid var(--ev-rule); }
+.regionHeading { display: flex; align-items: baseline; gap: 9px; font-size: 9px; }
+.regionHeading > span:first-child { color: var(--ev-blue); }
+.regionHeading h3 { margin: 0; color: var(--ev-ink); font-size: inherit; font-weight: 500; letter-spacing: .02em; }
+.regionHeading > span:last-child { margin-left: auto; color: var(--text-muted); white-space: nowrap; }
+.evidenceCanvas .diagram { margin-top: 12px; max-height: 180px; }
+.evidenceCanvas .pointCloud { max-height: 167px; }
+.canvasPipeline { display: flex; justify-content: space-between; gap: 8px; margin: 0; padding: 13px 0; list-style: none; border-top: 1px solid var(--ev-rule); color: var(--ev-ink); font-size: 10px; }
+.canvasPipeline li { display: flex; align-items: center; gap: 12px; }
+.canvasPipeline li:not(:last-child)::after { content: "→"; color: var(--text-muted); }
+.evidenceCanvas figcaption { margin: 0; padding-block: 9px 12px; border-top: 1px solid var(--ev-rule); color: var(--ev-muted); font-size: 11px; line-height: 1.6; }
+.workstreamFigure { margin: 0; padding: 17px 20px 13px; background: #f6f7f8; }
+.figureHeading { color: var(--ev-muted); font-size: 10px; letter-spacing: .035em; }
+.workstreamFigure .diagram { margin-top: 19px; }
+.figurePipeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 13px 0 0; margin: 15px 0 0; border-top: 1px solid var(--ev-rule); }
+.figurePipeline li { position: relative; min-width: 0; }
+.figurePipeline li:not(:last-child)::after { content: "→"; position: absolute; top: 0; right: -5px; color: var(--text-muted); font-size: 11px; }
+.figurePipeline span { display: block; color: var(--ev-muted); font-size: 8px; letter-spacing: .02em; }
+.figurePipeline strong { display: block; margin-top: 5px; color: var(--ev-ink); font-size: 10px; font-weight: 500; line-height: 1.5; }
+.workstreamFigure figcaption { margin-top: 14px; color: var(--ev-muted); font-size: 11px; line-height: 1.6; }
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  .mapStages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 38px; }
+  .mapStages::before { display: none; }
+  .mapStage { border-bottom: 1px solid var(--ev-rule); }
+  .stageFlow { display: none; }
+}
+@media (max-width: 600px) {
+  .mapStage { gap: 26px; grid-template-columns: 28px minmax(0, 1fr) 55px; }
+  .stageSketch { width: 55px; }
+  .stageCopy strong { font-size: 13px; }
+  .stageAnnotations { font-size: 9px; }
+  .evidenceCanvas { padding: 14px 12px 0; }
+  .canvasHeading { font-size: 8px; }
+  .regionHeading { font-size: 8px; gap: 7px; }
+  .regionHeading > span:last-child { display: none; }
+  .evidenceCanvas .diagram, .evidenceCanvas .pointCloud { max-height: none; }
+  .canvasPipeline { gap: 6px; font-size: 9px; }
+  .canvasPipeline li { gap: 6px; }
+  .workstreamFigure { padding: 16px 12px 12px; }
+  .figurePipeline { gap: 14px; }
+}
+@media (max-width: 760px) {
+  .stageAnnotations { display: flex; flex-direction: column; }
+  .stageTools { opacity: 1; color: var(--ev-muted); }
+  .stageDefault { display: none; }
+}
+@media (hover: none), (pointer: coarse) {
+  .stageAnnotations { display: flex; flex-direction: column; }
+  .stageTools { opacity: 1; color: var(--ev-muted); }
+  .stageDefault { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mapStage::before, .mapStage::after, .stageAnnotations > span, .stageSketch, .eventFill, .phaseEvent, .correspondences { transition: none; }
+}

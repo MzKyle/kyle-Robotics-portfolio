@@ -18,7 +18,7 @@ export default function ProjectsPage() {
       <SiteHeader active="projects" />
       <div className={styles.container}>
         <ProjectsIntro />
-        <SanyFeaturedExperience project={getProject("sany-welding-robotics")!} />
+        <SanyFeaturedExperience />
         <SelectedEngineeringGrid projects={[
           getProject("waterbag-inspection")!,
           getProject("auto-aim")!,

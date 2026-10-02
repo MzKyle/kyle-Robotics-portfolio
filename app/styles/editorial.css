@@ -26,12 +26,10 @@
 .footer-links a { color: var(--text-secondary); }
 .footer-intro .brand-mark { margin-right: 8px; }
 .footer-base, .footer-links span { color: var(--text-secondary); }
-.engineering-hero { min-height: 0; grid-template-columns: minmax(0, 1.5fr) minmax(0, .75fr); }
+.engineering-hero { min-height: 0; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
 .engineering-hero-main { padding: 64px var(--gutter); border-right: 0; }
 .engineering-hero h1 { font-size: clamp(3.5rem, 5.5vw, 4.5rem); }
-.engineering-hero-route { padding: 48px var(--gutter); background: transparent; }
-.engineering-hero-route li { border-bottom: 0; }
-.engineering-hero-route ol { border-top: 0; }
+.engineering-hero-route { padding: 24px var(--gutter); background: transparent; }
 .engineering-section-head h2 { font-size: var(--type-section); }
 .selected-engineering-work { gap: 44px; }
 .engineering-featured-card, .engineering-secondary-card { border: 0; border-radius: 0; background: transparent; }
