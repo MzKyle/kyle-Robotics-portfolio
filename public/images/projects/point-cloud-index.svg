@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Point-cloud geometry schematic">
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0d1821"/><stop offset="1" stop-color="#172c3a"/></linearGradient>
+    <linearGradient id="object" x2="0" y2="1"><stop stop-color="#50afea" stop-opacity=".7"/><stop offset="1" stop-color="#0c6fb8" stop-opacity=".16"/></linearGradient>
+    <pattern id="dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#73d7f7" opacity=".65"/></pattern>
+  </defs>
+  <rect width="640" height="400" fill="url(#bg)"/>
+  <g fill="none" stroke="#8eaab9" stroke-opacity=".24" stroke-width="1">
+    <path d="M48 300 318 165 594 288 316 420M104 325 373 190M162 350 428 213M220 375 483 237M278 400 538 260"/>
+    <path d="M103 273 372 393M161 244 431 366M219 215 490 340M277 186 549 313"/>
+  </g>
+  <path d="m172 217 103-65 192 48-101 73Z" fill="url(#object)" stroke="#71c5f2" stroke-width="2"/>
+  <path d="m172 217 194 56v83l-194-58Zm194 56 101-73v83l-101 73Z" fill="#0a5c94" fill-opacity=".22" stroke="#71c5f2" stroke-width="2"/>
+  <path d="m172 217 103-65 192 48-101 73Z M172 217v81l194 58V273m101-73v83l-101 73" fill="url(#dots)" opacity=".88"/>
+  <g stroke="#bbebff" stroke-opacity=".78" fill="none" stroke-width="1.5"><path d="M501 201v86m-7-86h14m-14 86h14"/><path d="M484 244h32" stroke-dasharray="3 5"/></g>
+  <g fill="#c8e9f7" font-family="Arial, sans-serif" font-size="11" letter-spacing="2"><text x="34" y="42">DEPTH / POINT CLOUD</text><text x="488" y="335">GEOMETRY</text></g>
+  <circle cx="524" cy="244" r="3" fill="#57b8ef"/>
+</svg>

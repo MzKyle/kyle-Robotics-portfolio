@@ -1,26 +1,42 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { ProjectDetail } from "../../lib/portfolio";
-import { Localized, T } from "../localized";
-import { ProjectFigure, SectionLabel, TechList } from "./project-elements";
+import { T } from "../localized";
+import { SectionLabel, TechList } from "./project-elements";
 import styles from "./projects.module.css";
 
 const cases = [
-  { number: "01", title: "Weave Welding Vision", href: "/projects/sany-welding-robotics/technical", subtitle: { zh: "主案例 · 相位感知与高频 RAW 系统设计", en: "Main case · phase-aware high-rate RAW system design" }, tech: ["≈60 Hz Robot", "200 Hz RAW Target", "Ring Buffer", "Time Alignment"] },
-  { number: "02", title: "Pre-Weld Positioning", href: "/projects/sany-welding-robotics/pre-weld-localization", subtitle: { zh: "相关模块 · 点云定位与高度纠偏", en: "Related module · point-cloud positioning and height correction" }, tech: ["3D Camera", "Point Cloud", "TCP Transform", "Robot Integration"] },
+  { number: "01", zh: "摆弧焊视觉稳像", en: "Phase-aware Welding Vision", href: "/projects/sany-welding-robotics/technical" },
+  { number: "02", zh: "焊前视觉定位", en: "Pre-weld Localization", href: "/projects/sany-welding-robotics/pre-weld-localization" },
 ];
 
 export function SanyFeaturedExperience({ project }: { project: ProjectDetail }) {
   return (
-    <section className={`${styles.section} ${styles.featuredSection}`} id="sany" aria-labelledby="sany-title">
-      <SectionLabel number="01" year={project.year}>FEATURED INDUSTRIAL EXPERIENCE</SectionLabel>
-      <div className={styles.featuredHeading}>
-        <div><h2 id="sany-title">SANY<span>Industrial Welding Robotics</span></h2><p className={styles.subtitle}><T zh="工业焊接机器人视觉与系统工程" en="Vision and systems engineering for industrial welding robots" /></p></div>
-        <div className={styles.featuredIntro}><span className={styles.label}><T zh="工业实习经历" en="Industrial internship" /></span><p><Localized text={project.homeDescription ?? project.summary} /></p></div>
-      </div>
-      <ProjectFigure src={project.homeImage!} alt="SANY industrial robotics system illustration, not an on-site photograph" number="01" caption={{ zh: "工业机器人系统示意 · 非现场实拍", en: "Industrial robotics system illustration · not an on-site photograph" }} />
-      <div className={styles.workLabel}><span className={styles.label}>MY WORK</span><span className={styles.label}>02 ENGINEERING CASES</span></div>
-      <div className={styles.cases}>
-        {cases.map((item) => <article key={item.number} className={styles.case}><span className={styles.caseNumber}>{item.number}</span><h3>{item.title}</h3><p className={styles.subtitle}><Localized text={item.subtitle} /></p><TechList items={item.tech} /><Link className={styles.projectLink} href={item.href}><T zh="查看案例" en="View case" /><span aria-hidden="true">→</span></Link></article>)}
+    <section className={styles.featuredExperience} id="sany" aria-labelledby="sany-title">
+      <SectionLabel number="01">FEATURED EXPERIENCE</SectionLabel>
+      <div className={styles.featuredCard}>
+        <figure className={styles.featuredVisual}>
+          <div className={styles.featuredImage}>
+            <Image src={project.homeImage!} alt="工业焊接机器人与三维视觉系统示意图" fill unoptimized sizes="(max-width: 800px) 100vw, 56vw" priority />
+          </div>
+          <figcaption><T zh="工业机器人系统示意 · 非现场实拍" en="Industrial robotics illustration · not an on-site photograph" /></figcaption>
+        </figure>
+        <div className={styles.featuredInformation}>
+          <span className={styles.eyebrow}>SANY ROBOTICS / INDUSTRIAL EXPERIENCE</span>
+          <h2 id="sany-title"><T zh="工业焊接机器人软件" en="Industrial Welding Robotics" /></h2>
+          <p className={styles.featuredSummary}><T zh="负责焊接机器人视觉链路中的摆弧焊稳像与焊前定位模块，将感知结果接入机器人系统。" en="Built vision modules for weave welding stabilization and pre-weld localization within an industrial robot system." /></p>
+          <div className={styles.featuredCases} aria-label="SANY engineering cases">
+            {cases.map((item) => (
+              <Link href={item.href} className={styles.featuredCase} key={item.number}>
+                <span>{item.number}</span>
+                <span><strong><T zh={item.zh} en={item.en} /></strong><small className="lang-zh">{item.en}</small></span>
+                <span aria-hidden="true">↗</span>
+              </Link>
+            ))}
+          </div>
+          <TechList items={["C++", "ROS 2", "Industrial Vision"]} />
+          <Link className={styles.featuredCta} href="/projects/sany-welding-robotics"><T zh="探索完整经历" en="Explore experience" /><span aria-hidden="true">→</span></Link>
+        </div>
       </div>
     </section>
   );

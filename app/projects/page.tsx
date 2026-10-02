@@ -1,11 +1,9 @@
 ﻿import type { Metadata } from "next";
 import { getProject, personalProjects } from "../../lib/portfolio";
 import { SiteFooter, SiteHeader } from "../../components/site-shell";
-import { ProjectsHero } from "../../components/projects/projects-hero";
+import { ProjectsIntro } from "../../components/projects/projects-intro";
 import { SanyFeaturedExperience } from "../../components/projects/sany-featured-experience";
-import { WaterbagProjectSection } from "../../components/projects/waterbag-project-section";
-import { RoboMasterProjectSection } from "../../components/projects/robomaster-project-section";
-import { VolumeMeasurementSection } from "../../components/projects/volume-measurement-section";
+import { SelectedEngineeringGrid } from "../../components/projects/selected-engineering-grid";
 import { PersonalEngineeringList } from "../../components/projects/personal-engineering-list";
 import styles from "../../components/projects/projects.module.css";
 
@@ -19,11 +17,13 @@ export default function ProjectsPage() {
     <main>
       <SiteHeader active="projects" />
       <div className={styles.container}>
-        <ProjectsHero />
+        <ProjectsIntro />
         <SanyFeaturedExperience project={getProject("sany-welding-robotics")!} />
-        <WaterbagProjectSection project={getProject("waterbag-inspection")!} />
-        <RoboMasterProjectSection project={getProject("auto-aim")!} />
-        <VolumeMeasurementSection project={getProject("3d-volume-measurement")!} />
+        <SelectedEngineeringGrid projects={[
+          getProject("waterbag-inspection")!,
+          getProject("auto-aim")!,
+          getProject("3d-volume-measurement")!,
+        ]} />
         <PersonalEngineeringList projects={personalProjects} />
       </div>
       <SiteFooter />
