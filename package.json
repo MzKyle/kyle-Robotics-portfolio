@@ -7,6 +7,8 @@
   },
   "scripts": {
     "dev": "vite",
+    "diagrams:sany": "node scripts/render-sany-diagrams.mjs",
+    "review:sany": "node scripts/review-sany-layout.mjs",
     "build": "vinext build && node scripts/validate-artifact.mjs",
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
@@ -28,6 +30,8 @@
     "@vitejs/plugin-rsc": "0.5.26",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
+    "mermaid": "^12.0.0",
+    "playwright": "^1.63.0",
     "react-server-dom-webpack": "19.2.6",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",

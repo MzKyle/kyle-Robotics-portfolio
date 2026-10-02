@@ -1,0 +1,23 @@
+block-beta
+columns 4
+Start["系统启动"]:1 ReadCounts["读取 Camera / Robot Count"]:1 Anchor["建立初始同步锚点"]:1 Independent["相机与机器人独立运行"]:1
+space:2 Cam["Camera Count<br/>→ 相机采集时间"]:1 Rob["Robot Count<br/>→ TCP 状态时间"]:1
+ROS["ROS 节点映射到统一时间轴"]:2 Match["t_phase ↔ RAW 时间戳匹配"]:2
+Update["更新时钟映射"]:2 Drift["长时间运行产生 Clock Drift"]:2
+space:2 Resync["每日空闲时间重新同步"]:2
+Start --> ReadCounts
+ReadCounts --> Anchor
+Anchor --> Independent
+Cam --> ROS
+Rob --> ROS
+ROS --> Match
+Drift --> Resync
+Resync --> Update
+Independent --> Cam
+Independent --> Rob
+Match --> Drift
+Update --> ROS
+style Anchor fill:#edf3fb,stroke:#0866e8,color:#161719
+style ROS fill:#edf3fb,stroke:#0866e8,color:#161719
+style Match fill:#edf3fb,stroke:#0866e8,color:#161719
+style Update fill:#edf3fb,stroke:#0866e8,color:#161719

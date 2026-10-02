@@ -19,6 +19,7 @@ export type EssayFigureId =
   | "isp"
   | "buffer"
   | "clock"
+  | "clock-mapping"
   | "system"
   | "error"
   | "evolution"
@@ -108,7 +109,6 @@ export const sanyEssayChapters: EssayChapter[] = [
       { kind: "p", text: l("目标由空间域逐帧补偿转向时间域选帧后，相机采样间隔决定了理想最近邻量化误差上界。120 Hz 的间隔约 8.33 ms，上界约 ±4.17 ms；200 Hz 的间隔为 5 ms，上界为 ±2.5 ms。这只是均匀采样的理想量化项，不包含机器人相位估计和跨设备同步误差。", "Once the goal shifts to temporal selection, the camera sample interval bounds ideal nearest-frame quantization. At 120 Hz the interval is about 8.33 ms and the bound about ±4.17 ms; at 200 Hz they are 5 ms and ±2.5 ms. These are uniform-sampling quantization terms only, excluding phase-estimation and cross-device timing error.") },
       { kind: "formula", expression: "|e_camera,quant| ≤ T_camera / 2", caption: l("理想最近邻时间量化上界", "Ideal nearest-frame temporal quantization bound") },
       { kind: "note", text: l("200 Hz 的意义是 RAW 时间采样分辨率，不代表系统输出 200 FPS 视频或具备 ±2.5 ms 端到端精度。", "200 Hz describes RAW temporal sampling resolution, not 200 FPS video output or ±2.5 ms end-to-end accuracy.") },
-      { kind: "media", name: "phase-sequence.webp", caption: l("同相位关键帧序列 · 真实素材预留", "Phase-consistent key-frame sequence · real media slot") },
     ],
   },
   {
@@ -121,8 +121,6 @@ export const sanyEssayChapters: EssayChapter[] = [
       { kind: "figure", id: "isp" },
       { kind: "list", items: [l("Sensor 连续采集带时间戳的 RAW，并保留在滚动历史窗口。", "The sensor continuously records timestamped RAW into rolling history."), l("根据机器人侧估计的 t_phase，查询最近的真实 RAW 帧。", "The robot-side t_phase selects the nearest real RAW frame."), l("仅对被选中的 Key RAW 执行完整 ISP，然后进入视觉处理。", "Only selected Key RAW receives full ISP before vision processing.")], ordered: true },
       { kind: "p", text: l("此架构把 RAW 采样能力与完整成像负载解耦。它追求更密的时间观测点与更少的无效 ISP 计算，并不声称所有设备都能持续达到精确 200 Hz，也不把未测吞吐量写成结果。", "This architecture separates RAW sampling capability from full imaging load. It seeks denser time observations and less unnecessary ISP work; it does not claim every device sustained exactly 200 Hz or present unmeasured throughput as a result.") },
-      { kind: "media", name: "weld-pool-raw.webp", caption: l("熔池 RAW 帧 · 真实素材预留", "Weld-pool RAW frame · real media slot") },
-      { kind: "media", name: "weld-pool-processed.webp", caption: l("关键帧 ISP 后图像 · 真实素材预留", "Post-ISP key image · real media slot") },
     ],
   },
   {
@@ -145,12 +143,11 @@ export const sanyEssayChapters: EssayChapter[] = [
       { kind: "subhead", text: l("长期运行：初始 offset 校准仍会漂移", "Long runs: correcting initial offset still leaves drift") },
       { kind: "p", text: l("原文记录了长时间运行后相机与机器人 count 映射逐渐偏移的现象。两侧时钟频率有微小差异时，一次同步只能校正当时的 offset，不能阻止后续 drift 累积。因此在设备空闲窗口周期性读取新的计数并更新映射。", "The source article records a gradual shift in the camera-to-robot count mapping during long operation. A small clock-rate difference means one synchronization corrects only the current offset, not future drift. New counters are therefore read during idle windows to refresh the mapping.") },
       { kind: "figure", id: "clock" },
+      { kind: "figure", id: "clock-mapping" },
       { kind: "note", text: l("这是软件时间校准与漂移补偿，不等于已实现 PTP 或硬实时全局时钟；最终精度仍受计数器分辨率、晶振、同步时延与调度影响。", "This is software time calibration and drift compensation, not implemented PTP or a hard real-time global clock. Counter resolution, oscillators, synchronization delay, and scheduling still limit accuracy.") },
       { kind: "subhead", text: l("完整系统：两条时间轴，一次真实选帧", "Full system: two timelines and one real frame selection") },
       { kind: "figure", id: "system" },
       { kind: "p", text: l("相位匹配后，选中的 RAW 帧经 ISP 形成同相位图像序列，并交由下游视觉算法或人工观察。2D / 3D 几何求解属于协作或既有链路；本篇重点解释其上游的采样、相位与时间系统设计。", "After matching, selected RAW frames pass through ISP into a phase-consistent image sequence for downstream vision or observation. Detailed 2D / 3D geometry belongs to collaborative or existing work; this essay focuses on upstream sampling, phase, and timing design.") },
-      { kind: "media", name: "robot-camera-setup.webp", caption: l("机器人与相机布置 · 真实素材预留", "Robot and camera setup · real media slot") },
-      { kind: "media", name: "debug-interface.webp", caption: l("时序调试界面 · 脱敏真实素材预留", "Timing debug interface · sanitized real media slot") },
     ],
   },
   {

@@ -1,0 +1,28 @@
+flowchart TB
+  subgraph RT["ROBOT TIMELINE · FANUC CONTROLLER"]
+    direction TB
+    FANUC["FANUC controller<br/>≈60 Hz TCP state"] --> TCP["Discrete TCP pose sequence"]
+    TCP --> SEP["Motion trend separation"]
+    SEP --> SLOW["Slow seam<br/>component"]
+    SEP --> SWING["Periodic weave<br/>component"]
+    SLOW --> MODEL["Local motion model estimation"]
+    SWING --> MODEL
+    MODEL --> PHASE["Key weave-phase detection"]
+    PHASE --> TP["t_phase / t_peak"]
+  end
+  SYNC["Common<br/>time base"]
+  subgraph CT["CAMERA TIMELINE · HIGH-RATE RAW SAMPLING"]
+    direction TB
+    RAW["Sensor · 200 Hz RAW design target"] --> TS["RAW + acquisition timestamp"]
+    TS --> BUF["Rolling history buffer"]
+    BUF --> MATCH["Nearest-time match<br/>i* = argmin |t_cam(i) − t_phase|"]
+    MATCH --> KEY["Key RAW frame"]
+    KEY --> ISP["Selective post-ISP"]
+    ISP --> STD["Standard-format image"]
+    STD --> SEQ["Same-phase stable weld-pool sequence"]
+    SEQ --> ALGO["Vision algorithm / human observation"]
+  end
+  TP --> SYNC
+  SYNC -->|align t_phase / t_peak| MATCH
+  classDef accent fill:#edf3fb,stroke:#0866e8,color:#161719;
+  class TP,SYNC,MATCH,KEY accent;

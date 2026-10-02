@@ -29,5 +29,8 @@ test("renders development preview metadata", async () => {
     response.headers.get("content-type") ?? "",
     /^text\/html\b/i,
   );
-  assert.match(await response.text(), developmentPreviewMeta);
+  const html = await response.text();
+  assert.match(html, developmentPreviewMeta);
+  assert.doesNotMatch(html, /(?:url\(|href=)["']?(?:file:\/\/\/|[a-z]:\/)/i,
+    "self-hosted fonts must use web URLs rather than local filesystem paths");
 });

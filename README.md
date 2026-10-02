@@ -63,6 +63,18 @@ Custom domains can be added later from Cloudflare once DNS is ready.
 
 ## Project Shape
 
+The SANY technical essay at `/projects/sany-welding-robotics/technical` uses one
+shared grid: an 800px reading column and a 1160px figure column with the same left
+edge. Its two source-article Mermaid graphs live in `public/diagrams/sany/`.
+`npm run diagrams:sany` renders localized desktop/mobile SVGs and their intrinsic
+dimensions at authoring time, keeping Mermaid out of the page's runtime bundle.
+
+With the development server running, `npm run review:sany` captures the full page,
+chapters, and figures, checks layout and interactions at five screen sizes, and
+saves its report in `outputs/sany-review/`. These scripts use an installed Chrome
+or Edge on Windows, `BROWSER_EXECUTABLE` when set, or Playwright's installed browser.
+Set `REVIEW_BASE_URL` to audit a preview on another port.
+
 - `app/`: Next.js app routes and page content
 - `components/`: shared UI components
 - `lib/`: portfolio data and CSDN article integration

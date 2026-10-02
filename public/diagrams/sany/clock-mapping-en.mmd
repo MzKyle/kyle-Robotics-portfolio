@@ -1,0 +1,27 @@
+flowchart LR
+  subgraph INIT["01 · ESTABLISH ANCHOR"]
+    direction TB
+    Start["System startup"] --> ReadCounts["Read Camera / Robot Count"]
+    ReadCounts --> Anchor["Establish initial sync anchor"]
+    Anchor --> Independent["Camera and robot run independently"]
+  end
+  subgraph RUN["02 · INDEPENDENT COUNTERS / COMMON TIME"]
+    direction TB
+    Cam["Camera Count<br/>→ acquisition time"]
+    Rob["Robot Count<br/>→ TCP state time"]
+    Cam --> ROS["ROS maps to a common timeline"]
+    Rob --> ROS
+    ROS --> Match["t_phase ↔ RAW timestamp match"]
+  end
+  subgraph CAL["03 · LONG-TERM DRIFT COMPENSATION"]
+    direction TB
+    Drift["Clock drift accumulates over runtime"]
+    Drift --> Resync["Resync during the daily idle window"]
+    Resync --> Update["Update clock mapping"]
+  end
+  Independent --> Cam
+  Independent --> Rob
+  Match --> Drift
+  Update --> ROS
+  classDef accent fill:#edf3fb,stroke:#0866e8,color:#161719;
+  class Anchor,ROS,Match,Update accent;
