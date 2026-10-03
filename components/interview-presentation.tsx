@@ -18,7 +18,7 @@ export function InterviewPresentation({ trackKey, track, projects }: { trackKey:
     let frame = 0;
     const update = () => {
       frame = 0;
-      const compact = matchMedia("(max-width: 600px)").matches;
+      const compact = matchMedia("(max-width: 760px)").matches;
       const routeBottom = document.querySelector(".interview-route-bar")?.getBoundingClientRect().bottom ?? 128;
       const boundary = Math.max(128, routeBottom, compact ? navigation.current?.getBoundingClientRect().bottom ?? 192 : 0) + 32;
       const next: Record<string, string> = {};
@@ -95,7 +95,7 @@ export function InterviewPresentation({ trackKey, track, projects }: { trackKey:
         <nav aria-label="切换面试路线 / Switch interview route">
           {(["robotics", "industrial-vision", "computer-vision", "general"] as InterviewTrackKey[]).map((key) => <Link className={key === trackKey ? "active" : ""} href={`/interview?track=${key}`} key={key}>{key.replace("-", " ")}</Link>)}
         </nav>
-        <Link href="/interview"><T zh="返回路线选择" en="Route selector" /> ↗</Link>
+        <Link href="/interview"><T zh="返回路线选择" en="Route selector" /> →</Link>
       </header>
 
       <div className="interview-layout">

@@ -20,7 +20,7 @@ export function SanyFeaturedExperience() {
         <h2 id="sany-title"><T {...projectNames["sany-welding-robotics"]} /></h2>
         <p className={styles.featuredSummary}><T zh="把设备时间轴、RAW 采集与机器人运动关联起来，让摆动中的熔池成为稳定的观测。" en="Connecting device timelines, RAW acquisition and robot motion to observe the weld pool consistently through weaving." /></p>
         <p className={styles.featuredResult}><T zh="120 → 200 Hz RAW · ±0.5 mm 摆弧焊纠偏" en="120 → 200 Hz RAW · ±0.5 mm weave correction" /></p>
-        <div className={styles.featuredCases}>{cases.map(item => <Link href={item.href} className={styles.featuredCase} key={item.number}><span>{item.number}</span><span><strong><T zh={item.zh} en={item.en} /></strong></span><span aria-hidden="true">↗</span></Link>)}</div>
+        <div className={styles.featuredCases}>{cases.map(item => <Link href={item.href} className={styles.featuredCase} key={item.number}><span>{item.number}</span><span><strong><T zh={item.zh} en={item.en} /></strong></span><span aria-hidden="true">→</span></Link>)}</div>
         <TechList items={["C++", "ROS 2", "RAW / ISP", "3D Vision"]} />
         <Link className={styles.featuredCta} href="/projects/sany-welding-robotics"><T zh="阅读项目概览" en="Read the case study" /><span aria-hidden="true">→</span></Link>
       </div>

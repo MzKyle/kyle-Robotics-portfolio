@@ -3,6 +3,7 @@ import Link from "next/link";
 import { experiences, flagshipProjects, honors } from "../../lib/portfolio";
 import { projectName } from "../../lib/project-presentation";
 import { ResumePdfPreview } from "../../components/resume-pdf-preview";
+import { EmailContact } from "../../components/email-contact";
 import { Localized, T } from "../../components/localized";
 import { SiteFooter, SiteHeader } from "../../components/site-shell";
 export const metadata: Metadata = { title: "简历 | 王凯豪", description: "王凯豪的机器人软件开发工程师在线简历。" };
@@ -28,7 +29,7 @@ export default function ResumePage() {
         <aside>
           <div>
             <span><T zh="联系方式" en="CONTACT" /></span>
-            <a href="mailto:2972689924@qq.com">2972689924@qq.com</a>
+            <EmailContact />
             <a href="tel:19862681939">19862681939</a>
             <a href="https://github.com/MzKyle" target="_blank" rel="noreferrer">github.com/MzKyle</a>
             <a href="https://mzkyle.blog.csdn.net" target="_blank" rel="noreferrer">mzkyle.blog.csdn.net</a>

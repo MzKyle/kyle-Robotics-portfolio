@@ -13,8 +13,8 @@ Project and essay pages share its color and typography system. A locally hosted
 Chinese font avoids depending on operating-system fonts; source and license
 information is in `public/fonts/README.md`.
 
-The welding cover is an AI-generated fictional illustration, visibly labeled on
-the site. No original SANY photograph is shipped. Its generation prompt and
+The welding cover is an AI-generated fictional illustration. No original SANY
+photograph is shipped. Its generation prompt and
 provenance are documented in `public/images/projects/asset-notes.md`.
 
 ## Prerequisites
