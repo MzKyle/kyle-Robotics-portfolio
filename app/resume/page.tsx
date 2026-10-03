@@ -42,7 +42,7 @@ export default function ResumePage() {
               <li>ROS 2 / TF / Component</li>
               <li>OpenCV / PCL / RANSAC</li>
               <li>YOLO / ONNX / CUDA</li>
-              <li>Linux / PTP / Shared Memory</li>
+              <li>Linux / Time Sync / Shared Memory</li>
               <li>Python / AI Workflow</li>
             </ul>
           </div>
@@ -51,7 +51,7 @@ export default function ResumePage() {
         <div className="resume-main">
           <section>
             <h2><T zh="个人简介" en="SUMMARY" /></h2>
-            <p className="resume-summary"><T zh="熟练掌握现代 C/C++、CMake 与 Python，具备 ROS 2 机器人系统、原始多传感器数据、PTP 与多设备时序、共享内存 / IPC、工业视觉、点云几何和 AI 模型部署经验，能够从现场问题出发完成感知、控制、调试工具与生产软件的工程闭环。" en="Robotics software engineer skilled in modern C/C++, CMake, and Python, with hands-on experience in ROS 2 systems, raw multi-sensor data, PTP and device timing, shared memory/IPC, industrial vision, point-cloud geometry, AI deployment, and field debugging." /></p>
+            <p className="resume-summary"><T zh="熟悉 C/C++、Python、CMake 与 ROS 2，具备多线程并发、异步任务、内存与数据生命周期管理及 Linux 工程调试能力。工程经历覆盖工业相机、多设备时间关联、共享内存 / IPC、点云几何、ONNX / CUDA 部署与机器人系统联调。" en="Skilled in C/C++, Python, CMake and ROS 2, with concurrency, asynchronous tasks, memory-lifecycle management and Linux debugging experience. Work spans industrial cameras, multi-device time association, shared memory/IPC, point-cloud geometry, ONNX/CUDA deployment and robot integration." /></p>
           </section>
 
           <section>

@@ -62,7 +62,7 @@
 .canvasPipeline li { display: flex; align-items: center; gap: 12px; }
 .canvasPipeline li:not(:last-child)::after { content: "→"; color: var(--text-muted); }
 .evidenceCanvas figcaption { margin: 0; padding-block: 9px 12px; border-top: 1px solid var(--ev-rule); color: var(--ev-muted); font-size: 11px; line-height: 1.6; }
-.workstreamFigure { margin: 0; padding: 17px 20px 13px; background: #f6f7f8; }
+.workstreamFigure { margin: 0; padding: 17px 20px 13px; background: var(--surface); border-radius: 5px; }
 .figureHeading { color: var(--ev-muted); font-size: 10px; letter-spacing: .035em; }
 .workstreamFigure .diagram { margin-top: 19px; }
 .figurePipeline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 13px 0 0; margin: 15px 0 0; border-top: 1px solid var(--ev-rule); }

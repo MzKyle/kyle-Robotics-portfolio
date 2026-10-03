@@ -1,11 +1,11 @@
-.container { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.container { max-width: 1200px; margin-inline: auto; padding-inline: var(--gutter); }
 .eyebrow, .sectionLabel, .cardMeta, .cardImageNote { font-family: var(--font-geist-mono), monospace; font-size: .7rem; letter-spacing: .1em; }
 
 /* The index introduces the work, then lets visitors choose a detail page. */
 .projectsIntro { padding-block: 42px 46px; }
 .eyebrow { color: var(--text-secondary); }
-.projectsIntro h1 { margin: 18px 0 0; max-width: 1100px; font-size: clamp(2.6rem, 4.5vw, 4rem); line-height: 1.14; font-weight: 550; letter-spacing: -.045em; text-wrap: balance; }
-.projectsIntro h1 :global(.lang-zh) { letter-spacing: -.04em; }
+.projectsIntro h1 { margin: 18px 0 0; max-width: 1100px; font-size: clamp(2.3rem, 4vw, 3.25rem); line-height: 1.25; font-weight: 550; letter-spacing: -.02em; text-wrap: balance; }
+.projectsIntro h1 :global(.lang-zh) { letter-spacing: 0; }
 .introFooter { display: flex; justify-content: space-between; align-items: baseline; gap: 20px 44px; margin-top: 22px; }
 .introFooter p { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
 .introFooter > span { color: var(--text-muted); font-family: var(--font-geist-mono), monospace; font-size: .72rem; line-height: 1.6; white-space: nowrap; }
@@ -17,10 +17,13 @@
 
 /* Flagship experience: a technical figure and two routes inward. */
 .featuredExperience { padding-top: 36px; border-top: 1px solid var(--border); scroll-margin-top: var(--header-height); }
-.featuredCard { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(0, .88fr); gap: clamp(30px, 3.8vw, 52px); align-items: stretch; margin-top: 18px; }
+.featuredCard { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: clamp(30px, 3.8vw, 52px); align-items: center; margin-top: 25px; }
 .featuredVisual { min-width: 0; margin: 0; }
+.featuredVisual img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
+.featuredVisual figcaption { margin-top: 10px; color: var(--text-muted); font-size: 11px; }
+.featuredResult { margin: 18px 0 0; color: var(--accent); font-size: 14px; line-height: 1.7; }
 .featuredInformation { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding-block: 9px 17px; }
-.featuredInformation h2 { margin: 16px 0 0; font-size: clamp(2rem, 3.15vw, 2.75rem); font-weight: 550; line-height: 1.15; letter-spacing: -.04em; text-wrap: balance; }
+.featuredInformation h2 { margin: 16px 0 0; font-size: clamp(1.8rem, 2.7vw, 2.3rem); font-weight: 550; line-height: 1.3; letter-spacing: -.015em; text-wrap: balance; }
 .featuredSummary { margin: 17px 0 0; max-width: 520px; color: var(--text-secondary); font-size: .96rem; line-height: 1.7; }
 .featuredCases { width: 100%; margin-top: 22px; border-top: 1px solid var(--border); }
 .featuredCase { display: grid; grid-template-columns: 30px minmax(0, 1fr) 18px; align-items: center; gap: 11px; padding-block: 10px; border-bottom: 1px solid var(--border); }
@@ -38,7 +41,7 @@
 
 /* Comparable selected projects: the image crop and content slots stay equal. */
 .selectedWork { margin-top: 86px; padding-top: 25px; border-top: 1px solid var(--border); }
-.selectedHeading { margin: 10px 0 26px; font-size: clamp(1.85rem, 2.6vw, 2.4rem); line-height: 1.2; font-weight: 520; letter-spacing: -.04em; }
+.selectedHeading { margin: 10px 0 26px; font-size: clamp(1.65rem, 2.3vw, 2rem); line-height: 1.3; font-weight: 520; letter-spacing: -.01em; }
 .selectedGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.5vw, 32px); }
 .selectedCard { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding-bottom: 12px; }
 .cardMeta { display: flex; gap: 10px; margin-bottom: 11px; color: var(--text-secondary); }
@@ -52,6 +55,7 @@
 .selectedCard h3 { margin: 17px 0 0; font-size: clamp(1.25rem, 1.65vw, 1.55rem); line-height: 1.28; font-weight: 520; letter-spacing: -.03em; }
 .selectedCard h3 a:hover { color: var(--accent); }
 .cardDescription { margin: 8px 0 13px; color: var(--text-secondary); font-size: .89rem; line-height: 1.55; }
+.cardResult { margin: 0 0 14px; color: var(--accent); font-size: .78rem; line-height: 1.7; }
 .selectedCard .techList { margin-bottom: 12px; }
 .cardExplore { display: inline-flex; align-items: center; gap: 14px; margin-top: auto; min-height: 30px; color: var(--accent); font-size: .88rem; font-weight: 500; }
 .cardExplore:hover { text-decoration: underline; text-underline-offset: 5px; }

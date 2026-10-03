@@ -2,19 +2,21 @@
 @import "./styles/content.css";
 @import "./styles/editorial.css";
 @import "./styles/shell.css";
+@import "./styles/portfolio-home.css";
 
 /* Precision Industrial Editorial — shared tokens and legacy aliases. */
 :root {
-  --bg: #F7F7F5;
-  --surface: #FFFFFF;
-  --surface-subtle: #EDEEEB;
-  --text-primary: #161719;
-  --text-secondary: #666A70;
-  --text-muted: #92969D;
-  --border: #DADDE1;
-  --border-strong: #BFC4CB;
-  --accent: #0866E8;
-  --dark: #11151A;
+  color-scheme: dark;
+  --bg: #0f172a;
+  --surface: #152238;
+  --surface-subtle: #1b2a40;
+  --text-primary: #e2e8f0;
+  --text-secondary: #a3b1c6;
+  --text-muted: #8191a9;
+  --border: #29374c;
+  --border-strong: #526078;
+  --accent: #5eead4;
+  --dark: #5eead4;
   --max: 1320px;
   --gutter: 32px;
   --header-height: 72px;

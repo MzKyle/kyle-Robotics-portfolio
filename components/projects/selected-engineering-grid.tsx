@@ -34,7 +34,7 @@ const cardCopy: Record<string, {
     description: { zh: "以深度相机与点云几何处理倾斜及超薄物体的体积测量。", en: "Depth-camera and point-cloud geometry for tilted and ultra-thin object measurement." },
     alt: "深度相机点云与体积测量的概念示意，非项目实拍",
     image: "/images/projects/point-cloud-index.svg",
-    imageNote: { zh: "几何示意 · 项目实拍待补充", en: "Geometry schematic · project imagery pending" },
+    imageNote: { zh: "点云几何示意", en: "Point-cloud geometry illustration" },
     tech: ["Orbbec", "OpenCV", "Point Cloud", "RANSAC"],
   },
 };
@@ -53,12 +53,13 @@ export function SelectedEngineeringGrid({ projects }: { projects: ProjectDetail[
               <div className={styles.cardMeta}><span>{String(index + 1).padStart(2, "0")}</span><span>{copy.category}</span></div>
               <Link className={styles.cardImageLink} href={`/projects/${project.slug}`} aria-label={`${copy.title.zh} · ${copy.title.en}`}>
                 <div className={styles.cardImage}>
-                  <Image src={copy.image ?? project.image!} alt={copy.alt} fill unoptimized sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw" />
+                  <Image src={copy.image ?? project.image!} alt={copy.alt} fill unoptimized sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw" style={{ objectFit: project.imageMode ?? "cover" }} />
                 </div>
               </Link>
               {copy.imageNote && <span className={styles.cardImageNote}><T {...copy.imageNote} /></span>}
               <h3><Link href={`/projects/${project.slug}`}><T {...copy.title} /></Link></h3>
               <p className={styles.cardDescription}><T {...copy.description} /></p>
+              <p className={styles.cardResult}>{project.homeEvidence?.map((evidence, evidenceIndex) => <span key={evidence.value}>{evidenceIndex > 0 && " · "}{evidence.value} <T {...evidence.label} /></span>)}</p>
               <TechList items={copy.tech} />
               <Link className={styles.cardExplore} href={`/projects/${project.slug}`}><T zh="查看项目" en="Explore" /><span aria-hidden="true">→</span></Link>
             </article>

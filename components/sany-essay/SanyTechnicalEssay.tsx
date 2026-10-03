@@ -50,7 +50,7 @@ export function SanyTechnicalEssay() {
 
       {sanyEssayChapters.map((chapter, index) => <CaseChapter chapter={{ ...chapter, title: { zh: sourceArticle.zh.sections[index].title, en: sourceArticle.en.sections[index].title } }} key={chapter.id}>
         <SourceArticleContent id={chapter.id} zh={sourceArticle.zh.sections[index].tokens} en={sourceArticle.en.sections[index].tokens} figure={id => <EssayFigure id={id} />} />
-        {chapter.id === "temporal-selection" && <CaseReading><CaseTakeaway><T zh="补充说明：约 40% 是从 4.17 ms 到 2.5 ms 的理想最近邻时间量化上界降幅，并非实测稳像提升率；200 Hz 为 RAW 设计目标。" en="Additional context: about 40% is the reduction in the ideal nearest-frame quantization bound from 4.17 ms to 2.5 ms, not a measured stabilization improvement. 200 Hz is the RAW design target." /></CaseTakeaway></CaseReading>}
+        {chapter.id === "temporal-selection" && <CaseReading><CaseTakeaway><T zh="补充说明：RAW 采样能力由 120 Hz 提升至 200 Hz。约 40% 是从 4.17 ms 到 2.5 ms 的理想最近邻时间量化上界降幅，并非实测稳像提升率。" en="Additional context: RAW sampling capability increased from 120 to 200 Hz. About 40% describes the ideal nearest-frame quantization bound dropping from 4.17 to 2.5 ms, not a measured stabilization improvement." /></CaseTakeaway></CaseReading>}
         {chapter.id === "error-evolution" && <CaseReading><CaseTakeaway><T zh="补充说明：高频伺服状态、PTP 亚微秒同步与全帧率融合属于原文的未来演进条件，不是本项目已实现成果。具体同步精度仍需设备支持与实验验证。" en="Additional context: high-rate servo state, sub-microsecond PTP synchronization, and full-rate fusion are future conditions in the source article, not implemented results. Actual synchronization accuracy depends on device support and experimental verification." /></CaseTakeaway></CaseReading>}
       </CaseChapter>)}
 

@@ -22,7 +22,7 @@ export function SanyMedia({ name, caption }: { name: SanyMediaName; caption: Loc
   }, [media]);
   if (!media || loadedSrc !== media.src) return null;
   return <figure className="case-figure essay-media">
-    <Image src={media.src} alt={caption.zh} width={media.width} height={media.height} unoptimized sizes="(max-width: 1224px) 100vw, 1160px" />
+    <Image src={media.src} alt={caption.zh} width={media.width} height={media.height} unoptimized sizes="(max-width: 760px) calc(100vw - 44px), 860px" />
     <figcaption><Localized text={caption} /></figcaption>
   </figure>;
 }

@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import type { ProjectDetail } from "../lib/portfolio";
 import { Localized, T } from "./localized";
@@ -60,7 +61,7 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
         </div>
         <div className={`case-hero-media case-hero-media-${project.accent ?? "tooling"}`}>
           {project.image ? (
-            <img src={project.image} alt={`${project.title} — ${project.imageNote.zh}`} fetchPriority="high" decoding="async" />
+            <Image src={project.image} alt={`${project.title} — ${project.imageNote.zh}`} fill unoptimized priority sizes="(max-width: 760px) 100vw, 45vw" style={{ objectFit: project.imageMode ?? "cover" }} />
           ) : (
             <div className="case-schematic-preview">
               <span><T zh="系统结构示意" en="SYSTEM SCHEMATIC" /></span>

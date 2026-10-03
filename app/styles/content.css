@@ -1,4 +1,5 @@
 /* Existing page layouts, with unused archive styles and superseded themes removed. */
+@font-face { font-family: "Portfolio Sans SC"; src: url("/fonts/portfolio-sans-sc.woff2") format("woff2"); font-style: normal; font-weight: 100 900; font-display: swap; }
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -11,12 +12,13 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-geist-sans), "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  font-family: "Geist", "Portfolio Sans SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
 }
 
 a { color: inherit; text-decoration: none; }
 
-::selection { background: var(--blue); color: white; }
+::selection { background: #285f64; color: #f0fdfa; }
 
 .hero-grid {
   position: absolute;

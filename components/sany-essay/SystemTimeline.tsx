@@ -14,7 +14,7 @@ export function SystemTimeline() {
   return <CaseFigure id="system" number="09" label="DUAL-TIMELINE ARCHITECTURE"
     title={{ zh: "异频采样，共同时间基准", en: "Different rates, common time base" }}
     note={{ zh: "原文 Mermaid · 系统架构", en: "Source Mermaid · system architecture" }}
-    caption={<T zh="机器人链路保留运动分解、局部建模与相位检测；相机链路保留 RAW 时间戳、历史缓存、最近邻匹配、关键帧 ISP 与同相位图像输出。两者通过共同时间基准关联，200 Hz 为 RAW 设计目标。" en="The robot path retains motion decomposition, local modeling, and phase detection. The camera path retains RAW timestamps, history, nearest-frame matching, selective ISP, and same-phase image output. A common time base connects them; 200 Hz is the RAW design target." />}>
+    caption={<T zh="机器人链路保留运动分解、局部建模与相位检测；相机链路保留 RAW 时间戳、历史缓存、最近邻匹配、关键帧 ISP 与同相位图像输出。两者通过共同时间基准关联，200 Hz 为 RAW 采样能力。" en="The robot path retains motion decomposition, local modeling, and phase detection. The camera path retains RAW timestamps, history, nearest-frame matching, selective ISP, and same-phase image output. A common time base connects them; 200 Hz is the RAW sampling capability." />}>
     <CaseMermaid name="dual-timeline" description={{ zh: "机器人与相机双时间轴的完整 Mermaid 架构，包含慢变与摆弧分支、相位事件、统一时间基准、RAW Buffer、匹配与按需 ISP。", en: "Full Mermaid architecture of robot and camera timelines: slow and weave branches, phase events, common time base, RAW buffer, matching, and selective ISP." }} />
   </CaseFigure>;
 }

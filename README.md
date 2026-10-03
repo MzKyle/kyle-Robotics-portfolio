@@ -7,6 +7,16 @@ The site presents four flagship engineering cases, personal/open-source work,
 an interview route selector, a concise experience timeline, resume material,
 and technical writing.
 
+The homepage uses a dark, two-column layout with a persistent identity panel,
+scroll-aware navigation, bilingual project summaries, and a compact work timeline.
+Project and essay pages share its color and typography system. A locally hosted
+Chinese font avoids depending on operating-system fonts; source and license
+information is in `public/fonts/README.md`.
+
+The welding cover is an AI-generated fictional illustration, visibly labeled on
+the site. No original SANY photograph is shipped. Its generation prompt and
+provenance are documented in `public/images/projects/asset-notes.md`.
+
 ## Prerequisites
 
 - Node.js `>=22.13.0`
@@ -64,8 +74,9 @@ Custom domains can be added later from Cloudflare once DNS is ready.
 ## Project Shape
 
 The SANY technical essay at `/projects/sany-welding-robotics/technical` uses one
-shared grid: an 800px reading column and a 1160px figure column with the same left
-edge. Its two source-article Mermaid graphs live in `public/diagrams/sany/`.
+shared grid: an 800px reading column, 900px interactive figures and 860px source
+images with the same left edge inside a 1160px container. Its two source-article
+Mermaid graphs live in `public/diagrams/sany/`.
 `npm run diagrams:sany` renders localized desktop/mobile SVGs and their intrinsic
 dimensions at authoring time, keeping Mermaid out of the page's runtime bundle.
 
@@ -74,6 +85,12 @@ chapters, and figures, checks layout and interactions at five screen sizes, and
 saves its report in `outputs/sany-review/`. These scripts use an installed Chrome
 or Edge on Windows, `BROWSER_EXECUTABLE` when set, or Playwright's installed browser.
 Set `REVIEW_BASE_URL` to audit a preview on another port.
+
+`npm run review:portfolio` checks the homepage at five screen sizes and fifteen
+secondary routes on desktop and mobile, in Chinese and English. It verifies
+layout, images, font loading, language persistence, section navigation, and the
+resume download, then saves screenshots and a report to
+`outputs/portfolio-redesign/`. Start the development server before running it.
 
 - `app/`: Next.js app routes and page content
 - `components/`: shared UI components

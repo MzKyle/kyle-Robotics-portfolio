@@ -97,7 +97,7 @@ function SourceImage({ href, id }: { href: string; id: string }) {
   if (!media) throw new Error(`Original article image has no local asset: ${href}`);
   return <figure className="case-figure essay-source-image" data-source-block={id} data-source-image={href}>
     <a href={media.src} target="_blank" rel="noreferrer" aria-label="打开原文示意图 / Open source illustration">
-      <Image src={media.src} width={media.width} height={media.height} alt={media.caption.zh} unoptimized sizes="(max-width: 1224px) 100vw, 1160px" />
+      <Image src={media.src} width={media.width} height={media.height} alt={media.caption.zh} unoptimized sizes="(max-width: 760px) calc(100vw - 44px), 860px" />
     </a>
     <figcaption><Localized text={media.caption} /><a href={media.src} target="_blank" rel="noreferrer"><T zh="查看原图" en="Open full-size image" /> ↗</a></figcaption>
   </figure>;

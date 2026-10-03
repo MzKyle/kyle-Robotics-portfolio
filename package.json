@@ -9,6 +9,7 @@
     "dev": "vite",
     "diagrams:sany": "node scripts/render-sany-diagrams.mjs",
     "review:sany": "node scripts/review-sany-layout.mjs",
+    "review:portfolio": "node scripts/review-portfolio.mjs",
     "build": "vinext build && node scripts/validate-artifact.mjs",
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs tests/sany-source-article.test.mjs",

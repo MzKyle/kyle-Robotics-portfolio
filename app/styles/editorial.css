@@ -1,4 +1,5 @@
 /* Shared editorial rhythm. Detail-page structures and content remain intact. */
+html[data-language="zh"] body h1, html[data-language="zh"] body h2, html[data-language="zh"] body h3 { letter-spacing: 0; }
 .section-shell, .case-shell { max-width: var(--max); padding: var(--section-space) var(--gutter); }
 .case-shell { padding-block: 72px var(--section-space); }
 .case-architecture { padding-block: 88px 96px; }
@@ -14,8 +15,8 @@
 .page-intro-copy p { max-width: 720px; color: var(--text-secondary); }
 .hero-grid { display: none; }
 .button { min-height: 48px; border-radius: var(--radius-button); }
-.button-primary, .contact-band a:first-child { background: var(--dark); border-color: var(--dark); color: var(--surface); }
-.button-primary:hover, .contact-band a:first-child:hover { background: var(--text-secondary); border-color: var(--text-secondary); }
+.button-primary, .contact-band a:first-child { background: transparent; border-color: var(--accent); color: var(--accent); }
+.button-primary:hover, .contact-band a:first-child:hover { background: rgba(94, 234, 212, .1); border-color: var(--accent); }
 .button-secondary:hover { background: var(--surface-subtle); }
 .contact-band, .site-footer { max-width: var(--max); padding-inline: var(--gutter); background: transparent; }
 .contact-band { padding-block: var(--section-space-compact); text-align: left; }

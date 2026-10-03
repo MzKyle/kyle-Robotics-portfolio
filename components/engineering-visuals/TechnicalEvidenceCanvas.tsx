@@ -17,6 +17,6 @@ export function TechnicalEvidenceCanvas({ className = "" }: { className?: string
     <ol className={styles.canvasPipeline} aria-label="工程数据链路 / Engineering data path">
       {["Acquisition", "Match", "Vision", "Robot"].map((step) => <li key={step}>{step}</li>)}
     </ol>
-    <figcaption><T zh="概念示意 · 200 Hz 为 RAW 设计目标，非实测曲线或现场素材。" en="Conceptual diagram · 200 Hz is a RAW design target; no measured curves or on-site media." /></figcaption>
+    <figcaption><T zh="原理示意 · 200 Hz 为 RAW 采样能力；图中曲线非实测轨迹。" en="Conceptual diagram · 200 Hz RAW sampling capability; curves are not measured trajectories." /></figcaption>
   </figure>;
 }

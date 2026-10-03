@@ -29,7 +29,7 @@ try {
     await page.goto(url, { waitUntil: "networkidle" });
     await page.evaluate(() => document.fonts.ready);
     const fonts = await page.evaluate(() => Array.from(document.fonts, (face) => ({ family: face.family, status: face.status })));
-    for (const family of ["Geist", "Geist Mono"]) assert.ok(fonts.some((face) => face.family === family && face.status === "loaded"), `${family}: self-hosted font failed to load`);
+    for (const family of ["Geist", "Geist Mono", "Portfolio Sans SC"]) assert.ok(fonts.some((face) => face.family === family && face.status === "loaded"), `${family}: self-hosted font failed to load`);
     console.log(`${viewport.name}: page loaded`);
     await page.evaluate(() => { for (const img of document.images) img.loading = "eager"; });
     await page.locator(".essay-sampling button").first().click();
@@ -46,7 +46,7 @@ try {
     const geometry = await page.evaluate(() => {
       const measure = (selector) => Array.from(document.querySelectorAll(selector), (element) => {
         const rect = element.getBoundingClientRect();
-        return { x: rect.x, width: rect.width };
+        return { x: rect.x, width: rect.width, sourceImage: element.classList.contains("essay-source-image") };
       });
       return {
         viewport: innerWidth, pageWidth: document.documentElement.scrollWidth,
@@ -60,12 +60,12 @@ try {
     assert.equal(geometry.chapters, 8);
     assert.equal(geometry.placeholders, false);
     assert.equal(geometry.figures.length, 13);
-    assert.equal(geometry.headerBackground, "rgb(247, 247, 245)");
+    assert.equal(geometry.headerBackground, "rgb(15, 23, 42)");
     const axis = geometry.readings[0].x;
     for (const rect of [...geometry.readings, ...geometry.figures]) assert.ok(Math.abs(rect.x - axis) < 1, `${viewport.name}: left axis drift`);
     const readingWidth = viewport.width > 1100 ? 800 : viewport.width - (viewport.width <= 760 ? 44 : 64);
     for (const rect of geometry.readings) assert.ok(Math.abs(rect.width - readingWidth) < 1, `${viewport.name}: reading width ${rect.width}`);
-    for (const rect of geometry.figures) assert.ok(Math.abs(rect.width - Math.min(1160, viewport.width - (viewport.width <= 760 ? 44 : 64))) < 1, `${viewport.name}: figure width`);
+    for (const rect of geometry.figures) assert.ok(Math.abs(rect.width - Math.min(rect.sourceImage ? 860 : 900, viewport.width - (viewport.width <= 760 ? 44 : 64))) < 1, `${viewport.name}: figure width`);
     await page.screenshot({ path: path.join(output, `${viewport.name}-hero.png`) });
     await page.screenshot({ path: path.join(output, `${viewport.name}-full.png`), fullPage: true });
     if (["desktop", "mobile"].includes(viewport.name)) {
