@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { projectNames } from "../../../lib/project-presentation";
 import { ProjectCase } from "../../../components/project-case";
 import { getProjectWithNeighbors } from "../../../lib/portfolio";
 
-export const metadata: Metadata = { title: "RoboMaster 视觉闭环自瞄系统 | 王凯豪项目案例" };
+export const metadata: Metadata = { title: projectNames["auto-aim"].zh + " | 王凯豪工程案例" };
 
 export default function Page() {
   return <ProjectCase {...getProjectWithNeighbors("auto-aim")!} />;

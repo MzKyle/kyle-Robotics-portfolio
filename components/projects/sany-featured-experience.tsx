@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { projectNames } from "../../lib/project-presentation";
 import { T } from "../localized";
 import { SectionLabel, TechList } from "./project-elements";
 import styles from "./projects.module.css";
@@ -13,10 +14,10 @@ export function SanyFeaturedExperience() {
   return <section className={styles.featuredExperience} id="sany" aria-labelledby="sany-title">
     <SectionLabel number="01">SANY / INDUSTRIAL ROBOTICS</SectionLabel>
     <div className={styles.featuredCard}>
-      <figure className={styles.featuredVisual}><Image src="/images/projects/welding-vision-concept-v3.webp" alt="AI 生成的通用焊接机器人视觉场景，非项目实拍" width={900} height={600} unoptimized priority /><figcaption><T zh="AI 场景示意 · 非项目实拍" en="AI illustration · not project photography" /></figcaption></figure>
+      <figure className={styles.featuredVisual}><Image src="/images/projects/welding-vision-concept-v3.webp" alt="AI 生成的通用焊接机器人视觉场景，非项目实拍" width={900} height={600} unoptimized priority /></figure>
       <div className={styles.featuredInformation}>
         <span className={styles.eyebrow}>2026.03 — 2026.08 / ALGORITHM ENGINEER</span>
-        <h2 id="sany-title"><T zh="工业焊接机器人视觉" en="Industrial welding vision" /></h2>
+        <h2 id="sany-title"><T {...projectNames["sany-welding-robotics"]} /></h2>
         <p className={styles.featuredSummary}><T zh="把设备时间轴、RAW 采集与机器人运动关联起来，让摆动中的熔池成为稳定的观测。" en="Connecting device timelines, RAW acquisition and robot motion to observe the weld pool consistently through weaving." /></p>
         <p className={styles.featuredResult}><T zh="120 → 200 Hz RAW · ±0.5 mm 摆弧焊纠偏" en="120 → 200 Hz RAW · ±0.5 mm weave correction" /></p>
         <div className={styles.featuredCases}>{cases.map(item => <Link href={item.href} className={styles.featuredCase} key={item.number}><span>{item.number}</span><span><strong><T zh={item.zh} en={item.en} /></strong></span><span aria-hidden="true">↗</span></Link>)}</div>

@@ -12,6 +12,7 @@
     "review:portfolio": "node scripts/review-portfolio.mjs",
     "review:polish": "node scripts/review-portfolio-polish.mjs",
     "review:iteration": "node scripts/review-portfolio-iteration.mjs",
+    "review:refinement": "node scripts/review-portfolio-refinement.mjs",
     "build": "vinext build && node scripts/validate-artifact.mjs",
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs tests/sany-source-article.test.mjs",

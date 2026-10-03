@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { experiences, flagshipProjects, honors } from "../../lib/portfolio";
+import { projectName } from "../../lib/project-presentation";
+import { ResumePdfPreview } from "../../components/resume-pdf-preview";
 import { Localized, T } from "../../components/localized";
 import { SiteFooter, SiteHeader } from "../../components/site-shell";
 export const metadata: Metadata = { title: "简历 | 王凯豪", description: "王凯豪的机器人软件开发工程师在线简历。" };
@@ -13,7 +15,8 @@ export default function ResumePage() {
         <div>
           <p className="section-kicker"><T zh="在线简历" en="RESUME" /></p>
           <h1><T zh="王凯豪" en="Kyle Wang" /></h1>
-          <p><T zh="机器人软件开发工程师" en="Robotics Software Engineer" /></p>
+          <p className="resume-role"><T zh="机器人软件开发工程师" en="Robotics Software Engineer" /></p>
+          <p className="resume-education"><T zh="青岛大学 · 电子信息工程" en="Qingdao University · Electronic Information Engineering" /><span>2023.09 — 2027.06</span></p>
         </div>
         <div>
           <a className="button button-primary" href="/resume.pdf" download="王凯豪简历.pdf"><T zh="下载 PDF" en="Download PDF" /> <span>↓</span></a>
@@ -68,7 +71,7 @@ export default function ResumePage() {
             <h2><T zh="代表项目" en="SELECTED PROJECTS" /></h2>
             {flagshipProjects.map((project) => (
               <article key={project.slug}>
-                <div><span>{project.year}</span><h3>{project.title}</h3><strong><Localized text={project.subtitle} /></strong></div>
+                <div><span>{project.year}</span><h3><Localized text={projectName(project)} /></h3><strong><Localized text={project.subtitle} /></strong></div>
                 <p><Localized text={project.summary} /></p>
                 <Link className="text-link" href={`/projects/${project.slug}`}><T zh="查看项目案例" en="View case study" /> →</Link>
               </article>
@@ -82,10 +85,7 @@ export default function ResumePage() {
         </div>
       </section>
 
-      <section className="pdf-preview section-shell">
-        <div><p className="section-kicker"><T zh="PDF 简历" en="RESUME PDF" /></p><h2><T zh="完整简历" en="Full resume" /></h2><a href="/resume.pdf" target="_blank" rel="noreferrer"><T zh="在新窗口打开" en="Open in a new window" /> ↗</a></div>
-        <iframe src="/resume.pdf" title="王凯豪简历 PDF / Kyle Wang resume PDF" />
-      </section>
+      <ResumePdfPreview />
       <SiteFooter />
     </main>
   );

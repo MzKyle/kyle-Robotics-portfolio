@@ -1,6 +1,7 @@
 import { PortfolioImage as Image } from "./portfolio-image";
 import Link from "next/link";
 import { personalProjects } from "../lib/portfolio";
+import { projectNames } from "../lib/project-presentation";
 import { projectMedia } from "../lib/project-media";
 import { Localized, T } from "./localized";
 import { PreferenceControl } from "./preferences";
@@ -21,28 +22,24 @@ function SocialIcon({ kind }: { kind: "github" | "email" | "writing" }) {
 const selectedWork = [
   {
     slug: "sany-welding-robotics", category: "SANY · 2026", image: "/images/projects/welding-vision-concept-v3.webp",
-    title: { zh: "焊接机器人系统化的设计开发", en: "Systematic design and development of welding robotics" },
     description: { zh: "在约 60 Hz 机器人状态的约束下，用相位选帧、RAW 环形历史与后置 ISP 重构焊接视觉链路。", en: "Rebuilt welding vision around phase-aware frame selection, RAW history and deferred ISP under a 60 Hz robot-state constraint." },
     result: { zh: "RAW 120 → 200 Hz · 摆弧焊纠偏 ±0.5 mm", en: "RAW 120 → 200 Hz · weave correction ±0.5 mm" },
     tech: ["C++", "ROS 2", "Shared Memory", "Robot Vision"], alt: "AI 生成的通用焊接机器人与视觉传感器示意，非三一项目实拍",
   },
   {
     slug: "waterbag-inspection", category: "INDUSTRIAL VISION · 2025", image: "/images/projects/缺陷检测装置1.png",
-    title: { zh: "从微小缺陷，到有序分拣", en: "From subtle defects to ordered sorting" },
     description: { zh: "将双面三光源成像、级联检测和 Bag ID 重排接入 C++ 主控，打通检测、分拣与生产追溯。", en: "A C++ controller connects six-frame imaging, cascaded inspection and Bag-ID reordering with sorting and traceability." },
     result: { zh: "Recall ≈97% · 六帧 / 袋 ≈200 ms", en: "Recall ≈97% · six frames / bag ≈200 ms" },
     tech: ["C++17", "ONNX / CUDA", "Modbus", "SQLite"], alt: "工业水样袋视觉缺陷检测工位",
   },
   {
     slug: "auto-aim", category: "ROBOMASTER · 2024–2025", image: "/images/projects/Robomaster封面.png",
-    title: { zh: "让视觉与控制形成闭环", en: "Closing the loop between vision and control" },
     description: { zh: "主导自瞄系统架构迭代，将采集、检测、跟踪、串口和可视化组件化，推进 EKF 预测与标定工具。", en: "Led auto-aim architecture, componentizing capture, detection, tracking, serial I/O and visualization, with EKF prediction and calibration tools." },
     result: { zh: "5 个核心模块 · 通信开销下降约 30%", en: "5 core modules · communication overhead down ≈30%" },
     tech: ["ROS 2", "Component", "OpenCV", "EKF"], alt: "RoboMaster 机器人与视觉开发场景",
   },
   {
     slug: "3d-volume-measurement", category: "3D PERCEPTION · 2025", image: "/images/projects/point-cloud-index.svg",
-    title: { zh: "深度相机视觉测算物体体积", en: "Measuring object volume with depth-camera vision" },
     description: { zh: "从深度滤波、RANSAC 基准拟合到几何补偿，处理物流体积测量中的噪声与姿态偏差。", en: "Depth filtering, RANSAC references and geometric compensation address noise and pose bias in logistics volume measurement." },
     result: { zh: "倾斜物体相对误差 ≤3% · 后处理耗时 −40%", en: "Tilted-object relative error ≤3% · post-processing time −40%" },
     tech: ["Orbbec", "Point Cloud", "RANSAC", "OpenCV"], alt: "深度相机点云与体积测量的几何示意",
@@ -69,7 +66,7 @@ export function PortfolioHome() {
         <section className="home-work home-section" id="selected-work" aria-labelledby="home-work-title">
           <h2 className="home-section-label" id="home-work-title"><span>01</span><T zh="精选项目" en="Selected work" /></h2>
           <div className="home-project-list">{selectedWork.map((project, index) => <Link className="home-project" href={`/projects/${project.slug}`} key={project.slug}>
-            <div className="home-project-heading"><span className="home-project-category">{project.category}</span><h3><T {...project.title} /><Arrow /></h3></div>
+            <div className="home-project-heading"><span className="home-project-category">{project.category}</span><h3><Localized text={projectNames[project.slug]} /><Arrow /></h3></div>
             <figure className="home-project-visual"><Image src={project.image} alt={project.alt} width={360} height={240} unoptimized priority={index === 0} sizes="(max-width: 600px) calc(100vw - 40px), 190px" style={{ objectPosition: projectMedia[project.slug]?.coverPosition }} /></figure>
             <p className="home-project-description"><T {...project.description} /></p>
             <p className="home-project-result"><T {...project.result} /></p>

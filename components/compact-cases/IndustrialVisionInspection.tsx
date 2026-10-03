@@ -1,5 +1,7 @@
+import { CaseNavigation } from "../case-navigation";
 import { PortfolioImage as Image } from "../portfolio-image";
 import Link from "next/link";
+import { projectNames } from "../../lib/project-presentation";
 import { T } from "../localized";
 import { SiteFooter, SiteHeader } from "../site-shell";
 import { ReorderBufferDemo } from "./ReorderBufferDemo";
@@ -26,20 +28,58 @@ function TraceRecord() {
   return <><TraceRecordFigure /><WaterbagCodeLinks kind="trace" /></>;
 }
 
+const sections = [
+  {
+    "id": "imaging",
+    "label": {
+      "zh": "成像",
+      "en": "Imaging"
+    }
+  },
+  {
+    "id": "system-path",
+    "label": {
+      "zh": "架构",
+      "en": "Architecture"
+    }
+  },
+  {
+    "id": "concurrency",
+    "label": {
+      "zh": "并发",
+      "en": "Concurrency"
+    }
+  },
+  {
+    "id": "traceability",
+    "label": {
+      "zh": "追溯",
+      "en": "Traceability"
+    }
+  },
+  {
+    "id": "validation",
+    "label": {
+      "zh": "验证",
+      "en": "Validation"
+    }
+  }
+];
+
 export function IndustrialVisionInspection() {
   return <main className="compact-case compact-vision"><SiteHeader active="projects" /><article>
-    <header className="compact-hero compact-hero-vision"><div><Link className="compact-back" href="/projects">← <T zh="项目案例" en="Projects" /></Link><p className="compact-kicker">INDUSTRIAL VISION / 2025</p><h1><T zh="工业水样袋视觉检测" en="Industrial Vision Inspection" /></h1><p className="compact-lead"><T zh="面对半透明、低对比度材料，将多光源采图、两阶段缺陷检测、Bag ID 有序分拣与生产追溯做成一条可运行的工业视觉链路。" en="For translucent, low-contrast bags, an industrial vision path connects multi-light capture, two-stage defect detection, Bag-ID ordered sorting, and production traceability." /></p><div className="compact-hero-meta"><span>C++17</span><span>Industrial Camera</span><span>ONNX / CUDA</span><span>Modbus TCP</span></div></div><figure className="vision-hero-photo"><Image src="/images/projects/缺陷检测装置1.png" alt="工业水样袋缺陷检测装置实拍" width={1122} height={1402} unoptimized priority sizes="(max-width: 900px) 350px, 32vw" /><figcaption><T zh="工业水样袋检测装置实拍" en="Industrial waterbag inspection station" /></figcaption></figure></header>
+    <header className="compact-hero compact-hero-vision"><div><Link className="compact-back" href="/projects">← <T zh="项目案例" en="Projects" /></Link><p className="compact-kicker">INDUSTRIAL VISION / 2025</p><h1><T {...projectNames["waterbag-inspection"]} /></h1><p className="compact-lead"><T zh="面对半透明、低对比度材料，将多光源采图、两阶段缺陷检测、Bag ID 有序分拣与生产追溯做成一条可运行的工业视觉链路。" en="For translucent, low-contrast bags, an industrial vision path connects multi-light capture, two-stage defect detection, Bag-ID ordered sorting, and production traceability." /></p><div className="compact-hero-meta"><span>C++17</span><span>Industrial Camera</span><span>ONNX / CUDA</span><span>Modbus TCP</span></div></div>    <dl className="compact-metrics"><div><dt><T zh="整体缺陷 Recall" en="Overall defect recall" /></dt><dd>≈97%</dd></div><div><dt><T zh="相较单级检测" en="Above single-stage inspection" /></dt><dd>+6 pp</dd></div><div><dt><T zh="六帧 / 袋端到端时延" en="Six-frame per-bag latency" /></dt><dd>≈200 ms</dd></div></dl><figure className="vision-hero-photo"><Image src="/images/projects/缺陷检测装置1.png" alt="工业水样袋缺陷检测装置实拍" width={1122} height={1402} unoptimized priority sizes="(max-width: 900px) 350px, 32vw" /><figcaption><T zh="工业水样袋检测装置实拍" en="Industrial waterbag inspection station" /></figcaption></figure></header><CaseNavigation sections={sections} />
 
-    <dl className="compact-metrics"><div><dt><T zh="整体缺陷 Recall" en="Overall defect recall" /></dt><dd>≈97%</dd></div><div><dt><T zh="相较单级检测" en="Above single-stage inspection" /></dt><dd>+6 pp</dd></div><div><dt><T zh="六帧 / 袋端到端时延" en="Six-frame per-bag latency" /></dt><dd>≈200 ms</dd></div></dl>
-    <section className="compact-section compact-section-first compact-section-split"><div className="compact-section-heading"><span>01 / IMAGING</span><h2><T zh="让微弱缺陷先变得可见" en="Make subtle defects visible first" /></h2><p><T zh="单张正面光图像容易把折痕、反光与真实缺陷混在一起。" en="A single front-lit image can confuse folds, glare, and real defects." /></p></div><div className="compact-prose"><p><T zh="人工检测会改变观察角度；平放的设备无法直接复制这一动作。方案以背光、双侧暗场与交叉偏振的时序 Burst 获得互补视图，并按 Bag ID 把 A/B 两面共六帧组合成一个完整样本。" en="Human inspectors change viewing angle, but a flat inspection station cannot directly copy that motion. Timed backlight, side dark field, and cross-polarized bursts provide complementary views, assembled as six frames across both sides under one Bag ID." /></p></div><div className="compact-split-figure"><MultiLightFigure /></div></section>
 
-    <section className="compact-section"><div className="compact-section-heading"><span>02 / SYSTEM PATH</span><h2><T zh="模型只是产线决策的一环" en="The model is one part of the line decision" /></h2><p><T zh="采图完整性、动作确认、物理顺序与异常记录同样影响交付。" en="Capture completeness, action acknowledgements, physical order, and exception records also determine delivery." /></p></div><BagPipeline /><WaterbagCodeLinks kind="capture" /></section>
+    <section className="compact-section compact-section-first compact-section-split" id="imaging"><div className="compact-section-heading"><span>01 / IMAGING</span><h2><T zh="让微弱缺陷先变得可见" en="Make subtle defects visible first" /></h2><p><T zh="单张正面光图像容易把折痕、反光与真实缺陷混在一起。" en="A single front-lit image can confuse folds, glare, and real defects." /></p></div><div className="compact-prose"><p><T zh="人工检测会改变观察角度；平放的设备无法直接复制这一动作。方案以背光、双侧暗场与交叉偏振的时序 Burst 获得互补视图，并按 Bag ID 把 A/B 两面共六帧组合成一个完整样本。" en="Human inspectors change viewing angle, but a flat inspection station cannot directly copy that motion. Timed backlight, side dark field, and cross-polarized bursts provide complementary views, assembled as six frames across both sides under one Bag ID." /></p></div><div className="compact-split-figure"><MultiLightFigure /></div></section>
 
-    <section className="compact-section"><div className="compact-section-heading"><span>03 / CONCURRENCY</span><h2><T zh="把并发完成顺序与物理袋序分开" en="Separate completion order from physical bag order" /></h2></div><ReorderBufferDemo /><WaterbagCodeLinks kind="order" /></section>
+    <section className="compact-section" id="system-path"><div className="compact-section-heading"><span>02 / SYSTEM PATH</span><h2><T zh="模型只是产线决策的一环" en="The model is one part of the line decision" /></h2><p><T zh="采图完整性、动作确认、物理顺序与异常记录同样影响交付。" en="Capture completeness, action acknowledgements, physical order, and exception records also determine delivery." /></p></div><BagPipeline /><WaterbagCodeLinks kind="capture" /></section>
 
-    <section className="compact-section compact-section-split"><div className="compact-section-heading"><span>04 / TRACEABILITY</span><h2><T zh="从误检回查到动作追溯" en="Trace a decision back to its evidence" /></h2><p><T zh="每个 Bag ID 要能回到原图、推理结果与设备动作。" en="Every Bag ID should lead back to images, inference, and device actions." /></p></div><div className="compact-prose"><p><T zh="系统以 JSONL 保留袋级审计记录，再同步至 SQLite 与 Flask 看板。帧、相机、检测框、缺陷原因、阶段耗时、PLC ACK 与状态轨迹共同解释一次 OK / NG 决策。" en="The system keeps bag-level audit records in JSONL and synchronizes them to SQLite and a Flask dashboard. Frames, cameras, boxes, defect reasons, stage timings, PLC ACKs, and state traces explain each OK / NG decision." /></p></div><div className="compact-split-figure"><TraceRecord /></div></section>
+    <section className="compact-section" id="concurrency"><div className="compact-section-heading"><span>03 / CONCURRENCY</span><h2><T zh="把并发完成顺序与物理袋序分开" en="Separate completion order from physical bag order" /></h2></div><ReorderBufferDemo /><WaterbagCodeLinks kind="order" /></section>
 
-    <section className="compact-section compact-section-split"><div className="compact-section-heading"><span>05 / OWNERSHIP & VALIDATION</span><h2><T zh="我完成的主控与验证边界" en="My controller and validation boundary" /></h2></div><div className="compact-prose"><p><T zh="我独立开发 C++ 视觉后端主控，接入工业相机、Modbus TCP、推理调度与末端分拣；参与多光源成像与粗检—微缺陷精检链路，并完成 YOLO 训练、ONNX 导出和 CUDA 部署。" en="I independently developed the C++ vision backend controller across camera, Modbus TCP, inference scheduling, and end sorting. I contributed to multi-light imaging and coarse-to-fine inspection, and handled YOLO training, ONNX export, and CUDA deployment." /></p><p><T zh="公开仓库定位为可复现的工程评审 Demo：Mock Camera / PLC 用于 CI 与无硬件回归，真实设备主路径可用 mock detector 验证采图、触发、ACK、分拣与留痕。此页不把概念图或示例 Bag ID 当作现场测量结果。" en="The public repository is a reproducible engineering review demo. Mock camera and PLC support CI and hardware-free regression; the real-device path can use a mock detector to verify capture, triggers, ACKs, sorting, and traceability. Concept diagrams and the sample Bag ID are not field measurements." /></p><a className="compact-source-link" href="https://github.com/MzKyle/Defect-detection-of-water-sampling-bags" target="_blank" rel="noreferrer"><T zh="查看公开仓库" en="View public repository" /> ↗</a></div></section>
+    <section className="compact-section compact-section-split" id="traceability"><div className="compact-section-heading"><span>04 / TRACEABILITY</span><h2><T zh="从误检回查到动作追溯" en="Trace a decision back to its evidence" /></h2><p><T zh="每个 Bag ID 要能回到原图、推理结果与设备动作。" en="Every Bag ID should lead back to images, inference, and device actions." /></p></div><div className="compact-prose"><p><T zh="系统以 JSONL 保留袋级审计记录，再同步至 SQLite 与 Flask 看板。帧、相机、检测框、缺陷原因、阶段耗时、PLC ACK 与状态轨迹共同解释一次 OK / NG 决策。" en="The system keeps bag-level audit records in JSONL and synchronizes them to SQLite and a Flask dashboard. Frames, cameras, boxes, defect reasons, stage timings, PLC ACKs, and state traces explain each OK / NG decision." /></p></div><div className="compact-split-figure"><TraceRecord /></div></section>
+
+    <section className="compact-section compact-section-split" id="validation"><div className="compact-section-heading"><span>05 / OWNERSHIP & VALIDATION</span><h2><T zh="我完成的主控与验证边界" en="My controller and validation boundary" /></h2></div><div className="compact-prose"><p><T zh="我独立开发 C++ 视觉后端主控，接入工业相机、Modbus TCP、推理调度与末端分拣；参与多光源成像与粗检—微缺陷精检链路，并完成 YOLO 训练、ONNX 导出和 CUDA 部署。" en="I independently developed the C++ vision backend controller across camera, Modbus TCP, inference scheduling, and end sorting. I contributed to multi-light imaging and coarse-to-fine inspection, and handled YOLO training, ONNX export, and CUDA deployment." /></p><p><T zh="公开仓库定位为可复现的工程评审 Demo：Mock Camera / PLC 用于 CI 与无硬件回归，真实设备主路径可用 mock detector 验证采图、触发、ACK、分拣与留痕。此页不把概念图或示例 Bag ID 当作现场测量结果。" en="The public repository is a reproducible engineering review demo. Mock camera and PLC support CI and hardware-free regression; the real-device path can use a mock detector to verify capture, triggers, ACKs, sorting, and traceability. Concept diagrams and the sample Bag ID are not field measurements." /></p><a className="compact-source-link" href="https://github.com/MzKyle/Defect-detection-of-water-sampling-bags" target="_blank" rel="noreferrer"><T zh="查看公开仓库" en="View public repository" /> ↗</a></div></section>
     <div className="compact-endlinks"><Link href="/projects/sany-welding-robotics"><T zh="SANY 工业机器人案例" en="SANY industrial robotics" /> →</Link><Link href="/projects"><T zh="返回项目列表" en="All projects" /> →</Link></div>
   </article><SiteFooter /></main>;
 }
