@@ -131,6 +131,9 @@ export function WritingTopicBrowser({
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      requestAnimationFrame(() => {
+        if (openerRef.current?.isConnected) openerRef.current.focus({ preventScroll: true });
+      });
     };
   }, [active]);
 
@@ -144,7 +147,6 @@ export function WritingTopicBrowser({
 
   const closeTopic = () => {
     setActive(null);
-    requestAnimationFrame(() => openerRef.current?.focus());
   };
 
   const copyLink = async (url: string) => {
@@ -172,6 +174,7 @@ export function WritingTopicBrowser({
               <button ref={closeRef} type="button" onClick={closeTopic} aria-label="关闭专题文章 / Close topic articles">×</button>
             </header>
 
+            <div className="writing-modal-body">
             <div className="writing-modal-columns">
               <span><T zh="相关专栏" en="RELATED COLUMNS" /></span>
               <div>{active.columns.map((column) => <a href={column.url} target="_blank" rel="noreferrer" key={column.url}><Localized text={column.title} /> <i aria-hidden="true">↗</i></a>)}</div>
@@ -195,6 +198,7 @@ export function WritingTopicBrowser({
             </div>
 
             <footer className="writing-modal-footer"><span><T zh="这些文章记录了王凯豪在机器人软件、工业视觉与系统工程中的技术研究和实践复盘。" en="These articles document Kyle Wang's research and engineering reviews across robotics software, industrial vision, and systems." /></span><a href="https://mzkyle.blog.csdn.net" target="_blank" rel="noreferrer"><T zh="查看 CSDN 主页" en="View CSDN profile" /> ↗</a></footer>
+            </div>
           </section>
         </div>,
         document.body,

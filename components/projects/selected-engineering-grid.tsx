@@ -1,6 +1,7 @@
-import Image from "next/image";
+import { PortfolioImage as Image } from "../portfolio-image";
 import Link from "next/link";
 import type { ProjectDetail } from "../../lib/portfolio";
+import { projectMedia } from "../../lib/project-media";
 import { T } from "../localized";
 import { SectionLabel, TechList } from "./project-elements";
 import styles from "./projects.module.css";
@@ -49,20 +50,20 @@ export function SelectedEngineeringGrid({ projects }: { projects: ProjectDetail[
           const copy = cardCopy[project.slug];
           if (!copy) return null;
           return (
-            <article className={styles.selectedCard} key={project.slug}>
+            <Link className={styles.selectedCard} href={`/projects/${project.slug}`} aria-label={`${copy.title.zh} · ${copy.title.en}`} key={project.slug}>
               <div className={styles.cardMeta}><span>{String(index + 1).padStart(2, "0")}</span><span>{copy.category}</span></div>
-              <Link className={styles.cardImageLink} href={`/projects/${project.slug}`} aria-label={`${copy.title.zh} · ${copy.title.en}`}>
+              <div className={styles.cardImageLink}>
                 <div className={styles.cardImage}>
-                  <Image src={copy.image ?? project.image!} alt={copy.alt} fill unoptimized sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw" style={{ objectFit: project.imageMode ?? "cover" }} />
+                  <Image src={copy.image ?? project.image!} alt={copy.alt} fill unoptimized sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw" style={{ objectFit: "cover", objectPosition: projectMedia[project.slug]?.coverPosition ?? "center" }} />
                 </div>
-              </Link>
-              {copy.imageNote && <span className={styles.cardImageNote}><T {...copy.imageNote} /></span>}
-              <h3><Link href={`/projects/${project.slug}`}><T {...copy.title} /></Link></h3>
+              </div>
+              <span className={styles.cardImageNote} aria-hidden={!copy.imageNote}>{copy.imageNote ? <T {...copy.imageNote} /> : "\u00a0"}</span>
+              <h3><T {...copy.title} /></h3>
               <p className={styles.cardDescription}><T {...copy.description} /></p>
               <p className={styles.cardResult}>{project.homeEvidence?.map((evidence, evidenceIndex) => <span key={evidence.value}>{evidenceIndex > 0 && " · "}{evidence.value} <T {...evidence.label} /></span>)}</p>
               <TechList items={copy.tech} />
-              <Link className={styles.cardExplore} href={`/projects/${project.slug}`}><T zh="查看项目" en="Explore" /><span aria-hidden="true">→</span></Link>
-            </article>
+              <span className={styles.cardExplore}><T zh="查看项目" en="Explore" /><span aria-hidden="true">→</span></span>
+            </Link>
           );
         })}
       </div>

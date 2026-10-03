@@ -1,12 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { InterviewTrackKey, LocalizedText, ProjectDetail } from "../lib/portfolio";
 import { Localized, T } from "./localized";
 
+function scrollToCase(slug: string) {
+  document.getElementById(`interview-${slug}`)?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
+}
+
 export function InterviewPresentation({ trackKey, track, projects }: { trackKey: InterviewTrackKey; track: { title: LocalizedText; subtitle: LocalizedText }; projects: ProjectDetail[] }) {
   const [current, setCurrent] = useState(0);
+  const navigation = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const nav = navigation.current;
+    const button = nav?.querySelector<HTMLButtonElement>('button[aria-current="step"]');
+    if (!nav || !button || nav.scrollWidth <= nav.clientWidth) return;
+    const bounds = nav.getBoundingClientRect();
+    const item = button.getBoundingClientRect();
+    if (item.left < bounds.left + 20 || item.right > bounds.right - 20) {
+      nav.scrollBy({ left: item.left - bounds.left - (nav.clientWidth - item.width) / 2, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+    }
+  }, [current]);
 
   useEffect(() => {
     const sections = projects.map((project) => document.getElementById(`interview-${project.slug}`)).filter(Boolean) as HTMLElement[];
@@ -23,12 +39,13 @@ export function InterviewPresentation({ trackKey, track, projects }: { trackKey:
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      if (event.altKey || event.ctrlKey || event.metaKey || (event.target as HTMLElement).closest('input, textarea, select, [contenteditable="true"]')) return;
       if (!["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft"].includes(event.key)) return;
       const forward = event.key === "ArrowDown" || event.key === "ArrowRight";
       const target = Math.min(projects.length - 1, Math.max(0, current + (forward ? 1 : -1)));
       if (target === current) return;
       event.preventDefault();
-      document.getElementById(`interview-${projects[target].slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToCase(projects[target].slug);
       setCurrent(target);
     };
     window.addEventListener("keydown", onKeyDown);
@@ -36,7 +53,7 @@ export function InterviewPresentation({ trackKey, track, projects }: { trackKey:
   }, [current, projects]);
 
   const goTo = (index: number) => {
-    document.getElementById(`interview-${projects[index].slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollToCase(projects[index].slug);
     setCurrent(index);
   };
 
@@ -51,7 +68,7 @@ export function InterviewPresentation({ trackKey, track, projects }: { trackKey:
       </header>
 
       <div className="interview-layout">
-        <aside className="interview-side-nav">
+        <aside className="interview-side-nav" ref={navigation}>
           <span><T zh="案例顺序" en="CASE ORDER" /></span>
           <ol>{projects.map((project, index) => <li key={project.slug}><button className={current === index ? "active" : ""} type="button" onClick={() => goTo(index)} aria-current={current === index ? "step" : undefined}><b>{String(index + 1).padStart(2, "0")}</b><span>{project.title}<small><Localized text={project.category} /></small></span></button></li>)}</ol>
           <p><T zh="键盘：↑ ↓ 或 ← → 切换案例" en="Keyboard: ↑ ↓ or ← → to change case" /></p>

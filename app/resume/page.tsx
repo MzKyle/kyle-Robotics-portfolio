@@ -16,7 +16,7 @@ export default function ResumePage() {
           <p><T zh="机器人软件开发工程师" en="Robotics Software Engineer" /></p>
         </div>
         <div>
-          <a className="button button-primary" href="/resume.pdf" target="_blank" rel="noreferrer"><T zh="下载 PDF" en="Download PDF" /> <span>↓</span></a>
+          <a className="button button-primary" href="/resume.pdf" download="王凯豪简历.pdf"><T zh="下载 PDF" en="Download PDF" /> <span>↓</span></a>
           <a className="button button-secondary" href="mailto:2972689924@qq.com"><T zh="联系我" en="Contact me" /> <span>↗</span></a>
         </div>
       </section>

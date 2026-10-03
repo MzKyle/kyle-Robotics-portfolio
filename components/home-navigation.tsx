@@ -4,14 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import { T } from "./localized";
 
 const sections = [
-  { id: "about", zh: "关于", en: "About" },
   { id: "selected-work", zh: "项目", en: "Projects" },
+  { id: "about", zh: "关于", en: "About" },
   { id: "experience", zh: "经历", en: "Experience" },
   { id: "writing", zh: "手记", en: "Writing" },
 ];
 
 export function HomeNavigation() {
-  const [active, setActive] = useState("about");
+  const [active, setActive] = useState("selected-work");
   useEffect(() => {
     let frame = 0;
     const update = () => {
@@ -43,7 +43,8 @@ export function HomeNavigation() {
 export function AmbientLight() {
   const light = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !window.matchMedia("(pointer: fine)").matches) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointer = window.matchMedia("(pointer: fine)");
     let frame = 0;
     let x = window.innerWidth * .65;
     let y = 180;
@@ -56,8 +57,20 @@ export function AmbientLight() {
         frame = 0;
       });
     };
-    window.addEventListener("pointermove", move, { passive: true });
-    return () => { window.removeEventListener("pointermove", move); cancelAnimationFrame(frame); };
+    const updatePreference = () => {
+      window.removeEventListener("pointermove", move);
+      if (!reducedMotion.matches && finePointer.matches) window.addEventListener("pointermove", move, { passive: true });
+      else { cancelAnimationFrame(frame); frame = 0; }
+    };
+    updatePreference();
+    reducedMotion.addEventListener("change", updatePreference);
+    finePointer.addEventListener("change", updatePreference);
+    return () => {
+      window.removeEventListener("pointermove", move);
+      reducedMotion.removeEventListener("change", updatePreference);
+      finePointer.removeEventListener("change", updatePreference);
+      cancelAnimationFrame(frame);
+    };
   }, []);
-  return <div className="home-ambient-light" ref={light} aria-hidden="true" />;
+  return <div className="site-ambient-light" ref={light} aria-hidden="true" />;
 }

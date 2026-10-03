@@ -92,6 +92,20 @@ layout, images, font loading, language persistence, section navigation, and the
 resume download, then saves screenshots and a report to
 `outputs/portfolio-redesign/`. Start the development server before running it.
 
+`npm run review:polish` checks all twenty page states at desktop, tablet, and
+mobile widths in both languages (120 layouts). It also verifies media proportions,
+card alignment, pointer lighting, dialogs, mobile navigation, interview tabs, and
+PDF downloads. Screenshots and the report are saved in `outputs/portfolio-polish/`.
+The phase essay is excluded from shared visual changes; local before screenshots,
+when present in that directory, are compared byte for byte.
+
+`npm run review:iteration` extends the full route audit with the work-first home
+layout, responsive WebP assets, disclosure deep links and 404 recovery. It saves
+screenshots and reports in `outputs/portfolio-iteration/`. When authoring-time
+hashes and phase-essay screenshots are available, it also verifies their integrity.
+Raster project covers use local 480/800/1280px WebP variants. Public repository
+documentation images and code links are pinned to commits in `project-evidence.tsx`.
+
 - `app/`: Next.js app routes and page content
 - `components/`: shared UI components
 - `lib/`: portfolio data and CSDN article integration

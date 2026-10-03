@@ -1,9 +1,12 @@
 import type { CSSProperties } from "react";
-import Image from "next/image";
+import { PortfolioImage as Image } from "./portfolio-image";
 import Link from "next/link";
 import type { ProjectDetail } from "../lib/portfolio";
+import { projectMedia } from "../lib/project-media";
 import { Localized, T } from "./localized";
 import { SiteFooter, SiteHeader } from "./site-shell";
+import { HashDisclosures } from "./hash-disclosures";
+import { AutoAimEvidence, VolumeGeometryFigure } from "./project-evidence";
 
 const ownershipLabels = {
   mine: { zh: "我的职责", en: "MY OWNERSHIP" },
@@ -38,9 +41,11 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
     decision: item.text,
   }));
   const deepDive = project.deepDive ?? project.engineering;
+  const media = projectMedia[project.slug] ?? { width: 1600, height: 1000 };
 
   return (
     <main className={`engineering-case engineering-case-${project.accent ?? "tooling"}`}>
+      <HashDisclosures />
       <SiteHeader active="projects" />
       <section className="case-hero">
         <div className="case-hero-copy">
@@ -59,9 +64,12 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
             <div><dt><T zh="核心证据" en="CORE EVIDENCE" /></dt><dd><b>{project.outcomes[0].value}</b><Localized text={project.outcomes[0].note} /></dd></div>
           </dl>
         </div>
-        <div className={`case-hero-media case-hero-media-${project.accent ?? "tooling"}`}>
+        <figure className={`case-hero-media case-hero-media-${project.accent ?? "tooling"}`}>
           {project.image ? (
-            <Image src={project.image} alt={`${project.title} — ${project.imageNote.zh}`} fill unoptimized priority sizes="(max-width: 760px) 100vw, 45vw" style={{ objectFit: project.imageMode ?? "cover" }} />
+            <>
+              <Image src={project.image} alt={`${project.title} — ${(media.caption ?? project.imageNote).zh}`} width={media.width} height={media.height} unoptimized priority sizes="(max-width: 760px) 100vw, 45vw" />
+              <figcaption><Localized text={media.caption ?? project.imageNote} /></figcaption>
+            </>
           ) : (
             <div className="case-schematic-preview">
               <span><T zh="系统结构示意" en="SYSTEM SCHEMATIC" /></span>
@@ -69,7 +77,7 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
               <small><Localized text={project.imageNote} /></small>
             </div>
           )}
-        </div>
+        </figure>
       </section>
 
       <nav className="case-jump-nav" aria-label="案例目录 / Case navigation">
@@ -96,12 +104,16 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
         </div>
       </section>
 
-      <section className="case-ownership case-shell" id="ownership">
+      <details className="case-ownership case-shell case-fold" id="ownership">
+        <summary>
         <div className="case-section-head">
           <span><T zh="02 · 我的职责" en="02 · MY OWNERSHIP" /></span>
           <h2><T zh="个人负责、协作与既有系统的边界" en="A clear boundary between ownership, collaboration, and existing systems" /></h2>
           <p><T zh="职责地图用于明确项目贡献，不把团队系统整体表述为个人成果。" en="The ownership map separates personal work from team collaboration and existing devices." /></p>
         </div>
+        <b className="case-fold-toggle" aria-hidden="true">+</b>
+        </summary>
+        <div className="case-fold-body">
         <div className="ownership-legend" aria-label="职责地图图例 / Ownership map legend">
           {(Object.keys(ownershipLabels) as Array<keyof typeof ownershipLabels>).map((type) => <span className={`ownership-${type}`} key={type}><i aria-hidden="true" /><Localized text={ownershipLabels[type]} /></span>)}
         </div>
@@ -112,7 +124,8 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
           <span><T zh="具体工作" en="CONCRETE CONTRIBUTIONS" /></span>
           <ul>{project.contribution.map((item, index) => <li key={item.zh}><b>{String(index + 1).padStart(2, "0")}</b><Localized text={item} /></li>)}</ul>
         </div>
-      </section>
+        </div>
+      </details>
 
       <section className="case-tech case-shell"><span><T zh="核心技术" en="CORE TECHNOLOGY" /></span><ul>{project.tech.slice(0, 8).map((item) => <li key={item}>{item}</li>)}</ul></section>
 
@@ -122,6 +135,8 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
           <h2><T zh="从输入、计算到执行边界" en="From inputs and computation to execution boundaries" /></h2>
           <p><T zh="用一条可快速阅读的数据流说明系统组成；移动端会自动切换为纵向链路。" en="A scannable data path explains the system; it becomes a vertical chain on smaller screens." /></p>
         </div>
+        {project.slug === "auto-aim" && <AutoAimEvidence />}
+        {project.slug === "3d-volume-measurement" && <VolumeGeometryFigure />}
         <FlowDiagram project={project} />
         <details className="case-disclosure">
           <summary><div><span><T zh="核心模块" en="CORE MODULES" /></span><h3><T zh="查看模块边界与职责" en="Inspect module boundaries" /></h3></div><b aria-hidden="true">+</b></summary>
@@ -129,15 +144,20 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
         </details>
       </section>
 
-      <section className="case-problems case-shell" id="problems">
+      <details className="case-problems case-shell case-fold" id="problems">
+        <summary>
         <div className="case-section-head">
           <span><T zh="04 · 关键工程问题" en="04 · KEY ENGINEERING PROBLEMS" /></span>
           <h2><T zh="问题、约束与我的选择" en="Problem, constraint, and engineering response" /></h2>
         </div>
+        <b className="case-fold-toggle" aria-hidden="true">+</b>
+        </summary>
+        <div className="case-fold-body">
         <div className="problem-grid">
           {problems.map((item, index) => <article key={item.title.zh}><span>{String(index + 1).padStart(2, "0")}</span><h3><Localized text={item.title} /></h3><dl><div><dt><T zh="约束" en="CONSTRAINT" /></dt><dd><Localized text={item.constraint} /></dd></div><div><dt><T zh="决策" en="MY DECISION" /></dt><dd><Localized text={item.decision} /></dd></div></dl></article>)}
         </div>
-      </section>
+        </div>
+      </details>
 
       <section className="case-decisions case-shell" id="decisions">
         <div className="case-section-head">
@@ -145,7 +165,7 @@ export function ProjectCase({ project, previous, next }: { project: ProjectDetai
           <h2><T zh="为什么这样设计" en="Why the system is designed this way" /></h2>
           <p><T zh="聚焦影响可靠性、性能与维护成本的判断。" en="Decisions that materially affect reliability, performance, and maintainability." /></p>
         </div>
-        <div className="decision-grid">{project.decisions.map((item, index) => <article key={item.title.zh}><span>{String(index + 1).padStart(2, "0")}</span><h3><Localized text={item.title} /></h3><p><Localized text={item.text} /></p></article>)}</div>
+        <div className="case-decision-list">{project.decisions.map((item, index) => <details key={item.title.zh} open={index === 0}><summary><span>{String(index + 1).padStart(2, "0")}</span><h3><Localized text={item.title} /></h3><b aria-hidden="true">+</b></summary><p><Localized text={item.text} /></p></details>)}</div>
         <details className="case-disclosure">
           <summary><div><span><T zh="实现重点" en="IMPLEMENTATION HIGHLIGHTS" /></span><h3><T zh="查看落地细节" en="View implementation details" /></h3></div><b aria-hidden="true">+</b></summary>
           <div className="engineering-list">{project.engineering.map((item, index) => <article key={item.title.zh}><span>{String(index + 1).padStart(2, "0")}</span><h3><Localized text={item.title} /></h3><p><Localized text={item.text} /></p></article>)}</div>
