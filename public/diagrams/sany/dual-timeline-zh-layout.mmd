@@ -1,0 +1,36 @@
+block-beta
+columns 7
+RLabel["机器人时间轴 · ≈60 Hz"]:3 space CLabel["相机时间轴 · 高频 RAW"]:3
+FANUC["FANUC 控制器<br/>约 60 Hz TCP 状态"]:3 space RAW["Sensor · 200 Hz RAW 设计目标"]:3
+TCP["离散 TCP 位姿序列"]:3 space TS["RAW + 采集时间戳"]:3
+SEP["运动趋势分离"]:3 space BUF["滚动历史缓存"]:3
+SLOW["焊缝慢变分量"]:1 space SWING["周期摆弧分量"]:1 SYNC["统一时间基准"]:1 MATCH["时间最近邻匹配<br/>i* = argmin |t_cam(i) − t_phase|"]:3
+MODEL["局部运动模型估计"]:3 space KEY["关键 RAW 帧"]:3
+PHASE["关键摆弧相位检测"]:3 space ISP["ISP 后处理"]:3
+TP["t_phase / t_peak"]:3 space STD["标准格式图像"]:3
+space:4 SEQ["同相位稳定熔池图像序列"]:3
+space:4 ALGO["视觉算法 / 人工观测"]:3
+style RLabel fill:transparent,stroke:transparent,color:#0866e8
+style CLabel fill:transparent,stroke:transparent,color:#0866e8
+FANUC --> TCP
+TCP --> SEP
+SEP --> SLOW
+SEP --> SWING
+SLOW --> MODEL
+SWING --> MODEL
+MODEL --> PHASE
+PHASE --> TP
+RAW --> TS
+TS --> BUF
+BUF --> MATCH
+MATCH --> KEY
+KEY --> ISP
+ISP --> STD
+STD --> SEQ
+SEQ --> ALGO
+TP --> SYNC
+SYNC --> MATCH
+style TP fill:#edf3fb,stroke:#0866e8,color:#161719
+style SYNC fill:#edf3fb,stroke:#0866e8,color:#161719
+style MATCH fill:#edf3fb,stroke:#0866e8,color:#161719
+style KEY fill:#edf3fb,stroke:#0866e8,color:#161719

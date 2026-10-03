@@ -1,0 +1,254 @@
+/* Shared presentation rules are scoped away from the authored phase essay. */
+.site-surface {
+  --type-case-title: clamp(34px, 3.3vw, 48px);
+  --type-case-section: clamp(24px, 2.4vw, 32px);
+  --type-case-body: 16px;
+}
+.site-surface :is(.engineering-case .case-hero h1, .compact-hero h1) { font-size: var(--type-case-title); line-height: 1.3; letter-spacing: -.035em; }
+.site-surface :is(.engineering-case .case-hero h1, .compact-hero h1, .interview-case-head h1, .home-writing-feature h3) { text-wrap: balance; }
+.site-surface :is(.case-section-head h2, .compact-section-heading h2, .case-fold > summary h2) { font-size: var(--type-case-section); line-height: 1.5; letter-spacing: -.025em; }
+.site-surface :is(.case-lead, .case-summary, .compact-lead, .compact-prose p) { font-size: var(--type-case-body); line-height: 1.85; }
+.site-surface .case-cn-title { font-size: 18px; line-height: 1.7; color: var(--text-secondary); margin-top: 14px; }
+.site-surface .case-summary { color: var(--text-secondary); }
+.site-surface .case-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 420px; gap: 12px; }
+.site-surface .case-actions .button { min-width: 0; padding-inline: 16px; }
+.site-surface :is(.case-architecture, .case-decisions, .case-evidence) { background: transparent; border-bottom: 0; }
+.site-surface .case-section-head { max-width: 900px; margin-bottom: 24px; }
+.site-surface .case-architecture .case-section-head { display: block; }
+.site-surface .case-section-head > p { max-width: 70ch; }
+.site-surface .case-shell { padding-block: 40px; }
+.site-surface .case-evidence { border-top: 0; }
+/* Shared label/value/note rows keep borderless metrics aligned. */
+.site-surface .case-evidence .outcome-grid, .site-surface .interview-outcomes { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto auto auto; gap: 28px 32px; border: 0; }
+.site-surface .case-evidence .outcome-grid { margin-top: 20px; }
+.site-surface .case-evidence .outcome-grid article:first-child { grid-column: auto; }
+.site-surface :is(.case-evidence .outcome-grid article, .interview-outcomes > div) { display: grid; grid-template-rows: subgrid; grid-row: span 3; min-width: 0; min-height: 0; padding: 12px 0; border: 0; background: transparent; row-gap: 10px; justify-content: normal; }
+.site-surface .engineering-case .case-evidence .outcome-grid article strong { display: flex; align-items: center; min-height: 52px; margin: 0; font-size: clamp(26px, 3vw, 40px); line-height: 1.3; }
+.site-surface .engineering-case .case-evidence .outcome-grid strong.outcome-value-label { font-size: 24px; line-height: 1.5; color: var(--text-secondary); }
+.site-surface .case-evidence .outcome-grid p { margin: 0; font: 14px/1.8 var(--font-body); letter-spacing: normal; }
+/* Localized text inherits its semantic container, rather than legacy span rules. */
+.site-surface :is(.case-disclosure > summary h3, .case-disclosure > summary > div > span, .outcome-grid p, .outcome-grid article > span, .interview-outcomes p, .interview-outcomes > div > small, .challenge-box p, .honors-profile li, .resume-layout aside p) :is(.lang-zh, .lang-en) { font: inherit; letter-spacing: inherit; color: inherit; }
+.site-surface .interview-outcomes strong { display: flex; align-items: center; min-height: 44px; margin: 0; font-size: clamp(20px, 2.4vw, 30px); line-height: 1.3; overflow-wrap: anywhere; }
+.site-surface .interview-outcomes strong.outcome-value-label { font-size: 20px; line-height: 1.5; color: var(--text-secondary); }
+.site-surface .interview-outcomes p { margin: 0; font-size: 12px; line-height: 1.75; }
+.site-surface .case-tech { padding-block: 20px; }
+.site-surface .engineering-case .case-fold { padding-block: 0; }
+.site-surface .case-fold > summary { min-height: 108px; }
+.site-surface .case-jump-nav { display: flex; max-width: var(--max); overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
+.site-surface .case-jump-nav::-webkit-scrollbar { display: none; }
+.site-surface :is(.engineering-case, .compact-case) .case-jump-nav a { position: relative; flex: 1 0 auto; justify-content: center; min-width: max-content; min-height: 52px; padding-inline: 20px; border-right: 0; font-size: 13px; gap: 9px; }
+.site-surface .case-jump-nav a[aria-current="location"] { color: var(--accent); background: rgba(94, 234, 212, .04); }
+.site-surface .case-jump-nav a[aria-current="location"]::after { content: ""; position: absolute; bottom: 0; left: 20px; right: 20px; height: 2px; background: var(--accent); }
+.site-surface :is(.case-shell, .compact-section, .case-fold)[id] { scroll-margin-top: 156px; }
+.site-surface :is(.case-disclosure, .deep-dive-list details) { background: transparent; }
+/* Each disclosure or list row owns one separator; chapter edges stay intact. */
+.site-surface .case-disclosure { border-bottom: 0; }
+.site-surface .case-disclosure + .case-disclosure { margin-top: 0; }
+.site-surface .case-decision-list > details:last-child { border-bottom: 0; }
+.site-surface .case-decision-list + .case-disclosure { margin-top: 0; }
+.site-surface .case-disclosure > :is(.module-grid, .engineering-list) { border-top: 0; }
+.site-surface .case-disclosure > .module-grid article { border-bottom: 0; }
+.site-surface .case-disclosure > .module-grid article:nth-child(n + 3) { border-top: 1px solid var(--border); }
+.site-surface .case-disclosure > .engineering-list article { border-bottom: 0; }
+.site-surface .case-disclosure > .engineering-list article + article { border-top: 1px solid var(--border); }
+.site-surface .deep-dive-list details:last-child { border-bottom: 0; }
+.site-surface .case-disclosure > summary h3 { color: var(--text-primary); font-size: 19px; line-height: 1.5; font-weight: 550; }
+.site-surface .case-disclosure > summary > div > span { color: var(--text-muted); font: 11px/1.6 var(--font-geist-mono), monospace; letter-spacing: .04em; }
+.site-surface .case-disclosure > summary { padding-block: 20px; }
+.site-surface .case-flow-overview { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; list-style: none; padding: 0; margin: 28px 0; }
+.site-surface .case-flow-overview li { position: relative; display: flex; align-items: flex-start; gap: 16px; border-top: 1px solid var(--border); padding-top: 18px; min-width: 0; }
+.site-surface .case-flow-overview li > span { color: var(--accent); font: 12px var(--font-geist-mono), monospace; padding-top: 3px; }
+.site-surface .case-flow-overview p { margin: 0 0 6px; color: var(--text-secondary); font-size: 15px; line-height: 1.6; }
+.site-surface .case-flow-overview li + li::before { content: "→"; position: absolute; top: -10px; left: -20px; color: var(--text-muted); font-size: 14px; }
+.site-surface :is(.repository-comparison figcaption, .volume-geometry-figure figcaption, .repository-architecture figcaption, .vision-hero-photo figcaption, .compact-figure figcaption) { font-size: 12px; line-height: 1.75; color: var(--text-muted); background: transparent; }
+.site-surface .compact-hero-vision { grid-template-areas: "copy photo" "metrics photo"; gap: 28px 48px; }
+.site-surface .compact-hero-vision > div:first-child { grid-area: copy; }
+.site-surface .compact-hero-vision .vision-hero-photo { grid-area: photo; }
+.site-surface .compact-metrics { border: 0; gap: 24px; padding-block: 12px; }
+.site-surface .compact-metrics > div { padding-inline: 0; }
+.site-surface .compact-metrics > div + div { border: 0; }
+.site-surface .compact-hero-vision .compact-metrics { grid-area: metrics; width: 100%; margin: 0; padding-block: 0; }
+.site-surface .compact-hero-vision .compact-metrics > div { padding-inline: 0; }
+.site-surface .compact-hero-vision .compact-metrics > div:first-child { padding-left: 0; }
+.site-surface .compact-hero-vision .compact-metrics dd { font-size: clamp(19px, 1.9vw, 26px); }
+.site-surface .compact-section { padding-top: 48px; padding-bottom: 40px; }
+.site-surface .compact-section-first { border-top: 0; }
+.site-surface .compact-figure { padding-block: 0; border-block: 0; }
+.site-surface .hub-workstream:first-child { padding-top: 0; border-top: 0; }
+
+/* Repository-derived module diagrams; typography remains selectable at every size. */
+.site-surface .architecture-label { color: var(--text-muted); font: 11px var(--font-geist-mono), monospace; letter-spacing: .03em; }
+.site-surface .architecture-preview { position: relative; padding: 26px; border: 1px solid var(--border); border-radius: var(--radius-image); background: linear-gradient(145deg, rgba(30, 61, 79, .28), rgba(15, 23, 42, .15)); }
+.site-surface .architecture-preview-input { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
+.site-surface :is(.architecture-preview-input, .architecture-preview-output) > span { padding: 12px 8px; border: 1px solid rgba(148, 163, 184, .14); border-radius: 8px; background: rgba(148, 163, 184, .025); text-align: center; color: var(--text-secondary); font: 11px/1.65 var(--font-geist-mono), monospace; overflow-wrap: anywhere; }
+.site-surface .architecture-preview-connector { position: relative; display: flex; justify-content: space-around; height: 24px; padding-inline: 12%; }
+.site-surface .architecture-preview-connector::after { content: ""; position: absolute; height: 1px; background: #335963; bottom: 0; left: 25%; right: 25%; }
+.site-surface .architecture-preview-connector i { display: block; width: 1px; height: 100%; background: #335963; }
+.site-surface .architecture-preview-core { position: relative; padding: 22px 14px; border: 1px solid rgba(94, 234, 212, .24); border-radius: 8px; background: rgba(94, 234, 212, .025); text-align: center; }
+.site-surface .architecture-preview-core > span { display: block; color: var(--accent); font: 10px var(--font-geist-mono), monospace; letter-spacing: .1em; }
+.site-surface .architecture-preview-core strong { display: block; margin-top: 8px; font: 21px/1.4 var(--font-geist-mono), monospace; }
+.site-surface .architecture-preview-core p { margin: 8px 0 0; color: var(--text-secondary); font-size: 13px; line-height: 1.6; }
+.site-surface .architecture-preview-connector-down::after { top: 0; bottom: auto; left: 16.66%; right: 16.66%; }
+.site-surface .architecture-preview-connector-down { padding-inline: 0; }
+.site-surface .architecture-preview-output { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.site-surface .architecture-preview-source { display: block; margin-top: 20px; color: var(--text-muted); font-size: 12px; text-align: right; }
+.site-surface .architecture-preview-source:hover { color: var(--accent); }
+.site-surface .architecture-preview-source code { margin-inline: 6px; font-size: 10px; }
+.site-surface .repository-architecture { margin: 28px 0 32px; }
+.site-surface .repository-architecture-grid { display: grid; grid-template-columns: minmax(0, 1fr) 24px minmax(0, 1.15fr) 24px minmax(0, 1fr); gap: 16px; align-items: center; }
+.site-surface .architecture-node-group { display: grid; align-content: start; gap: 12px; min-width: 0; }
+.site-surface .architecture-node { min-width: 0; padding: 16px; border: 1px solid rgba(148, 163, 184, .14); border-radius: 8px; background: rgba(148, 163, 184, .025); }
+.site-surface .architecture-node strong { color: var(--text-primary); font: 13px/1.7 var(--font-geist-mono), monospace; overflow-wrap: anywhere; }
+.site-surface .architecture-node p { margin: 7px 0 0; color: var(--text-secondary); font-size: 13px; line-height: 1.75; }
+.site-surface .architecture-core-node { border-color: rgba(94, 234, 212, .3); background: rgba(94, 234, 212, .025); }
+.site-surface .architecture-core-node strong { color: var(--accent); font-size: 19px; }
+.site-surface .architecture-core-node ul { list-style: none; margin: 20px 0 0; padding: 0; color: var(--text-secondary); font: 12px/1.75 var(--font-geist-mono), monospace; }
+.site-surface .architecture-core-node li { padding-block: 8px; border-top: 1px solid var(--border); }
+.site-surface .architecture-direction { color: var(--accent); text-align: center; }
+.site-surface .repository-architecture figcaption { margin-top: 18px; }
+.site-surface .repository-architecture figcaption a { color: var(--text-secondary); }
+.site-surface .repository-architecture figcaption a:hover { color: var(--accent); }
+.site-surface .repository-architecture figcaption code { font-size: 10px; }
+
+.site-surface .pdf-preview { display: block; padding-block: 40px 56px; }
+.site-surface .pdf-preview > div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 24px; margin-bottom: 24px; }
+.site-surface .pdf-preview .section-kicker { flex: 0 0 100%; }
+.site-surface .pdf-preview h2 { margin: 0; font-size: var(--type-case-section); }
+.site-surface .pdf-preview > div > a { margin-left: auto; color: var(--accent); font-size: 14px; }
+.site-surface .resume-pdf-disclosure { border-block: 1px solid var(--border); }
+.site-surface .resume-pdf-disclosure summary { display: flex; align-items: center; justify-content: space-between; min-height: 56px; cursor: pointer; color: var(--text-secondary); font-size: 15px; list-style: none; }
+.site-surface .resume-pdf-disclosure summary::-webkit-details-marker { display: none; }
+.site-surface .resume-pdf-disclosure summary > span:last-child { color: var(--accent); font-size: 24px; }
+.site-surface .resume-pdf-disclosure[open] summary > span:last-child { transform: rotate(45deg); }
+.site-surface .resume-pdf-frame { display: block; width: 100%; height: 800px; margin-block: 12px 24px; border: 0; }
+.site-surface .resume-pdf-mobile { display: none; }
+.site-surface .resume-hero > div:first-child > .resume-role { margin-top: 16px; color: var(--accent); font-size: 18px; line-height: 1.6; font-weight: 400; }
+.site-surface .resume-hero > div:first-child > .resume-education { margin-top: 14px; color: var(--text-muted); font-size: 14px; line-height: 1.8; font-weight: 400; }
+.site-surface .resume-education > span:last-child { display: block; font: 12px/1.8 var(--font-geist-mono), monospace; }
+.site-surface .interview-case-head h1 { font-size: var(--type-case-title); line-height: 1.3; }
+.site-surface .interview-case-head > p { font-size: 18px; line-height: 1.7; color: var(--text-secondary); }
+.site-surface .interview-case-head nav a[aria-current="location"] { color: var(--accent); border-color: rgba(94, 234, 212, .35); background: rgba(94, 234, 212, .04); }
+.site-surface .interview-supplement { margin-top: 20px; border-top: 1px solid var(--border); border-bottom: 0; }
+.site-surface .interview-supplement summary { display: flex; justify-content: space-between; align-items: center; min-height: 52px; color: var(--text-secondary); font-size: 14px; cursor: pointer; list-style: none; }
+.site-surface .interview-supplement summary::-webkit-details-marker { display: none; }
+.site-surface .interview-supplement summary > b { color: var(--accent); font-size: 22px; font-weight: 400; }
+.site-surface .interview-supplement[open] summary > b { transform: rotate(45deg); }
+.site-surface .interview-supplement .interview-problems { margin-top: 0; }
+
+/* Folded chapters and inline disclosures share one control and focus treatment. */
+.site-surface :is(.case-disclosure, .case-decision-list details, .deep-dive-list details, .case-fold, .about-disclosure, .interview-supplement, .resume-pdf-disclosure) > summary { border-radius: 6px; transition: background 180ms ease; }
+.site-surface :is(.case-disclosure, .case-decision-list details, .deep-dive-list details, .case-fold, .about-disclosure, .interview-supplement, .resume-pdf-disclosure) > summary:hover { background: rgba(94, 234, 212, .025); }
+.site-surface :is(.case-disclosure > summary > b, .case-decision-list summary > b, .deep-dive-list summary > b, .case-fold-toggle, .disclosure-toggle b, .interview-supplement summary > b, .resume-pdf-disclosure summary > span:last-child) { display: grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(148, 163, 184, .055); color: var(--text-secondary); font: 22px/1 var(--font-body); transition: color 180ms ease, background 180ms ease; }
+.site-surface :is(.case-disclosure, .case-decision-list details, .deep-dive-list details, .case-fold, .about-disclosure, .interview-supplement, .resume-pdf-disclosure)[open] > summary :is(b, .case-fold-toggle), .site-surface .resume-pdf-disclosure[open] summary > span:last-child { color: var(--accent); background: rgba(94, 234, 212, .065); }
+.site-surface .deep-dive-list summary { grid-template-columns: 32px minmax(0, 1fr) 32px; }
+.site-surface .deep-dive-list details > p { margin-left: 50px; }
+
+/* Keep meaningful row separators without enclosing every paragraph in a cell. */
+.site-surface .engineering-list article { grid-template-columns: 32px minmax(0, .7fr) minmax(0, 1.3fr); gap: 20px; padding-block: 22px; }
+.site-surface .engineering-list article > span { padding: 4px 0 0; border: 0; }
+.site-surface .engineering-list h3 { padding: 0; border: 0; font-size: 19px; line-height: 1.6; }
+.site-surface .engineering-list p { padding: 0; border: 0; line-height: 1.85; }
+.site-surface .problem-grid { gap: 24px 40px; border: 0; }
+.site-surface .problem-grid article { min-height: 0; padding: 20px 0 8px; border: 0; border-top: 1px solid var(--border); }
+.site-surface .problem-grid h3 { font-size: 22px; line-height: 1.5; }
+.site-surface .problem-grid dl > div { border: 0; padding-block: 7px; }
+.site-surface .problem-grid dd { line-height: 1.8; }
+.site-surface .case-disclosure > .validation-grid { gap: 24px 40px; padding-bottom: 24px; background: transparent; }
+.site-surface .case-evidence .validation-grid article { padding: 14px 0; min-height: 0; background: transparent; }
+.site-surface .validation-grid article > span { padding: 0; border: 0; }
+.site-surface .validation-grid h3 { font-size: 21px; line-height: 1.5; }
+.site-surface .challenge-box { border-radius: 0 8px 8px 0; background: rgba(94, 234, 212, .035); }
+
+/* Internal destinations retain their original rendering in the protected essay. */
+.site-surface .header-resume > span[aria-hidden], .site-surface .mobile-navigation nav a[href="/resume"] > span[aria-hidden] { font-size: 0; }
+.site-surface .header-resume > span[aria-hidden]::after, .site-surface .mobile-navigation nav a[href="/resume"] > span[aria-hidden]::after { content: "→"; font-size: 16px; }
+.site-surface .footer-base > a { font-size: 0; }
+.site-surface .footer-base > a :is(.lang-zh, .lang-en) { font-size: 11px; }
+.site-surface .footer-base > a::after { content: " →"; font-size: 11px; }
+
+.site-surface .email-contact { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.site-surface .email-contact > a { margin-top: 0; }
+.site-surface .email-copy { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: var(--text-muted); font: 12px/1.5 var(--font-body); cursor: pointer; }
+.site-surface .email-copy:hover { color: var(--accent); background: rgba(94, 234, 212, .04); }
+.site-surface .email-copy svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.site-surface .email-contact :is(.lang-zh, .lang-en) { font: inherit; color: inherit; letter-spacing: inherit; }
+.site-surface .email-copy-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.site-surface .resume-layout aside .email-contact { margin-top: 6px; }
+
+@media (max-width: 1100px) {
+  .site-surface .interview-outcomes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .site-surface .case-evidence .outcome-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-surface .compact-hero-vision { grid-template-areas: "copy" "metrics" "photo"; gap: 24px; }
+  .site-surface .compact-hero-vision .vision-hero-photo { justify-self: center; }
+  .site-surface .repository-architecture-grid { gap: 10px; grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1.15fr) 16px minmax(0, 1fr); }
+  .site-surface .architecture-node { padding: 12px; }
+  .site-surface .engineering-case .case-hero-media:has(img) { max-width: 520px; justify-self: center; }
+}
+@media (max-width: 760px) {
+  .site-surface .case-disclosure > .module-grid article:nth-child(n + 2) { border-top: 1px solid var(--border); }
+  .site-surface .engineering-list article { grid-template-columns: 24px minmax(0, 1fr); gap: 8px 16px; }
+  .site-surface .engineering-list p { grid-column: 2; }
+  .site-surface .site-footer { gap: 20px; padding-block: 28px 20px; }
+  .site-surface .footer-links a { min-height: 36px; }
+  .site-surface .footer-base { padding-top: 12px; gap: 8px 16px; }
+  .site-surface .interview-presentation { --interview-route-height: 45px; --interview-tabs-height: 52px; }
+  .site-surface .interview-route-bar { min-height: var(--interview-route-height); padding-block: 0; gap: 12px; }
+  .site-surface .interview-route-bar > a { display: flex; align-items: center; min-height: 44px; }
+  .site-surface .interview-side-nav { top: calc(var(--header-height) + var(--interview-route-height)); height: var(--interview-tabs-height); padding-block: 4px; }
+  .site-surface .interview-side-nav button { height: 44px; min-height: 44px; border: 0; border-radius: 6px; }
+  .site-surface .interview-side-nav li:last-child button { border-right: 0; }
+  .site-surface .interview-side-nav button.active { background: rgba(94, 234, 212, .06); }
+  .site-surface .interview-case, .site-surface .interview-case > section { scroll-margin-top: calc(var(--header-height) + var(--interview-route-height) + var(--interview-tabs-height) + 12px); }
+}
+@media (max-width: 600px) {
+  .site-surface { --type-case-title: 32px; --type-case-section: 24px; }
+  .site-surface .case-shell { padding-block: 32px; }
+  .site-surface :is(.case-shell, .compact-section, .case-fold)[id] { scroll-margin-top: 144px; }
+  .site-surface .case-fold > summary h2 { font-size: 22px; }
+  .site-surface .case-fold > summary { gap: 14px; min-height: 100px; }
+  .site-surface .case-fold > summary .case-section-head { margin-bottom: 0; }
+  .site-surface :is(.engineering-case, .compact-case) .case-jump-nav a { flex: 0 0 auto; padding-inline: 14px; min-height: 48px; gap: 6px; }
+  .site-surface .case-jump-nav a[aria-current="location"]::after { left: 14px; right: 14px; }
+  .site-surface .case-section-head { margin-bottom: 18px; }
+  .site-surface .engineering-case .case-evidence .outcome-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-surface .engineering-case .case-evidence .outcome-grid article:first-child { grid-column: auto; }
+  .site-surface :is(.case-evidence .outcome-grid, .interview-outcomes) { gap: 24px 20px; }
+  .site-surface :is(.case-evidence .outcome-grid article, .interview-outcomes > div) { padding-block: 0; row-gap: 8px; }
+  .site-surface .engineering-case .case-evidence .outcome-grid article strong { min-height: 36px; font-size: 26px; }
+  .site-surface .engineering-case .case-evidence .outcome-grid article strong.outcome-value-label { font-size: 18px; }
+  .site-surface .outcome-grid strong { font-size: 26px; overflow-wrap: anywhere; }
+  .site-surface .outcome-grid article > span { font-size: 11px; }
+  .site-surface .case-evidence .outcome-grid p { font-size: 13px; }
+  .site-surface .interview-outcomes strong { min-height: 36px; font-size: 20px; }
+  .site-surface .interview-outcomes strong.outcome-value-label { font-size: 17px; }
+  .site-surface .case-flow-overview { grid-template-columns: 1fr; gap: 10px; margin-block: 22px; }
+  .site-surface .case-flow-overview li { padding-top: 12px; gap: 12px; }
+  .site-surface .case-flow-overview li + li::before { display: none; }
+  .site-surface .case-flow-overview p { font-size: 14px; }
+  .site-surface .case-disclosure > summary h3 { font-size: 17px; }
+  .site-surface .case-cn-title { font-size: 16px; }
+  .site-surface .compact-section { padding-block: 36px; }
+  .site-surface .compact-metrics { gap: 0; padding-block: 0; }
+  .site-surface .compact-metrics > div { padding-block: 12px; }
+  .site-surface .compact-hero-vision .compact-metrics dt { font-size: 11px; line-height: 1.7; }
+  .site-surface .compact-hero-vision .compact-metrics dd { font-size: 18px; }
+  .site-surface .engineering-case .case-hero-media:has(.architecture-preview) { display: none; }
+  .site-surface .repository-architecture-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .site-surface .architecture-node-group { gap: 10px; }
+  .site-surface .architecture-node-group:not(.architecture-core-group) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-surface .architecture-node-group > .architecture-label { grid-column: 1 / -1; }
+  .site-surface .architecture-node-group > .architecture-node:last-child:nth-child(even) { grid-column: 1 / -1; }
+  .site-surface .architecture-node { padding: 14px; }
+  .site-surface .architecture-node strong { font-size: 12px; }
+  .site-surface .architecture-core-node strong { font-size: 19px; }
+  .site-surface .architecture-core-node ul { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 14px; }
+  .site-surface .architecture-core-node li { padding-top: 8px; }
+  .site-surface .architecture-direction { transform: rotate(90deg); line-height: 1; }
+}
+@media (max-width: 760px), (hover: none) and (pointer: coarse) {
+  .site-surface .resume-pdf-disclosure { display: none; }
+  .site-surface .resume-pdf-mobile { display: block; color: var(--text-secondary); font-size: 14px; line-height: 1.8; }
+  .site-surface .resume-pdf-mobile a { display: inline-block; margin-left: 10px; color: var(--accent); }
+}

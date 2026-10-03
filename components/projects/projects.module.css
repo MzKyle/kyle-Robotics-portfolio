@@ -1,0 +1,121 @@
+.container { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.eyebrow, .sectionLabel, .cardMeta, .cardImageNote { font-family: var(--font-geist-mono), monospace; font-size: .7rem; letter-spacing: .1em; }
+
+/* The index introduces the work, then lets visitors choose a detail page. */
+.projectsIntro { padding-block: 42px 46px; }
+.eyebrow { color: var(--text-secondary); }
+.projectsIntro h1 { margin: 18px 0 0; max-width: 1100px; font-size: clamp(2.3rem, 4vw, 3.25rem); line-height: 1.25; font-weight: 550; letter-spacing: -.02em; text-wrap: balance; }
+.projectsIntro h1 :global(.lang-zh) { letter-spacing: 0; }
+.introFooter { display: flex; justify-content: space-between; align-items: baseline; gap: 20px 44px; margin-top: 22px; }
+.introFooter p { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+.introFooter > span { color: var(--text-muted); font-family: var(--font-geist-mono), monospace; font-size: .72rem; line-height: 1.6; white-space: nowrap; }
+.sectionLabel { display: flex; align-items: baseline; gap: 10px; color: var(--text-secondary); line-height: 1.4; }
+.sectionLabel > span:first-child { color: var(--accent); }
+.sectionLabel > span:first-child::after { content: " /"; color: var(--text-muted); }
+.techList { display: flex; flex-wrap: wrap; gap: 5px 0; list-style: none; margin: 0; padding: 0; color: var(--text-secondary); font-family: var(--font-geist-mono), monospace; font-size: .7rem; line-height: 1.5; }
+.techList li:not(:last-child)::after { content: "·"; margin-inline: 9px; color: var(--text-muted); }
+
+/* Flagship experience: a technical figure and two routes inward. */
+.featuredExperience { padding-top: 36px; border-top: 1px solid var(--border); scroll-margin-top: var(--header-height); }
+.featuredCard { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: clamp(30px, 3.8vw, 52px); align-items: center; margin-top: 25px; }
+.featuredVisual { min-width: 0; margin: 0; }
+.featuredVisual img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; border: 1px solid var(--border); }
+.featuredVisual figcaption { margin-top: 10px; color: var(--text-muted); font-size: 11px; }
+.featuredResult { margin: 18px 0 0; color: var(--accent); font-size: 14px; line-height: 1.7; }
+.featuredInformation { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding-block: 9px 17px; }
+.featuredInformation h2 { margin: 16px 0 0; font-size: clamp(1.8rem, 2.7vw, 2.3rem); font-weight: 550; line-height: 1.3; letter-spacing: -.015em; text-wrap: balance; }
+.featuredSummary { margin: 17px 0 0; max-width: 520px; color: var(--text-secondary); font-size: .96rem; line-height: 1.7; }
+.featuredCases { width: 100%; margin-top: 22px; border-top: 1px solid var(--border); }
+.featuredCase { display: grid; grid-template-columns: 30px minmax(0, 1fr) 18px; align-items: center; gap: 11px; padding-block: 10px; border-bottom: 1px solid var(--border); }
+.featuredCase > span:first-child { align-self: start; margin-top: 3px; color: var(--accent); font-family: var(--font-geist-mono), monospace; font-size: .72rem; }
+.featuredCase strong { display: block; font-size: 1.09rem; font-weight: 500; line-height: 1.35; }
+.featuredCase small { display: block; margin-top: 2px; color: var(--text-secondary); font-size: .73rem; line-height: 1.3; }
+.featuredCase > span:last-child { color: var(--accent); font-size: 1.1rem; transition: transform 180ms ease; }
+.featuredCase:hover strong { color: var(--accent); }
+.featuredCase:hover > span:last-child { transform: translateX(3px); }
+.featuredInformation .techList { margin-top: 17px; }
+.featuredCta { display: inline-flex; align-items: center; gap: 22px; margin-top: auto; padding-top: 21px; color: var(--accent); font-size: .92rem; font-weight: 500; }
+.featuredCta:hover { text-decoration: underline; text-underline-offset: 5px; }
+.featuredCta > span:last-child { transition: transform 180ms ease-out; }
+.featuredCta:hover > span:last-child { transform: translateX(4px); }
+
+/* Comparable selected projects: the image crop and content slots stay equal. */
+.selectedWork { margin-top: 64px; padding-top: 25px; border-top: 1px solid var(--border); }
+.selectedHeading { margin: 10px 0 26px; font-size: clamp(1.65rem, 2.3vw, 2rem); line-height: 1.3; font-weight: 520; letter-spacing: -.01em; }
+.selectedGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(20px, 2.5vw, 32px); row-gap: 0; }
+.selectedCard { display: grid; grid-template-rows: subgrid; grid-row: span 8; row-gap: 0; align-items: start; min-width: 0; padding-bottom: 32px; }
+.cardMeta { display: flex; gap: 10px; margin-bottom: 11px; color: var(--text-secondary); }
+.cardMeta > span:first-child { color: var(--accent); }
+.cardImageLink { display: block; width: 100%; }
+.cardImage { position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius-image); background: var(--surface-subtle); }
+.cardImage img { object-fit: cover; transition: transform 220ms ease; }
+.selectedCard:hover img { transform: scale(1.025); }
+.cardImageNote { display: block; min-height: 18px; margin-top: 8px; color: var(--text-muted); font-size: .75rem; line-height: 1.5; letter-spacing: 0; }
+.selectedCard h3 { margin: 17px 0 0; font-size: clamp(1.4rem, 1.8vw, 1.65rem); line-height: 1.28; font-weight: 520; letter-spacing: -.03em; }
+.selectedCard:hover h3 { color: var(--accent); }
+.cardDescription { margin: 8px 0 13px; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+.cardResult { margin: 0 0 14px; color: var(--accent); font-size: .875rem; line-height: 1.7; }
+.selectedCard .techList { margin-bottom: 12px; }
+.cardExplore { display: inline-flex; align-items: center; gap: 14px; margin-top: 8px; min-height: 44px; color: var(--accent); font-size: .88rem; font-weight: 500; }
+.cardExplore:hover { text-decoration: underline; text-underline-offset: 5px; }
+
+/* Supporting projects remain a text index. */
+.personalListSection { margin-top: 64px; padding-block: 25px 64px; border-top: 1px solid var(--border); }
+.personalListSection h2 { margin: 10px 0 18px; font-size: clamp(1.55rem, 2.2vw, 2rem); font-weight: 500; line-height: 1.25; letter-spacing: -.035em; }
+.personalList { list-style: none; padding: 0; margin: 0; }
+.personalList li { border-bottom: 1px solid var(--border); }
+.personalList a { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 20px; align-items: center; gap: 16px; min-height: 58px; padding-block: 10px; }
+.personalList strong { font-size: 1rem; font-weight: 500; }
+.personalList a > span:nth-child(2) { color: var(--text-secondary); font-size: .84rem; }
+.personalList a > span:last-child { color: var(--accent); font-size: 1.05rem; }
+.personalList a:hover strong { color: var(--accent); }
+
+@media (max-width: 1100px) {
+  .introFooter { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .featuredCard { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 28px; }
+  .featuredInformation h2 { font-size: clamp(1.85rem, 3.5vw, 2.3rem); }
+  .featuredSummary { margin-top: 12px; }
+  .featuredCases { margin-top: 14px; }
+}
+
+@media (max-width: 1100px) {
+  .projectsIntro { padding-block: 38px 42px; }
+  .featuredCard { grid-template-columns: 1fr; gap: 16px; }
+  .featuredInformation { padding-block: 0; }
+  .featuredInformation h2 { margin-top: 12px; }
+  .featuredCta { margin-top: 0; }
+  .selectedWork { margin-top: 66px; }
+  .selectedGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 22px; }
+}
+
+@media (max-width: 600px) {
+  .projectsIntro { padding-block: 32px 35px; }
+  .projectsIntro h1 { margin-top: 15px; font-size: clamp(2.15rem, 9vw, 2.8rem); }
+  .introFooter { margin-top: 15px; }
+  .introFooter p { font-size: .92rem; }
+  .introFooter > span { font-size: .62rem; white-space: normal; }
+  .featuredExperience { padding-top: 24px; }
+  .featuredCard { margin-top: 13px; gap: 14px; }
+  .featuredInformation h2 { font-size: 2rem; }
+  .featuredSummary { font-size: .91rem; line-height: 1.6; }
+  .featuredCase { padding-block: 9px; }
+  .featuredInformation .techList { margin-top: 12px; }
+  .featuredCta { padding-top: 14px; }
+  .selectedWork { margin-top: 57px; }
+  .selectedHeading { margin-bottom: 20px; }
+  .selectedGrid { grid-template-columns: 1fr; gap: 34px; }
+  .selectedCard { display: flex; flex-direction: column; align-items: flex-start; grid-row: auto; padding-bottom: 0; }
+  .cardImage { aspect-ratio: 16 / 9; }
+  .selectedCard h3 { margin-top: 13px; }
+  .cardDescription { margin-block: 7px 10px; }
+  .selectedCard .techList { margin-bottom: 7px; }
+  .personalListSection { margin-top: 56px; padding-bottom: 56px; }
+  .personalList a { grid-template-columns: minmax(0, 1fr) 20px; gap: 2px 12px; min-height: 63px; }
+  .personalList a > span:nth-child(2) { grid-column: 1; grid-row: 2; }
+  .personalList a > span:last-child { grid-column: 2; grid-row: 1 / 3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featuredCase > span:last-child, .featuredCta > span:last-child, .cardImage img { transition: none; }
+  .featuredCase:hover > span:last-child, .featuredCta:hover > span:last-child, .selectedCard:hover img { transform: none; }
+}

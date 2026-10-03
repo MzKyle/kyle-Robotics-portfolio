@@ -1,0 +1,28 @@
+flowchart TB
+  subgraph RT["机器人时间轴 · FANUC 控制器"]
+    direction TB
+    FANUC["FANUC 控制器<br/>约 60 Hz TCP 状态"] --> TCP["离散 TCP 位姿序列"]
+    TCP --> SEP["运动趋势分离"]
+    SEP --> SLOW["焊缝慢变分量"]
+    SEP --> SWING["周期摆弧分量"]
+    SLOW --> MODEL["局部运动模型估计"]
+    SWING --> MODEL
+    MODEL --> PHASE["关键摆弧相位检测"]
+    PHASE --> TP["t_phase / t_peak"]
+  end
+  SYNC["统一时间基准"]
+  subgraph CT["相机时间轴 · 高频 RAW 采样"]
+    direction TB
+    RAW["Sensor · 200 Hz RAW 设计目标"] --> TS["RAW + 采集时间戳"]
+    TS --> BUF["滚动历史缓存"]
+    BUF --> MATCH["时间最近邻匹配<br/>i* = argmin |t_cam(i) − t_phase|"]
+    MATCH --> KEY["关键 RAW 帧"]
+    KEY --> ISP["ISP 后处理"]
+    ISP --> STD["标准格式图像"]
+    STD --> SEQ["同相位稳定熔池图像序列"]
+    SEQ --> ALGO["视觉算法 / 人工观测"]
+  end
+  TP --> SYNC
+  SYNC -->|对齐 t_phase / t_peak| MATCH
+  classDef accent fill:#edf3fb,stroke:#0866e8,color:#161719;
+  class TP,SYNC,MATCH,KEY accent;

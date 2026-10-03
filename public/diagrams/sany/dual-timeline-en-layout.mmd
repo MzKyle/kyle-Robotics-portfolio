@@ -1,0 +1,36 @@
+block-beta
+columns 7
+RLabel["ROBOT TIMELINE · ≈60 Hz"]:3 space CLabel["CAMERA TIMELINE · HIGH-RATE RAW"]:3
+FANUC["FANUC controller<br/>≈60 Hz TCP state"]:3 space RAW["Sensor · 200 Hz RAW design target"]:3
+TCP["Discrete TCP pose sequence"]:3 space TS["RAW + acquisition timestamp"]:3
+SEP["Motion trend separation"]:3 space BUF["Rolling history buffer"]:3
+SLOW["Slow seam<br/>component"]:1 space SWING["Periodic weave<br/>component"]:1 SYNC["Common<br/>time base"]:1 MATCH["Nearest-time match<br/>i* = argmin |t_cam(i) − t_phase|"]:3
+MODEL["Local motion model estimation"]:3 space KEY["Key RAW frame"]:3
+PHASE["Key weave-phase detection"]:3 space ISP["Selective post-ISP"]:3
+TP["t_phase / t_peak"]:3 space STD["Standard-format image"]:3
+space:4 SEQ["Same-phase stable weld-pool sequence"]:3
+space:4 ALGO["Vision algorithm / human observation"]:3
+style RLabel fill:transparent,stroke:transparent,color:#0866e8
+style CLabel fill:transparent,stroke:transparent,color:#0866e8
+FANUC --> TCP
+TCP --> SEP
+SEP --> SLOW
+SEP --> SWING
+SLOW --> MODEL
+SWING --> MODEL
+MODEL --> PHASE
+PHASE --> TP
+RAW --> TS
+TS --> BUF
+BUF --> MATCH
+MATCH --> KEY
+KEY --> ISP
+ISP --> STD
+STD --> SEQ
+SEQ --> ALGO
+TP --> SYNC
+SYNC --> MATCH
+style TP fill:#edf3fb,stroke:#0866e8,color:#161719
+style SYNC fill:#edf3fb,stroke:#0866e8,color:#161719
+style MATCH fill:#edf3fb,stroke:#0866e8,color:#161719
+style KEY fill:#edf3fb,stroke:#0866e8,color:#161719

@@ -1,5 +1,25 @@
 import vinext from "vinext";
-import { defineConfig } from "vite";
+import { defineConfig, normalizePath, type Plugin } from "vite";
+
+// Vinext 0.0.50 caches CSS paths with forward slashes, but compares them against
+// a Windows backslash path. Rewrite the missed font URLs after its transform;
+// its own middleware and writeBundle hook already serve this asset namespace.
+function windowsFontUrls(): Plugin {
+  let cachePrefix = "";
+  let servedPrefix = "";
+  return {
+    name: "portfolio:windows-font-urls",
+    enforce: "post",
+    configResolved(config) {
+      cachePrefix = `${normalizePath(config.root)}/.vinext/fonts`;
+      servedPrefix = `/${config.build.assetsDir || "assets"}/_vinext_fonts`;
+    },
+    transform(code) {
+      if (process.platform !== "win32" || !code.includes("_selfHostedCSS") || !code.includes(cachePrefix)) return null;
+      return { code: code.split(cachePrefix).join(servedPrefix), map: null };
+    },
+  };
+}
 
 // Sandboxed macOS environments can block FSEvents, so previews use polling for HMR.
 const isSeatbeltSandbox = process.env.PREVIEW_SANDBOX === "seatbelt";
@@ -29,6 +49,7 @@ export default defineConfig(async () => {
     },
     plugins: [
       vinext(),
+      windowsFontUrls(),
       cloudflare({
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         inspectorPort: false,

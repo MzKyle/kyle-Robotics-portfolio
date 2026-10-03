@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated bundles, visual reviews, and portable development tools.
+    "dist/**",
+    ".vinext/**",
+    ".wrangler/**",
+    "outputs/**",
+    "work/**",
   ]),
 ]);
 

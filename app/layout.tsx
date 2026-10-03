@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./styles/portfolio-polish.css";
+import "./styles/portfolio-iteration.css";
+import "./styles/portfolio-refinement.css";
+import { SiteSurface } from "../components/site-surface";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,14 +35,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" data-language="zh" data-theme="minimal" suppressHydrationWarning>
+    <html lang="zh-CN" data-language="zh" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var l=localStorage.getItem('portfolio-language')==='en'?'en':'zh';var t=localStorage.getItem('portfolio-theme')==='industrial'?'industrial':'minimal';document.documentElement.dataset.language=l;document.documentElement.dataset.theme=t;document.documentElement.lang=l==='zh'?'zh-CN':'en';}catch(e){}})();` }} />
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var l=localStorage.getItem('portfolio-language')==='en'?'en':'zh';document.documentElement.dataset.language=l;document.documentElement.lang=l==='zh'?'zh-CN':'en';}catch(e){}})();` }} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <SiteSurface>{children}</SiteSurface>
       </body>
     </html>
   );

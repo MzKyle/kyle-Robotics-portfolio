@@ -1,0 +1,23 @@
+block-beta
+columns 4
+Start["System startup"]:1 ReadCounts["Read Camera / Robot Count"]:1 Anchor["Establish initial sync anchor"]:1 Independent["Camera and robot run independently"]:1
+space:2 Cam["Camera Count<br/>→ acquisition time"]:1 Rob["Robot Count<br/>→ TCP state time"]:1
+ROS["ROS maps to a common timeline"]:2 Match["t_phase ↔ RAW timestamp match"]:2
+Update["Update clock mapping"]:2 Drift["Clock drift accumulates over runtime"]:2
+space:2 Resync["Resync during the daily idle window"]:2
+Start --> ReadCounts
+ReadCounts --> Anchor
+Anchor --> Independent
+Cam --> ROS
+Rob --> ROS
+ROS --> Match
+Drift --> Resync
+Resync --> Update
+Independent --> Cam
+Independent --> Rob
+Match --> Drift
+Update --> ROS
+style Anchor fill:#edf3fb,stroke:#0866e8,color:#161719
+style ROS fill:#edf3fb,stroke:#0866e8,color:#161719
+style Match fill:#edf3fb,stroke:#0866e8,color:#161719
+style Update fill:#edf3fb,stroke:#0866e8,color:#161719

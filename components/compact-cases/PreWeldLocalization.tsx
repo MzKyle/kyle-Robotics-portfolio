@@ -1,0 +1,56 @@
+import { CaseNavigation } from "../case-navigation";
+import Link from "next/link";
+import { T } from "../localized";
+import { SiteFooter, SiteHeader } from "../site-shell";
+
+const hub = "/projects/sany-welding-robotics";
+
+function RegistrationFigure() {
+  return <figure className="compact-figure preweld-registration"><div className="compact-figure-heading"><span>01 / PRE-SCAN TO LOOK-AHEAD</span><h3><T zh="先记录几何，再沿轨迹读取" en="Record geometry. Read it along the trajectory." /></h3></div><div className="preweld-pipeline"><div><small>SCAN</small><strong><T zh="前置点云采集" en="Pre-scan cloud" /></strong></div><i>→</i><div><small>TRANSFORM</small><strong><T zh="TCP → Base" en="TCP → Base" /></strong></div><i>→</i><div><small>CACHE</small><strong><T zh="历史高度地图" en="Height history" /></strong></div><i>→</i><div><small>LOOK AHEAD</small><strong>Δheight</strong></div></div><figcaption><T zh="通用原理示意。扫描数据依据位姿与时间戳关联到机器人空间轨迹。" en="Conceptual pipeline. Pose and timestamps associate scan data with the robot's spatial trajectory." /></figcaption></figure>;
+}
+
+function CoordinateFigure() {
+  return <figure className="compact-figure preweld-coordinate"><div className="compact-figure-heading"><span>02 / COORDINATE FRAMES</span><h3><T zh="在同一坐标系中复用观测" en="Reuse observations in one frame" /></h3></div><svg viewBox="0 0 600 230" role="img" aria-label="Conceptual camera, TCP and robot base coordinate relationships"><path d="M64 177H538M64 177V35" className="compact-axis" /><path d="M180 150 L340 91 L470 130" className="compact-line" /><circle cx="180" cy="150" r="9" /><circle cx="340" cy="91" r="9" /><circle cx="470" cy="130" r="9" /><text x="120" y="185">ROBOT BASE</text><text x="303" y="72">TCP POSE</text><text x="432" y="160">3D OBSERVATION</text></svg><figcaption><T zh="概念坐标关系，不表示项目安装结构或标定参数。" en="Conceptual frame relationships, without project installation geometry or calibration parameters." /></figcaption></figure>;
+}
+
+const sections = [
+  {
+    "id": "problem",
+    "label": {
+      "zh": "背景",
+      "en": "Context"
+    }
+  },
+  {
+    "id": "spatial-lookup",
+    "label": {
+      "zh": "预读",
+      "en": "Lookup"
+    }
+  },
+  {
+    "id": "curved-surfaces",
+    "label": {
+      "zh": "曲面",
+      "en": "Surfaces"
+    }
+  },
+  {
+    "id": "contribution",
+    "label": {
+      "zh": "职责",
+      "en": "Ownership"
+    }
+  }
+];
+
+export function PreWeldLocalization() {
+  return <main className="compact-case"><SiteHeader active="projects" /><article>
+    <header className="compact-hero compact-hero-small"><div><Link className="compact-back" href={hub}>← <T zh="三一项目概览" en="SANY overview" /></Link><p className="compact-kicker">SANY / PRE-SCAN GEOMETRY</p><h1><T zh="前置扫描与高度预读" en="Pre-scan height correction" /></h1><p className="compact-lead"><T zh="把焊接前清晰的工件几何保存下来，在弧光与飞溅出现后，仍能沿机器人轨迹读取稳定的高度先验。" en="Preserve clear workpiece geometry before welding, then read stable height priors along the robot trajectory after arc light and spatter appear." /></p><div className="compact-hero-meta"><span>3D Camera</span><span>Point Cloud</span><span>TCP / Base</span></div></div><aside className="compact-result"><span>GEOMETRY / TIME / ROBOT</span><strong>3D → TCP</strong><p><T zh="前置扫描 → Base 高度地图 → 在线空间预读" en="Pre-scan → Base-frame height map → online spatial lookup" /></p></aside></header><CaseNavigation sections={sections} />
+    <section className="compact-section compact-section-first" id="problem"><div className="compact-section-heading"><span>01 / PROBLEM</span><h2><T zh="焊接时，点云质量会发生变化" en="Point-cloud quality changes during welding" /></h2></div><div className="compact-prose"><p><T zh="弧光和飞溅会降低焊接阶段的 3D 观测质量。模块在相机前置观察工件时采集点云，结合实时 TCP 位姿转换到机器人 Base 坐标系，将沿运动轨迹的历史几何保存为高度地图。" en="Arc light and spatter degrade 3D observations during welding. The module scans the workpiece ahead of welding, transforms clouds with live TCP pose into the Base frame, and caches historical geometry along the path as a height map." /></p></div><RegistrationFigure /></section>
+    <section className="compact-section compact-section-split" id="spatial-lookup"><div className="compact-section-heading"><span>02 / SPATIAL LOOKUP</span><h2><T zh="用当前位置找到历史高度" en="Find historical height at the current position" /></h2></div><div className="compact-prose"><p><T zh="运行时根据当前 TCP 空间位置预读并匹配历史点云，为后续视觉计算与高度纠偏提供几何先验。坐标变换将不同时刻的观测放到同一空间关系中，使扫描数据可以连续复用。" en="At runtime, the current TCP position indexes historical point-cloud geometry for downstream vision and height correction. Coordinate transforms put observations from different times into a common spatial frame for continuous reuse." /></p></div><div className="compact-split-figure"><CoordinateFigure /></div></section>
+    <section className="compact-section compact-section-split" id="curved-surfaces"><div className="compact-section-heading"><span>03 / CURVED SURFACES</span><h2><T zh="复杂曲面需要时空关联" en="Curved surfaces require time and space association" /></h2></div><div className="compact-prose"><p><T zh="在滚筒等复杂曲面场景中，结合机器人运动速度与采集时间戳维护扫描数据和运动轨迹的对应关系，让焊接阶段持续复用前置扫描信息。" en="For curved workpieces such as drums, motion speed and acquisition timestamps maintain the relationship between scans and the robot trajectory, enabling continuous reuse during welding." /></p></div></section>
+    <section className="compact-section compact-section-split" id="contribution"><div className="compact-section-heading"><span>04 / MY CONTRIBUTION</span><h2><T zh="从采集到纠偏的模块设计" en="Module design from capture to correction" /></h2></div><div className="compact-prose"><p><T zh="我设计前置扫描、Base 坐标变换、高度地图缓存与空间预读模块，并参与机器人系统集成。该案例展示几何复用方法；摆弧焊纠偏的 ±0.5 mm 结果见项目概览。" en="I designed pre-scan capture, Base-frame transformation, height-map caching and spatial lookup, and participated in robot integration. This case explains geometry reuse; the ±0.5 mm weave-correction result is presented in the project overview." /></p></div></section>
+    <div className="compact-endlinks"><Link href={hub}><T zh="返回三一项目" en="Back to SANY" /> →</Link><Link href={`${hub}/technical`}><T zh="阅读相位稳像长文" en="Read the phase-stabilization essay" /> →</Link></div>
+  </article><SiteFooter /></main>;
+}

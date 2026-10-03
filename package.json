@@ -6,14 +6,22 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vite",
-    "build": "bash scripts/build-verified.sh",
-    "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
-    "validate:artifact": "bash scripts/validate-artifact.sh",
+    "dev": "vite",
+    "diagrams:sany": "node scripts/render-sany-diagrams.mjs",
+    "review:sany": "node scripts/review-sany-layout.mjs",
+    "review:portfolio": "node scripts/review-portfolio.mjs",
+    "review:polish": "node scripts/review-portfolio-polish.mjs",
+    "review:iteration": "node scripts/review-portfolio-iteration.mjs",
+    "review:refinement": "node scripts/review-portfolio-refinement.mjs",
+    "build": "vinext build && node scripts/validate-artifact.mjs",
+    "start": "vinext start",
+    "test": "npm run build && node --test tests/rendered-html.test.mjs tests/sany-source-article.test.mjs",
+    "validate:artifact": "node scripts/validate-artifact.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
   },
   "dependencies": {
+    "katex": "0.16.47",
+    "marked": "16.4.2",
     "next": "16.2.6",
     "react": "19.2.6",
     "react-dom": "19.2.6"
@@ -28,6 +36,8 @@
     "@vitejs/plugin-rsc": "0.5.26",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
+    "mermaid": "^12.0.0",
+    "playwright": "^1.63.0",
     "react-server-dom-webpack": "19.2.6",
     "tailwindcss": "4.2.1",
     "typescript": "5.9.3",

@@ -1,0 +1,27 @@
+flowchart LR
+  subgraph INIT["01 · 建立锚点"]
+    direction TB
+    Start["系统启动"] --> ReadCounts["读取 Camera / Robot Count"]
+    ReadCounts --> Anchor["建立初始同步锚点"]
+    Anchor --> Independent["相机与机器人独立运行"]
+  end
+  subgraph RUN["02 · 独立计数与时间关联"]
+    direction TB
+    Cam["Camera Count<br/>→ 相机采集时间"]
+    Rob["Robot Count<br/>→ TCP 状态时间"]
+    Cam --> ROS["ROS 节点映射到统一时间轴"]
+    Rob --> ROS
+    ROS --> Match["t_phase ↔ RAW 时间戳匹配"]
+  end
+  subgraph CAL["03 · 长期漂移补偿"]
+    direction TB
+    Drift["长时间运行产生 Clock Drift"]
+    Drift --> Resync["每日空闲时间重新同步"]
+    Resync --> Update["更新时钟映射"]
+  end
+  Independent --> Cam
+  Independent --> Rob
+  Match --> Drift
+  Update --> ROS
+  classDef accent fill:#edf3fb,stroke:#0866e8,color:#161719;
+  class Anchor,ROS,Match,Update accent;
